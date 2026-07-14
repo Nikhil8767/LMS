@@ -1,0 +1,310 @@
+You are a Senior Spring Boot Microservices Developer.
+
+The architecture and planning documentation has already been completed and approved.
+
+Now begin the implementation.
+
+====================================================
+OBJECTIVE
+====================================================
+
+Create the complete project foundation for the Online Learning Management System.
+
+This project should follow enterprise coding standards while remaining simple enough for learning purposes.
+
+Do NOT implement business logic.
+
+Do NOT implement authentication.
+
+Do NOT create entities.
+
+Do NOT create controllers.
+
+Do NOT create repositories.
+
+Do NOT create services.
+
+Do NOT create REST APIs.
+
+Do NOT create database tables.
+
+This step is ONLY for creating the project structure.
+
+====================================================
+TECH STACK
+====================================================
+
+Backend
+
+- Java 25
+- Spring Boot 3.x
+- Spring Cloud
+- Spring MVC
+- Spring Data JPA
+- Spring Security
+- PostgreSQL
+- Spring Cloud Gateway
+- Eureka Discovery Server
+- Spring WebClient
+- Maven
+- Lombok
+
+Frontend
+
+- Thymeleaf
+- HTML
+- CSS
+- Bootstrap
+
+====================================================
+PROJECT STRUCTURE
+====================================================
+
+Create a Maven Multi-Module Project.
+
+Parent Project
+
+online-learning-management-system
+
+Create the following modules
+
+1. discovery-service
+
+2. api-gateway
+
+3. auth-service
+
+4. user-service
+
+5. course-service
+
+6. content-service
+
+7. enrollment-service
+
+8. frontend-service
+
+9. common-library
+
+====================================================
+PACKAGE STRUCTURE
+====================================================
+
+For every microservice create the following packages.
+
+config
+
+controller
+
+service
+
+repository
+
+entity
+
+dto
+
+mapper
+
+exception
+
+security
+
+client
+
+util
+
+constant
+
+validation
+
+Create only the package structure.
+
+Do not generate implementation classes unless absolutely required for the application to compile.
+
+====================================================
+COMMON LIBRARY
+====================================================
+
+Create package structure
+
+dto
+
+response
+
+constants
+
+util
+
+validation
+
+Do NOT place business-specific classes such as Role enums or GlobalExceptionHandler inside the common-library.
+
+====================================================
+CONFIGURATION RULES
+====================================================
+
+Use ONLY one configuration file per microservice.
+
+Create ONLY
+
+src/main/resources/application.properties
+
+Do NOT create
+
+application.yml
+
+application-dev.yml
+
+application-test.yml
+
+application-prod.yml
+
+bootstrap.yml
+
+bootstrap.properties
+
+Do NOT configure Spring Profiles.
+
+Do NOT create environment-specific configuration files.
+
+Keep all configuration inside application.properties.
+
+Organize it using comments such as
+
+# Application
+
+# Server
+
+# Eureka
+
+# Database
+
+# Logging
+
+# Spring Security
+
+# Gateway
+
+====================================================
+DEPENDENCIES
+====================================================
+
+Add only the dependencies required by each microservice.
+
+Examples
+
+Gateway
+- Spring Cloud Gateway
+- Eureka Client
+- Actuator
+
+Discovery
+- Eureka Server
+
+Auth Service
+- Spring Security
+- Spring Data JPA
+- PostgreSQL Driver
+- Validation
+
+Frontend
+- Thymeleaf
+
+Do not add unnecessary dependencies.
+
+====================================================
+DO NOT CONFIGURE YET
+====================================================
+
+Do NOT configure
+
+PostgreSQL
+
+Eureka
+
+Gateway Routes
+
+Spring Security
+
+WebClient
+
+Authentication
+
+JPA
+
+Hibernate
+
+Business Logic
+
+REST APIs
+
+====================================================
+DOCUMENTATION
+====================================================
+
+Update
+
+README.md
+
+docs/09-folder-structure.md
+
+docs/10-development-plan.md
+
+Include
+
+Project Tree
+
+Module Responsibilities
+
+Dependency Summary
+
+Folder Explanation
+
+====================================================
+QUALITY REQUIREMENTS
+====================================================
+
+Use enterprise-level package naming.
+
+Follow clean architecture.
+
+Keep the project modular.
+
+Avoid duplicate code.
+
+Avoid unnecessary dependencies.
+
+Prepare the project for future scalability.
+
+Ensure the parent project builds successfully.
+
+====================================================
+EXPECTED RESULT
+====================================================
+
+At the end
+
+Every module should compile successfully.
+
+Every module should contain only ONE configuration file:
+
+src/main/resources/application.properties
+
+No YAML files should exist anywhere in the project.
+
+No application-dev.properties, application-test.properties, or application-prod.properties should be created.
+
+Provide
+
+1. Project Tree
+
+2. Module Summary
+
+3. Dependency Summary
+
+4. Build Verification Steps
+
+5. Git Commit Message
+
+Wait for the next task after completion.

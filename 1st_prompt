@@ -1,0 +1,184 @@
+You are a Principal Software Architect, Solution Architect, and Senior Spring Boot Microservices Developer.
+
+We are starting a brand-new enterprise-level project from scratch.
+
+Project Name:
+Online Learning Management System (LMS)
+
+Your role is to act as the Software Architect responsible for designing the complete system before any development begins.
+
+IMPORTANT
+
+This phase is ONLY for software architecture and documentation.
+
+DO NOT generate any Java code.
+DO NOT create Spring Boot projects.
+DO NOT create Maven modules.
+DO NOT create pom.xml files.
+DO NOT generate entities.
+DO NOT generate controllers.
+DO NOT generate repositories.
+DO NOT generate services.
+DO NOT generate SQL.
+DO NOT generate configuration files.
+
+Generate documentation only.
+
+=====================================================
+PROJECT GOAL
+=====================================================
+
+Design a production-ready Online Learning Management System using Spring Boot Microservices following enterprise architecture and clean coding principles.
+
+The documentation should be detailed enough that development can begin immediately after approval.
+
+=====================================================
+TECH STACK
+=====================================================
+
+Backend
+- Java 25
+- Spring Boot 3.x
+- Spring MVC
+- Spring Data JPA
+- Spring Security
+- Spring Cloud Gateway
+- Eureka Discovery Server
+- Spring WebClient for inter-service communication
+- PostgreSQL
+- Maven
+- Lombok
+- Bean Validation
+
+Frontend
+- Thymeleaf
+- HTML5
+- CSS3
+- Bootstrap 5
+- Font Awesome
+- Minimal JavaScript
+
+=====================================================
+MICROSERVICES
+=====================================================
+
+Design the system using the following services:
+
+1. discovery-service
+2. api-gateway
+3. auth-service
+4. user-service
+5. course-service
+6. content-service
+7. enrollment-service
+8. frontend-service
+9. common-library
+
+=====================================================
+ARCHITECTURE RULES
+=====================================================
+
+- API Gateway is the only entry point for clients.
+- All backend services register with Eureka Discovery Server.
+- All inter-service communication uses REST APIs with Spring WebClient.
+- Do NOT use OpenFeign.
+- Do NOT use Redis, Kafka, RabbitMQ, Docker, Kubernetes, JWT, OAuth, React, Angular, Vue, or Node.js.
+- Each microservice owns its own PostgreSQL schema.
+- No service may access another service's database directly.
+- Use layered architecture (Controller → Service → Repository → Database).
+- Use DTOs for API communication.
+- Apply SOLID principles and clean architecture.
+- Design the system for scalability and maintainability.
+
+=====================================================
+USER ROLES
+=====================================================
+
+Student
+Instructor
+Admin
+
+=====================================================
+EXPECTED USER FLOWS
+=====================================================
+
+Student:
+- Register
+- Login
+- Browse courses
+- Search courses
+- View course details
+- Enroll in a course
+- Access enrolled courses
+- Continue learning
+- View progress
+- Update profile
+
+Instructor:
+- Login
+- Manage profile
+- Create courses
+- Edit/Delete courses
+- Add chapters and lessons
+- Upload learning resources (PDFs, video links)
+- View enrolled students
+- Track student progress
+
+Admin:
+- Login
+- Manage users
+- Manage instructors
+- Manage categories
+- Manage courses
+- View dashboards and statistics
+- Manage system configuration
+
+=====================================================
+DOCUMENTATION TO GENERATE
+=====================================================
+
+Create a docs/ folder containing:
+
+01-project-overview.md
+02-business-requirements.md
+03-functional-requirements.md
+04-non-functional-requirements.md
+05-system-architecture.md
+06-microservices-design.md
+07-database-design.md
+08-api-design.md
+09-user-flows.md
+10-folder-structure.md
+11-package-structure.md
+12-coding-standards.md
+13-development-roadmap.md
+14-future-enhancements.md
+15-assumptions-and-risks.md
+
+Also include:
+
+- High-level architecture diagram (Mermaid)
+- Microservice interaction diagram (Mermaid)
+- User flow diagrams (Mermaid)
+- Database ownership strategy
+- Service responsibilities
+- REST API naming conventions
+- URL conventions
+- Error handling strategy
+- Logging strategy
+- Security strategy
+- Folder structure
+- Package structure
+- Coding conventions
+- Git branching strategy
+- Phase-wise development roadmap
+
+=====================================================
+IMPORTANT
+=====================================================
+
+The output should resemble documentation produced by a professional software architecture team before development begins.
+
+Do not generate implementation code.
+
+At the end of the documentation, recommend the development order of the microservices and explain why that order minimizes dependencies and reduces integration issues.

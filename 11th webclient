@@ -1,0 +1,315 @@
+You are a Principal Software Architect and Senior Spring Boot Microservices Engineer.
+
+The Online Learning Management System has successfully implemented
+
+✓ Eureka Discovery Server
+✓ API Gateway
+✓ PostgreSQL
+✓ Common Library
+✓ Authentication Service
+✓ User Service
+✓ Course Service
+✓ Content Service
+✓ Enrollment Service
+
+The infrastructure is complete.
+
+Now integrate all business microservices using Spring WebClient.
+
+===========================================================
+IMPORTANT
+===========================================================
+
+Before writing any code,
+
+Analyze the complete project.
+
+Understand every microservice.
+
+Understand every REST endpoint.
+
+Understand package structure.
+
+Understand coding standards.
+
+Do not regenerate existing code.
+
+Modify only the files necessary for service integration.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Implement inter-service communication.
+
+All communication between microservices must use
+
+Spring WebClient
+
+REST APIs
+
+Never use
+
+OpenFeign
+
+Feign Client
+
+Kafka
+
+RabbitMQ
+
+Redis
+
+===========================================================
+COMMUNICATION RULES
+===========================================================
+
+Every service owns its own database.
+
+No service may directly access another service's schema.
+
+All data required from another service must be retrieved through REST APIs using Spring WebClient.
+
+===========================================================
+INTEGRATIONS
+===========================================================
+
+------------------------------------------------
+Course Service
+------------------------------------------------
+
+When creating a course
+
+Validate Instructor
+
+Call
+
+user-service
+
+through REST API.
+
+------------------------------------------------
+Content Service
+------------------------------------------------
+
+Before creating
+
+Section
+
+Lesson
+
+Resource
+
+Validate
+
+Course Exists
+
+using
+
+course-service
+
+------------------------------------------------
+Enrollment Service
+------------------------------------------------
+
+Before enrollment
+
+Validate
+
+Student Exists
+
+using
+
+user-service
+
+Validate
+
+Course Exists
+
+using
+
+course-service
+
+Before updating lesson progress
+
+Validate
+
+Lesson Exists
+
+using
+
+content-service
+
+------------------------------------------------
+Frontend Service
+------------------------------------------------
+
+Frontend should never call business services directly.
+
+Frontend communicates only with
+
+API Gateway.
+
+===========================================================
+WEBCLIENT
+===========================================================
+
+Create
+
+WebClient Configuration
+
+Connection Timeout
+
+Read Timeout
+
+Error Handling
+
+Base Client Configuration
+
+Reusable Client Beans
+
+Service-specific clients
+
+Follow best practices.
+
+===========================================================
+ERROR HANDLING
+===========================================================
+
+Handle
+
+Service unavailable
+
+Timeout
+
+404
+
+500
+
+Connection refused
+
+Gracefully.
+
+Return meaningful API responses.
+
+===========================================================
+RESILIENCE
+===========================================================
+
+Implement
+
+Connection timeout
+
+Read timeout
+
+Retry (simple configurable retry only if appropriate)
+
+Fallback responses where suitable
+
+Do not introduce external libraries such as Resilience4j unless absolutely necessary.
+
+===========================================================
+LOGGING
+===========================================================
+
+Log
+
+Outgoing Requests
+
+Incoming Responses
+
+Failures
+
+Timeouts
+
+Service Errors
+
+Do not log sensitive data.
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Layered Architecture
+
+Single Responsibility Principle
+
+Constructor Injection
+
+Reusable WebClient Components
+
+Clean Code
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Course Service validates instructor
+
+✓ Content Service validates course
+
+✓ Enrollment validates student
+
+✓ Enrollment validates course
+
+✓ Enrollment validates lesson
+
+✓ Gateway routes all requests correctly
+
+✓ No direct database access
+
+✓ No OpenFeign dependency
+
+✓ All services compile
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/microservice-communication.md
+
+docs/api-design.md
+
+docs/development-roadmap.md
+
+Include
+
+Service Interaction Diagram
+
+REST Communication Flow
+
+WebClient Strategy
+
+API Dependency Matrix
+
+Error Handling Strategy
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Communication Diagram
+
+2. Service Dependency Matrix
+
+3. WebClient Summary
+
+4. API Integration Summary
+
+5. Verification Checklist
+
+6. Git Commit Message
+
+After completing integration, stop and wait for the next implementation task.

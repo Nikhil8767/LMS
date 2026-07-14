@@ -1,0 +1,459 @@
+You are a Principal Software Architect and Senior Spring Boot Microservices Engineer.
+
+The Online Learning Management System has completed the following modules.
+
+✓ Infrastructure
+✓ Discovery Server
+✓ API Gateway
+✓ PostgreSQL
+✓ Common Library
+✓ Authentication Service
+✓ User Service
+
+Analyze the existing project before making any modifications.
+
+Do not regenerate existing code.
+
+Modify only course-service unless another service absolutely requires a small integration change.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Implement the Course Service.
+
+This service is responsible ONLY for course management.
+
+Do NOT implement lessons.
+
+Do NOT implement videos.
+
+Do NOT implement PDFs.
+
+Do NOT implement quizzes.
+
+Do NOT implement enrollments.
+
+Those belong to other microservices.
+
+===========================================================
+RESPONSIBILITIES
+===========================================================
+
+The Course Service owns
+
+Course
+
+Category
+
+Course Thumbnail
+
+Course Metadata
+
+Course Search
+
+Course Approval Status
+
+Course Visibility
+
+Course Statistics
+
+Instructor Assignment
+
+===========================================================
+DATABASE
+===========================================================
+
+Schema
+
+course_schema
+
+Create entities
+
+Category
+
+Course
+
+Suggested Category fields
+
+id
+
+name
+
+description
+
+icon
+
+createdAt
+
+updatedAt
+
+Suggested Course fields
+
+id
+
+title
+
+shortDescription
+
+fullDescription
+
+thumbnail
+
+language
+
+level
+
+price
+
+duration
+
+status
+
+visibility
+
+categoryId
+
+instructorId
+
+rating
+
+totalStudents
+
+createdAt
+
+updatedAt
+
+Use UUID primary keys.
+
+Use JPA Auditing.
+
+===========================================================
+RELATIONSHIPS
+===========================================================
+
+Category
+
+1
+
+↓
+
+Many
+
+Course
+
+Do NOT create Lesson relationship.
+
+Lessons belong to content-service.
+
+Instructor information comes from user-service through REST APIs.
+
+===========================================================
+REST APIs
+===========================================================
+
+Implement
+
+POST
+
+/api/v1/courses
+
+PUT
+
+/api/v1/courses/{id}
+
+DELETE
+
+/api/v1/courses/{id}
+
+GET
+
+/api/v1/courses
+
+GET
+
+/api/v1/courses/{id}
+
+GET
+
+/api/v1/courses/search
+
+GET
+
+/api/v1/categories
+
+POST
+
+/api/v1/categories
+
+PUT
+
+/api/v1/categories/{id}
+
+DELETE
+
+/api/v1/categories/{id}
+
+===========================================================
+FEATURES
+===========================================================
+
+Create Course
+
+Update Course
+
+Delete Course
+
+Search Course
+
+Filter Course
+
+Pagination
+
+Sorting
+
+Category Management
+
+Course Approval Status
+
+Course Visibility
+
+===========================================================
+SEARCH
+===========================================================
+
+Support
+
+Title
+
+Category
+
+Instructor
+
+Difficulty
+
+Language
+
+Price
+
+Status
+
+Use pageable APIs.
+
+===========================================================
+WEBCLIENT
+===========================================================
+
+Prepare WebClient integration with
+
+user-service
+
+The course-service should validate instructor information through REST APIs.
+
+Do not implement the actual communication yet.
+
+Only prepare the client configuration.
+
+Never use OpenFeign.
+
+===========================================================
+VALIDATION
+===========================================================
+
+Validate
+
+Course Title
+
+Description
+
+Price
+
+Category
+
+Instructor
+
+Language
+
+Level
+
+===========================================================
+MAPPER
+===========================================================
+
+Use DTO pattern.
+
+Never expose entities.
+
+Create
+
+CourseRequest
+
+CourseResponse
+
+CategoryRequest
+
+CategoryResponse
+
+Mapper classes
+
+===========================================================
+EXCEPTIONS
+===========================================================
+
+Create
+
+CourseNotFoundException
+
+CategoryNotFoundException
+
+DuplicateCategoryException
+
+InvalidCourseException
+
+Implement service-specific GlobalExceptionHandler.
+
+===========================================================
+LOGGING
+===========================================================
+
+Log
+
+Course Creation
+
+Course Update
+
+Course Delete
+
+Category Creation
+
+Category Update
+
+Course Search
+
+Do not log sensitive data.
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+Follow existing architecture.
+
+config
+
+controller
+
+service
+
+service.impl
+
+repository
+
+entity
+
+dto
+
+mapper
+
+exception
+
+validation
+
+client
+
+util
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Layered Architecture
+
+Repository Pattern
+
+DTO Pattern
+
+Mapper Pattern
+
+Constructor Injection
+
+Meaningful Names
+
+Enterprise Coding Standards
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Course CRUD
+
+✓ Category CRUD
+
+✓ Pagination
+
+✓ Sorting
+
+✓ Search
+
+✓ Validation
+
+✓ Build Success
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/course-service.md
+
+docs/api-design.md
+
+docs/development-roadmap.md
+
+Document
+
+Course Service Architecture
+
+Entity Relationships
+
+REST APIs
+
+Validation Rules
+
+Future WebClient Integration
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Entity Diagram
+
+2. API Summary
+
+3. Package Structure
+
+4. Validation Summary
+
+5. Testing Checklist
+
+6. Build Verification
+
+7. Git Commit Message
+
+Do not implement lessons.
+
+Do not implement videos.
+
+Do not implement enrollments.
+
+Wait for the next implementation task.

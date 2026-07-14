@@ -1,0 +1,455 @@
+You are a Principal Software Architect and Senior Spring Boot Microservices Engineer.
+
+The Online Learning Management System project has already completed the following phases:
+
+✓ Project Planning
+✓ Multi-module Maven Architecture
+✓ Eureka Discovery Server
+✓ Spring Cloud Gateway
+✓ Service Discovery
+✓ PostgreSQL Configuration
+✓ Common Library
+✓ API Standards
+✓ application.properties configuration
+
+Analyze the existing project before writing any code.
+
+Understand the architecture, package naming conventions, coding standards, documentation, and dependencies.
+
+Do not regenerate existing code.
+
+Modify only auth-service unless another module absolutely requires a minimal change.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Implement the complete Authentication Service.
+
+This service is responsible ONLY for
+
+• Authentication
+• Authorization
+• Session Management
+• User Credentials
+• Role Management
+
+It must NOT become a profile service.
+
+===========================================================
+ARCHITECTURE RULES
+===========================================================
+
+Use
+
+Spring Boot 3
+
+Spring Security
+
+Spring Session (HttpSession)
+
+PostgreSQL
+
+Spring Data JPA
+
+REST APIs
+
+Spring WebClient architecture
+
+Use REST APIs for future communication.
+
+Do NOT use
+
+JWT
+
+OAuth
+
+OAuth2
+
+Redis
+
+Kafka
+
+RabbitMQ
+
+OpenFeign
+
+GraphQL
+
+SOAP
+
+gRPC
+
+===========================================================
+DATABASE
+===========================================================
+
+Schema
+
+auth_schema
+
+Create authentication entities only.
+
+Suggested entities
+
+UserCredential
+
+Fields
+
+id (UUID)
+
+email
+
+password
+
+role
+
+enabled
+
+accountNonLocked
+
+accountNonExpired
+
+credentialsNonExpired
+
+failedLoginAttempts
+
+lastLogin
+
+createdAt
+
+updatedAt
+
+Use Spring Data JPA Auditing.
+
+Use UUID as primary key.
+
+Email must be unique.
+
+===========================================================
+ROLE MANAGEMENT
+===========================================================
+
+Support
+
+ADMIN
+
+INSTRUCTOR
+
+STUDENT
+
+Default registration role
+
+STUDENT
+
+ADMIN and INSTRUCTOR accounts should only be created by an administrator later.
+
+===========================================================
+SECURITY
+===========================================================
+
+Configure Spring Security.
+
+Implement
+
+SecurityFilterChain
+
+AuthenticationManager
+
+PasswordEncoder
+
+UserDetailsService
+
+Session Management
+
+CSRF Protection
+
+Role-based Authorization
+
+Custom AuthenticationEntryPoint
+
+Custom AccessDeniedHandler
+
+Secure Session Configuration
+
+Use BCryptPasswordEncoder.
+
+===========================================================
+REST APIs
+===========================================================
+
+Implement REST endpoints
+
+POST /api/v1/auth/register
+
+POST /api/v1/auth/login
+
+POST /api/v1/auth/logout
+
+GET /api/v1/auth/me
+
+GET /api/v1/auth/session
+
+Use DTOs.
+
+Never expose entities.
+
+Return standardized ApiResponse<T> from common-library.
+
+===========================================================
+REGISTRATION
+===========================================================
+
+Validate
+
+Email
+
+Password
+
+Duplicate Email
+
+Password Strength
+
+Default Role
+
+Hash password before storing.
+
+Create authenticated session only after successful login.
+
+===========================================================
+LOGIN
+===========================================================
+
+Implement JSON-based login.
+
+Do NOT use Spring Security formLogin().
+
+Accept
+
+email
+
+password
+
+Authenticate user.
+
+Create HttpSession.
+
+Return authenticated user information.
+
+===========================================================
+LOGOUT
+===========================================================
+
+Invalidate session.
+
+Clear Security Context.
+
+Return standardized success response.
+
+===========================================================
+VALIDATION
+===========================================================
+
+Password Rules
+
+Minimum 8 characters
+
+One uppercase
+
+One lowercase
+
+One number
+
+One special character
+
+Validate
+
+Email format
+
+Duplicate email
+
+Required fields
+
+===========================================================
+EXCEPTION HANDLING
+===========================================================
+
+Implement only auth-service specific exceptions.
+
+Examples
+
+InvalidCredentialsException
+
+DuplicateEmailException
+
+AccountLockedException
+
+InactiveAccountException
+
+Handle exceptions using auth-service's own GlobalExceptionHandler.
+
+===========================================================
+LOGGING
+===========================================================
+
+Log
+
+Registration Success
+
+Registration Failure
+
+Login Success
+
+Login Failure
+
+Logout
+
+Session Expiration
+
+Account Lock
+
+Never log passwords or session identifiers.
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+Follow existing package structure.
+
+config
+
+controller
+
+service
+
+service.impl
+
+repository
+
+entity
+
+dto
+
+mapper
+
+security
+
+exception
+
+validation
+
+client
+
+util
+
+===========================================================
+CODE QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+DTO Pattern
+
+Mapper Pattern
+
+Repository Pattern
+
+Single Responsibility Principle
+
+Open/Closed Principle
+
+Use meaningful names.
+
+Avoid duplicate code.
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Registration works
+
+✓ Login works
+
+✓ Logout works
+
+✓ Session is created
+
+✓ Session validation works
+
+✓ Passwords are encrypted
+
+✓ Duplicate email validation works
+
+✓ Role authorization works
+
+✓ Application starts successfully
+
+✓ No compilation errors
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/07-authentication.md
+
+docs/08-api-design.md
+
+docs/13-development-roadmap.md
+
+Include
+
+Authentication Architecture
+
+Entity Diagram
+
+Authentication Flow
+
+Session Flow
+
+Security Flow
+
+REST API Documentation
+
+Validation Rules
+
+===========================================================
+OUTPUT
+===========================================================
+
+After implementation provide
+
+1. Folder Structure
+
+2. Entity Relationship Diagram
+
+3. Security Flow
+
+4. Session Flow
+
+5. API Summary
+
+6. Verification Checklist
+
+7. Git Commit Message
+
+Do not implement user profile management.
+
+Do not modify user-service.
+
+Do not implement WebClient communication yet.
+
+Stop after auth-service is complete and wait for the next task.

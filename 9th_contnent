@@ -1,0 +1,454 @@
+You are a Principal Software Architect and Senior Spring Boot Microservices Engineer.
+
+The Online Learning Management System has successfully implemented
+
+✓ Infrastructure
+✓ Eureka Discovery Server
+✓ API Gateway
+✓ PostgreSQL
+✓ Common Library
+✓ Authentication Service
+✓ User Service
+✓ Course Service
+
+Analyze the existing project before making any modifications.
+
+Do not regenerate existing code.
+
+Modify only content-service unless another service absolutely requires a minimal integration change.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Implement the complete Content Service.
+
+This service is responsible ONLY for course learning content.
+
+It must NOT manage
+
+Course metadata
+
+Categories
+
+Enrollment
+
+Authentication
+
+User Profiles
+
+===========================================================
+RESPONSIBILITIES
+===========================================================
+
+This service owns
+
+Course Curriculum
+
+Sections
+
+Lessons
+
+Video URLs
+
+PDF Notes
+
+Downloadable Resources
+
+Lesson Order
+
+Lesson Duration
+
+Lesson Visibility
+
+===========================================================
+DATABASE
+===========================================================
+
+Schema
+
+content_schema
+
+Create entities
+
+Section
+
+Lesson
+
+Resource
+
+===========================================================
+SECTION ENTITY
+===========================================================
+
+Suggested Fields
+
+id
+
+courseId
+
+title
+
+description
+
+displayOrder
+
+createdAt
+
+updatedAt
+
+===========================================================
+LESSON ENTITY
+===========================================================
+
+Suggested Fields
+
+id
+
+sectionId
+
+title
+
+description
+
+videoUrl
+
+lessonType
+
+duration
+
+displayOrder
+
+isPreview
+
+createdAt
+
+updatedAt
+
+===========================================================
+RESOURCE ENTITY
+===========================================================
+
+Suggested Fields
+
+id
+
+lessonId
+
+resourceName
+
+resourceType
+
+resourceUrl
+
+createdAt
+
+updatedAt
+
+===========================================================
+RELATIONSHIPS
+===========================================================
+
+Course
+
+↓
+
+Many Sections
+
+Section
+
+↓
+
+Many Lessons
+
+Lesson
+
+↓
+
+Many Resources
+
+Course information belongs to course-service.
+
+Use courseId only.
+
+Never access course-service database.
+
+===========================================================
+REST APIs
+===========================================================
+
+Implement
+
+POST /api/v1/sections
+
+PUT /api/v1/sections/{id}
+
+DELETE /api/v1/sections/{id}
+
+GET /api/v1/sections
+
+GET /api/v1/sections/{id}
+
+POST /api/v1/lessons
+
+PUT /api/v1/lessons/{id}
+
+DELETE /api/v1/lessons/{id}
+
+GET /api/v1/lessons
+
+GET /api/v1/lessons/{id}
+
+POST /api/v1/resources
+
+DELETE /api/v1/resources/{id}
+
+GET /api/v1/resources
+
+===========================================================
+FEATURES
+===========================================================
+
+Create Section
+
+Update Section
+
+Delete Section
+
+Reorder Sections
+
+Create Lesson
+
+Update Lesson
+
+Delete Lesson
+
+Preview Lesson
+
+Upload Resource Metadata
+
+Manage PDFs
+
+Manage Video Links
+
+Support Lesson Ordering
+
+===========================================================
+WEBCLIENT
+===========================================================
+
+Prepare Spring WebClient configuration for communication with course-service.
+
+The Content Service should validate whether a course exists before creating sections or lessons.
+
+Do NOT implement the actual WebClient calls yet.
+
+Never use OpenFeign.
+
+===========================================================
+VALIDATION
+===========================================================
+
+Validate
+
+Course ID
+
+Section Title
+
+Lesson Title
+
+Video URL
+
+Resource URL
+
+Display Order
+
+Duration
+
+===========================================================
+DTOS
+===========================================================
+
+Create
+
+SectionRequest
+
+SectionResponse
+
+LessonRequest
+
+LessonResponse
+
+ResourceRequest
+
+ResourceResponse
+
+Never expose entities directly.
+
+===========================================================
+EXCEPTIONS
+===========================================================
+
+Create
+
+SectionNotFoundException
+
+LessonNotFoundException
+
+ResourceNotFoundException
+
+InvalidLessonException
+
+Implement content-service specific GlobalExceptionHandler.
+
+===========================================================
+LOGGING
+===========================================================
+
+Log
+
+Section Created
+
+Section Updated
+
+Lesson Created
+
+Lesson Updated
+
+Lesson Deleted
+
+Resource Added
+
+Resource Deleted
+
+Do not log sensitive information.
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+Follow existing architecture.
+
+config
+
+controller
+
+service
+
+service.impl
+
+repository
+
+entity
+
+dto
+
+mapper
+
+exception
+
+validation
+
+client
+
+util
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Layered Architecture
+
+Repository Pattern
+
+DTO Pattern
+
+Mapper Pattern
+
+Constructor Injection
+
+Meaningful Names
+
+Enterprise Coding Standards
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Section CRUD
+
+✓ Lesson CRUD
+
+✓ Resource CRUD
+
+✓ Ordering
+
+✓ Validation
+
+✓ Build Success
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/content-service.md
+
+docs/api-design.md
+
+docs/development-roadmap.md
+
+Include
+
+Content Service Architecture
+
+Entity Relationships
+
+REST API Documentation
+
+Lesson Structure
+
+Section Structure
+
+Future WebClient Integration
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Entity Diagram
+
+2. API Summary
+
+3. Package Structure
+
+4. Validation Summary
+
+5. Testing Checklist
+
+6. Build Verification
+
+7. Git Commit Message
+
+Only implement content-service.
+
+Do not modify course-service except where absolutely required for compilation.
+
+Do not implement file uploads yet.
+
+Store only metadata (video URLs and resource URLs).
+
+Wait for the next implementation task.

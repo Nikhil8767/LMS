@@ -1,0 +1,436 @@
+You are a Principal Software Architect and Senior Spring Boot Microservices Engineer.
+
+The project planning and project structure have already been completed.
+
+Before making any changes, analyze the entire project structure, existing modules, package naming conventions, dependencies, and documentation.
+
+Never regenerate existing code.
+
+Only modify files that are required for this phase.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Implement ONLY the infrastructure layer of the Online Learning Management System.
+
+This phase should establish the communication backbone of the project.
+
+Do NOT implement any business functionality.
+
+The project must compile successfully after this phase.
+
+===========================================================
+TECH STACK
+===========================================================
+
+Backend
+
+- Java 21
+- Spring Boot 3.x
+- Spring MVC
+- Spring Data JPA
+- Spring Security
+- Spring Cloud Gateway
+- Eureka Discovery Server
+- Spring WebClient
+- PostgreSQL
+- Maven
+- Lombok
+- Bean Validation
+
+Frontend
+
+- Thymeleaf
+- HTML
+- CSS
+- Bootstrap 5
+- Minimal JavaScript
+
+===========================================================
+PROJECT ARCHITECTURE
+===========================================================
+
+Microservices
+
+• discovery-service
+
+• api-gateway
+
+• auth-service
+
+• user-service
+
+• course-service
+
+• content-service
+
+• enrollment-service
+
+• frontend-service
+
+• common-library
+
+===========================================================
+MICROSERVICE COMMUNICATION STANDARD
+===========================================================
+
+This project follows REST-based Microservices Architecture.
+
+All communication between services must follow these rules.
+
+Client
+
+↓
+
+Frontend
+
+↓
+
+API Gateway
+
+↓
+
+Microservices
+
+↓
+
+REST APIs
+
+↓
+
+Spring WebClient
+
+Use Spring WebClient for every future service-to-service communication.
+
+Do NOT use
+
+OpenFeign
+
+Feign Client
+
+Kafka
+
+RabbitMQ
+
+Redis
+
+GraphQL
+
+gRPC
+
+SOAP
+
+Do not add any OpenFeign dependency anywhere in the project.
+
+Do not configure OpenFeign.
+
+Do not generate Feign clients.
+
+The project architecture must be prepared for REST APIs and Spring WebClient only.
+
+===========================================================
+CONFIGURE DISCOVERY SERVICE
+===========================================================
+
+Configure Eureka Discovery Server.
+
+Requirements
+
+• Enable Eureka Server.
+
+• Configure only application.properties.
+
+• Never generate YAML files.
+
+• Configure server port.
+
+• Enable Spring Boot Actuator.
+
+• Expose health and info endpoints.
+
+Verify the Eureka Dashboard loads successfully.
+
+===========================================================
+CONFIGURE EVERY MICROSERVICE
+===========================================================
+
+Configure every service as a Eureka Client.
+
+Each service must
+
+• Register automatically with Eureka.
+
+• Discover other services.
+
+• Use application.properties only.
+
+Configure
+
+Application Name
+
+Server Port
+
+Eureka Client
+
+Actuator
+
+Health Endpoint
+
+Info Endpoint
+
+Logging
+
+===========================================================
+CONFIGURE API GATEWAY
+===========================================================
+
+Configure Spring Cloud Gateway.
+
+Requirements
+
+• Dynamic service discovery using Eureka.
+
+• Route configuration.
+
+• Global CORS configuration.
+
+• Request logging.
+
+• Error handling.
+
+Prepare routes for
+
+/auth/**
+
+/users/**
+
+/courses/**
+
+/contents/**
+
+/enrollments/**
+
+Do NOT implement controllers.
+
+Do NOT implement REST APIs.
+
+Configure only routing.
+
+===========================================================
+APPLICATION CONFIGURATION
+===========================================================
+
+Every microservice must contain ONLY
+
+src/main/resources/application.properties
+
+Never create
+
+application.yml
+
+application-dev.yml
+
+application-test.yml
+
+application-prod.yml
+
+bootstrap.yml
+
+bootstrap.properties
+
+Never configure Spring Profiles.
+
+Never generate multiple configuration files.
+
+Keep all configuration inside a single application.properties.
+
+Use comments to organize sections.
+
+===========================================================
+DEPENDENCY RULES
+===========================================================
+
+Each microservice should contain only the dependencies it actually needs.
+
+Gateway
+
+• Spring Cloud Gateway
+
+• Eureka Client
+
+• Actuator
+
+Discovery
+
+• Eureka Server
+
+Business Services
+
+• Eureka Client
+
+• Spring Web
+
+• Spring WebFlux (for future WebClient usage)
+
+• Actuator
+
+Frontend
+
+• Thymeleaf
+
+• Eureka Client
+
+Do NOT include
+
+OpenFeign
+
+Redis
+
+Kafka
+
+RabbitMQ
+
+Docker
+
+Kubernetes
+
+===========================================================
+DO NOT IMPLEMENT
+===========================================================
+
+Authentication
+
+Authorization
+
+Database
+
+JPA Entities
+
+Repositories
+
+Controllers
+
+Services
+
+DTOs
+
+Validation
+
+Exception Handling
+
+REST APIs
+
+WebClient Calls
+
+Business Logic
+
+===========================================================
+QUALITY REQUIREMENTS
+===========================================================
+
+Follow
+
+• SOLID Principles
+
+• Clean Architecture
+
+• Layered Architecture
+
+• Enterprise Folder Structure
+
+• Constructor Injection
+
+• Clean Package Naming
+
+• Production-quality code
+
+Avoid
+
+Duplicate configuration
+
+Unused dependencies
+
+Hardcoded values
+
+Code smells
+
+===========================================================
+VERIFICATION
+===========================================================
+
+Verify
+
+✓ Discovery Server starts successfully.
+
+✓ API Gateway starts successfully.
+
+✓ Every microservice registers with Eureka.
+
+✓ Gateway discovers every registered service.
+
+✓ Actuator endpoints are accessible.
+
+✓ Health endpoints are working.
+
+✓ No build errors.
+
+✓ No YAML files exist.
+
+✓ Only application.properties exists.
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/05-system-architecture.md
+
+docs/06-microservices-design.md
+
+docs/09-folder-structure.md
+
+docs/10-development-plan.md
+
+Document
+
+Infrastructure Architecture
+
+Gateway Flow
+
+Service Discovery Flow
+
+REST Communication Strategy
+
+Spring WebClient Strategy
+
+Port Allocation
+
+Startup Order
+
+===========================================================
+OUTPUT
+===========================================================
+
+After implementation provide
+
+1. Updated Project Tree
+
+2. Infrastructure Diagram
+
+3. Port Allocation Table
+
+4. Registered Services
+
+5. Dependency Summary
+
+6. Verification Checklist
+
+7. Git Commit Message
+
+Stop after completing the infrastructure.
+
+Wait for the next implementation task.

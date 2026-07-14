@@ -1,0 +1,433 @@
+You are a Principal Software Architect and Senior Spring Boot Microservices Engineer.
+
+The Online Learning Management System has successfully implemented
+
+✓ Infrastructure
+✓ Eureka Discovery Server
+✓ API Gateway
+✓ PostgreSQL
+✓ Common Library
+✓ Authentication Service
+✓ User Service
+✓ Course Service
+✓ Content Service
+
+Analyze the existing project before making any modifications.
+
+Do not regenerate existing code.
+
+Modify only enrollment-service unless another service absolutely requires a minimal integration change.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Implement the complete Enrollment Service.
+
+This service is responsible ONLY for managing student enrollments and learning progress.
+
+It must NOT manage
+
+Authentication
+
+User Profiles
+
+Course Metadata
+
+Lessons
+
+Videos
+
+Resources
+
+Categories
+
+===========================================================
+RESPONSIBILITIES
+===========================================================
+
+This service owns
+
+Student Enrollment
+
+Enrollment Status
+
+Course Progress
+
+Lesson Progress
+
+Course Completion
+
+Completion Percentage
+
+Last Accessed Lesson
+
+Enrollment Date
+
+Completion Date
+
+Certificate Eligibility
+
+===========================================================
+DATABASE
+===========================================================
+
+Schema
+
+enrollment_schema
+
+Create entities
+
+Enrollment
+
+LessonProgress
+
+===========================================================
+ENROLLMENT ENTITY
+===========================================================
+
+Suggested Fields
+
+id
+
+studentId
+
+courseId
+
+status
+
+progressPercentage
+
+lastLessonId
+
+enrollmentDate
+
+completionDate
+
+certificateEligible
+
+createdAt
+
+updatedAt
+
+===========================================================
+LESSON PROGRESS ENTITY
+===========================================================
+
+Suggested Fields
+
+id
+
+enrollmentId
+
+lessonId
+
+completed
+
+watchTime
+
+completedAt
+
+createdAt
+
+updatedAt
+
+===========================================================
+RELATIONSHIPS
+===========================================================
+
+One Enrollment
+
+↓
+
+Many LessonProgress
+
+Store only IDs
+
+studentId
+
+courseId
+
+lessonId
+
+Never duplicate data from
+
+user-service
+
+course-service
+
+content-service
+
+===========================================================
+REST APIs
+===========================================================
+
+Implement
+
+POST /api/v1/enrollments
+
+DELETE /api/v1/enrollments/{id}
+
+GET /api/v1/enrollments
+
+GET /api/v1/enrollments/{id}
+
+GET /api/v1/enrollments/student/{studentId}
+
+GET /api/v1/enrollments/course/{courseId}
+
+PUT /api/v1/enrollments/progress
+
+GET /api/v1/enrollments/progress
+
+GET /api/v1/enrollments/continue-learning
+
+===========================================================
+FEATURES
+===========================================================
+
+Enroll Student
+
+Prevent Duplicate Enrollment
+
+Cancel Enrollment
+
+Continue Learning
+
+Track Lesson Progress
+
+Track Course Progress
+
+Course Completion
+
+Certificate Eligibility
+
+Pagination
+
+Sorting
+
+Filtering
+
+===========================================================
+WEBCLIENT
+===========================================================
+
+Prepare Spring WebClient for communication with
+
+user-service
+
+course-service
+
+content-service
+
+Enrollment Service should validate
+
+Student Exists
+
+Course Exists
+
+Lesson Exists
+
+Do NOT implement the actual WebClient calls yet.
+
+Never use OpenFeign.
+
+===========================================================
+VALIDATION
+===========================================================
+
+Validate
+
+Student ID
+
+Course ID
+
+Lesson ID
+
+Duplicate Enrollment
+
+Progress Range (0-100)
+
+===========================================================
+DTOs
+===========================================================
+
+Create
+
+EnrollmentRequest
+
+EnrollmentResponse
+
+LessonProgressRequest
+
+LessonProgressResponse
+
+ContinueLearningResponse
+
+Never expose entities directly.
+
+===========================================================
+EXCEPTIONS
+===========================================================
+
+Create
+
+EnrollmentNotFoundException
+
+DuplicateEnrollmentException
+
+ProgressUpdateException
+
+InvalidEnrollmentException
+
+Implement enrollment-service specific GlobalExceptionHandler.
+
+===========================================================
+LOGGING
+===========================================================
+
+Log
+
+Enrollment Created
+
+Enrollment Cancelled
+
+Progress Updated
+
+Course Completed
+
+Continue Learning Access
+
+Never log sensitive information.
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+Follow existing architecture.
+
+config
+
+controller
+
+service
+
+service.impl
+
+repository
+
+entity
+
+dto
+
+mapper
+
+exception
+
+validation
+
+client
+
+util
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Layered Architecture
+
+Repository Pattern
+
+DTO Pattern
+
+Mapper Pattern
+
+Constructor Injection
+
+Meaningful Names
+
+Enterprise Coding Standards
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Enrollment CRUD
+
+✓ Duplicate Enrollment Prevention
+
+✓ Lesson Progress Updates
+
+✓ Continue Learning
+
+✓ Progress Percentage Calculation
+
+✓ Validation
+
+✓ Build Success
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/enrollment-service.md
+
+docs/api-design.md
+
+docs/development-roadmap.md
+
+Include
+
+Enrollment Service Architecture
+
+Entity Relationships
+
+Progress Tracking Strategy
+
+REST API Documentation
+
+Future WebClient Integration
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Entity Diagram
+
+2. API Summary
+
+3. Package Structure
+
+4. Progress Tracking Flow
+
+5. Validation Summary
+
+6. Testing Checklist
+
+7. Build Verification
+
+8. Git Commit Message
+
+Only implement enrollment-service.
+
+Do not modify other services except where absolutely required for compilation.
+
+Do not implement certificate generation yet.
+
+Do not implement payment integration.
+
+Wait for the next implementation task.

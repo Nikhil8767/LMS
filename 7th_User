@@ -1,0 +1,383 @@
+You are a Principal Software Architect and Senior Spring Boot Microservices Engineer.
+
+The Online Learning Management System has successfully completed the following phases.
+
+✓ Planning
+✓ Project Structure
+✓ Eureka Discovery Server
+✓ API Gateway
+✓ PostgreSQL Configuration
+✓ Common Library
+✓ Authentication Service
+
+Analyze the existing project before making any modifications.
+
+Do not regenerate existing code.
+
+Modify only the user-service unless absolutely necessary.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Implement the complete User Service.
+
+This service is responsible ONLY for user profile management.
+
+Do NOT implement authentication.
+
+Do NOT store passwords.
+
+Do NOT implement login.
+
+Do NOT implement session management.
+
+Authentication remains inside auth-service.
+
+===========================================================
+ARCHITECTURE RULES
+===========================================================
+
+Follow the existing architecture.
+
+Client
+
+↓
+
+Frontend
+
+↓
+
+API Gateway
+
+↓
+
+REST APIs
+
+↓
+
+User Service
+
+Future communication with auth-service must use Spring WebClient.
+
+Do NOT use OpenFeign.
+
+Do NOT directly access auth-service database.
+
+Do NOT share database tables.
+
+===========================================================
+DATABASE
+===========================================================
+
+Schema
+
+user_schema
+
+Create only profile-related entities.
+
+Example
+
+UserProfile
+
+Fields
+
+id (UUID)
+
+authUserId (UUID reference to auth-service)
+
+firstName
+
+lastName
+
+phone
+
+gender
+
+dateOfBirth
+
+bio
+
+profilePicture
+
+country
+
+state
+
+city
+
+address
+
+zipCode
+
+createdAt
+
+updatedAt
+
+Use Spring Data JPA Auditing.
+
+Use UUID primary keys.
+
+===========================================================
+RESPONSIBILITIES
+===========================================================
+
+Manage
+
+Student Profiles
+
+Instructor Profiles
+
+Admin Profiles
+
+Profile Updates
+
+Profile Retrieval
+
+Profile Search
+
+Profile Status
+
+===========================================================
+REST APIs
+===========================================================
+
+Implement REST APIs.
+
+GET
+
+/api/v1/users/profile
+
+PUT
+
+/api/v1/users/profile
+
+GET
+
+/api/v1/users/{id}
+
+GET
+
+/api/v1/users
+
+DELETE
+
+/api/v1/users/{id}
+
+GET
+
+/api/v1/users/search
+
+Support
+
+Pagination
+
+Sorting
+
+Filtering
+
+===========================================================
+WEBCLIENT
+===========================================================
+
+Prepare User Service for future communication with auth-service.
+
+Create WebClient configuration.
+
+Do NOT implement actual service calls yet.
+
+Do NOT create OpenFeign clients.
+
+===========================================================
+VALIDATION
+===========================================================
+
+Validate
+
+Phone Number
+
+Email format (if required)
+
+Date of Birth
+
+Name
+
+Required Fields
+
+===========================================================
+MAPPER
+===========================================================
+
+Use DTO pattern.
+
+Never expose entities.
+
+Create
+
+Request DTOs
+
+Response DTOs
+
+Mapper classes
+
+===========================================================
+EXCEPTION HANDLING
+===========================================================
+
+Create service-specific exceptions.
+
+Examples
+
+UserNotFoundException
+
+DuplicateProfileException
+
+InvalidProfileException
+
+Implement user-service GlobalExceptionHandler.
+
+===========================================================
+LOGGING
+===========================================================
+
+Log
+
+Profile Creation
+
+Profile Update
+
+Profile Delete
+
+Profile Search
+
+Profile View
+
+Do not log sensitive information.
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+Follow the existing architecture.
+
+config
+
+controller
+
+service
+
+service.impl
+
+repository
+
+entity
+
+dto
+
+mapper
+
+exception
+
+validation
+
+client
+
+util
+
+===========================================================
+QUALITY
+===========================================================
+
+Use
+
+SOLID Principles
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+DTO Pattern
+
+Repository Pattern
+
+Mapper Pattern
+
+Meaningful Package Names
+
+Reusable Components
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Profile Creation
+
+✓ Profile Update
+
+✓ Profile Retrieval
+
+✓ Pagination
+
+✓ Search
+
+✓ Validation
+
+✓ Build Success
+
+✓ No Compilation Errors
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/09-user-service.md
+
+docs/08-api-design.md
+
+docs/13-development-roadmap.md
+
+Include
+
+User Service Architecture
+
+Entity Diagram
+
+REST API Documentation
+
+Validation Rules
+
+Future WebClient Integration Strategy
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Package Structure
+
+2. Entity Diagram
+
+3. API Summary
+
+4. Validation Summary
+
+5. Testing Checklist
+
+6. Build Verification
+
+7. Git Commit Message
+
+Only implement user-service.
+
+Do not modify auth-service except where absolutely required for integration.
+
+Wait for the next implementation task.

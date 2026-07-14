@@ -1,0 +1,329 @@
+You are a Principal Software Architect and Senior Spring Boot Microservices Engineer.
+
+The project currently contains
+
+✓ Multi-module Maven Project
+
+✓ Eureka Discovery Server
+
+✓ API Gateway
+
+✓ PostgreSQL Configuration
+
+✓ Service Discovery
+
+✓ Spring Boot Actuator
+
+✓ application.properties configuration
+
+✓ Project builds successfully
+
+Before implementing any business microservice, establish common development standards that every service will follow.
+
+Analyze the existing project first.
+
+Do not regenerate existing code.
+
+Modify only the required modules.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Build the common-library.
+
+The common-library should contain ONLY generic reusable components.
+
+It must NEVER contain business logic.
+
+It must NEVER depend on any business microservice.
+
+===========================================================
+DO NOT IMPLEMENT
+===========================================================
+
+Authentication
+
+User Management
+
+Courses
+
+Content
+
+Enrollment
+
+Entities
+
+Repositories
+
+Business Services
+
+Controllers
+
+REST APIs
+
+Business Exceptions
+
+Role Enum
+
+Security Classes
+
+===========================================================
+COMMON LIBRARY RESPONSIBILITIES
+===========================================================
+
+Implement reusable components only.
+
+Examples
+
+Generic API Response
+
+Generic Error Response
+
+Pagination Response
+
+Application Constants
+
+Date Utilities
+
+String Utilities
+
+Validation Utilities
+
+Generic Exceptions
+
+Request/Response Models
+
+===========================================================
+API RESPONSE STANDARD
+===========================================================
+
+Create a standard API response model.
+
+Every future REST API should return the same response structure.
+
+Example
+
+success
+
+message
+
+timestamp
+
+data
+
+path
+
+status
+
+Do not expose entities directly.
+
+Future services must return DTOs only.
+
+===========================================================
+ERROR RESPONSE STANDARD
+===========================================================
+
+Create a generic error response.
+
+Include
+
+timestamp
+
+status
+
+error
+
+message
+
+path
+
+traceId (optional)
+
+Future services should extend this format.
+
+===========================================================
+COMMON EXCEPTIONS
+===========================================================
+
+Create only generic exceptions.
+
+Examples
+
+ResourceNotFoundException
+
+ValidationException
+
+BusinessException
+
+Do NOT create
+
+InvalidCredentialsException
+
+CourseNotFoundException
+
+EnrollmentException
+
+Those belong inside their own services.
+
+===========================================================
+COMMON UTILITIES
+===========================================================
+
+Create utility classes.
+
+Examples
+
+DateUtil
+
+StringUtil
+
+ResponseBuilder
+
+ValidationUtil
+
+Constants
+
+Do not add business-specific utilities.
+
+===========================================================
+PAGINATION
+===========================================================
+
+Create reusable pagination response models.
+
+These should be usable by every microservice.
+
+===========================================================
+REST API STANDARDS
+===========================================================
+
+Document standards for all future REST APIs.
+
+Use
+
+/api/v1/
+
+Naming Convention
+
+Plural Resources
+
+HTTP Status Codes
+
+Validation Responses
+
+Error Responses
+
+Response Format
+
+===========================================================
+WEBCLIENT STANDARD
+===========================================================
+
+Prepare shared configuration for Spring WebClient.
+
+Do NOT create actual service calls.
+
+Do NOT create client implementations.
+
+Do NOT use OpenFeign.
+
+The entire project must use Spring WebClient for future inter-service communication.
+
+===========================================================
+CODING STANDARDS
+===========================================================
+
+Establish common standards.
+
+Use
+
+Constructor Injection
+
+DTO Pattern
+
+Mapper Pattern
+
+Layered Architecture
+
+SOLID Principles
+
+Clean Code
+
+Meaningful Package Names
+
+Meaningful Logging
+
+Standard Exception Handling
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/08-api-design.md
+
+docs/11-coding-standards.md
+
+docs/13-development-roadmap.md
+
+Document
+
+API Standards
+
+Response Format
+
+Exception Strategy
+
+Utility Classes
+
+Pagination Standard
+
+Spring WebClient Strategy
+
+Coding Standards
+
+===========================================================
+VERIFY
+===========================================================
+
+Verify
+
+✓ common-library builds successfully.
+
+✓ No circular dependencies exist.
+
+✓ Every service can depend on common-library.
+
+✓ No business logic exists.
+
+✓ No service-specific code exists.
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Library Structure
+
+2. Package Structure
+
+3. Response Format
+
+4. Exception Hierarchy
+
+5. Utility Summary
+
+6. Coding Standards Summary
+
+7. Verification Checklist
+
+8. Git Commit Message
+
+Stop after common-library is complete.
+
+Wait for the next implementation task.
