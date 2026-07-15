@@ -1,0 +1,61 @@
+You are a Principal Software Architect, Senior Spring Boot Developer, and Senior QA Engineer.
+
+The Online Learning Management System backend has been implemented.
+
+Analyze ONLY the user-service before making any changes.
+
+Do NOT regenerate code.
+
+Do NOT rewrite existing classes.
+
+Modify only user-service.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Integrate Swagger (OpenAPI 3) documentation into user-service.
+
+After integration, manually verify every REST API using Swagger UI.
+
+If any bug is found, fix only the minimum required code and retest.
+
+===========================================================
+TEST THE FOLLOWING APIs
+===========================================================
+
+POST /api/v1/users
+
+GET /api/v1/users
+
+GET /api/v1/users/{id}
+
+PUT /api/v1/users/{id}
+
+DELETE /api/v1/users/{id}
+
+GET /api/v1/users/search
+
+===========================================================
+VERIFY
+===========================================================
+
+✓ Swagger loads
+
+✓ CRUD works
+
+✓ Pagination works
+
+✓ Search works
+
+✓ Validation works
+
+✓ Error handling works
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide Swagger URL, API Test Report, Bug Report, Verification Checklist, and Git Commit Message.
+
+Stop after user-service testing.

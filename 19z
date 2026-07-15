@@ -1,0 +1,249 @@
+The proposed plan is good and aligns with the overall architecture of the LMS. I approve the direction, but before implementation I want to improve several parts of the design so that the API Gateway follows enterprise microservice security practices.
+
+Please update the implementation according to the following requirements before generating code.
+
+===========================================================
+GENERAL REQUIREMENTS
+===========================================================
+
+Analyze the complete api-gateway project before making any changes.
+
+Do NOT regenerate the project.
+
+Do NOT rewrite unrelated code.
+
+Modify ONLY api-gateway.
+
+Do NOT modify auth-service or any business microservice.
+
+===========================================================
+JWT LIBRARY
+===========================================================
+
+Use the latest stable JJWT version that is fully compatible with the Spring Boot version already used in the project.
+
+Do not use an older version unless there is a compatibility requirement.
+
+===========================================================
+JWT VALIDATION
+===========================================================
+
+The Gateway must validate
+
+• Signature
+
+• Expiration
+
+• Issuer
+
+• Subject
+
+• Authorities
+
+• User ID
+
+Do not trust any client supplied information.
+
+===========================================================
+HEADER SECURITY
+===========================================================
+
+This requirement is mandatory.
+
+Before forwarding a request,
+
+remove any incoming headers named
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-User-Authorities
+
+Clients must never be allowed to send these headers.
+
+Only after successful JWT validation should the Gateway create and forward trusted headers.
+
+===========================================================
+FORWARDED USER CONTEXT
+===========================================================
+
+Forward the following headers to downstream services.
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-User-Authorities
+
+The values must come only from the validated JWT.
+
+===========================================================
+ROUTE SECURITY
+===========================================================
+
+Public routes
+
+/api/v1/auth/register
+
+/api/v1/auth/login
+
+/swagger-ui/**
+
+/v3/api-docs/**
+
+/actuator/health
+
+Everything else must require a valid JWT.
+
+===========================================================
+ERROR HANDLING
+===========================================================
+
+Return a consistent JSON response using the project's standard ApiResponse structure.
+
+Handle
+
+401 Unauthorized
+
+403 Forbidden
+
+Expired Token
+
+Invalid Token
+
+Malformed Token
+
+Missing Token
+
+Invalid Signature
+
+===========================================================
+FILTER IMPLEMENTATION
+===========================================================
+
+The AuthenticationFilter should be clean and lightweight.
+
+Move all JWT parsing and validation logic into JwtUtil or a dedicated JwtService.
+
+The filter should only
+
+• Determine whether authentication is required.
+
+• Validate the JWT.
+
+• Remove spoofed headers.
+
+• Add trusted headers.
+
+• Continue the request.
+
+===========================================================
+CODE QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Single Responsibility Principle
+
+Constructor Injection
+
+Reusable Components
+
+Meaningful Package Structure
+
+Do not duplicate JWT validation logic.
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/security/api-gateway-jwt.md
+
+Include
+
+Gateway Security Architecture
+
+JWT Validation Flow
+
+Header Forwarding Strategy
+
+Header Spoofing Prevention
+
+Public vs Protected Routes
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Register works without JWT
+
+✓ Login works without JWT
+
+✓ Protected APIs reject missing tokens
+
+✓ Protected APIs reject expired tokens
+
+✓ Protected APIs reject malformed tokens
+
+✓ Protected APIs reject tampered tokens
+
+✓ Valid JWT allows access
+
+✓ Gateway removes spoofed headers
+
+✓ Gateway forwards trusted headers correctly
+
+✓ Existing routes continue to work
+
+===========================================================
+IMPORTANT
+===========================================================
+
+This Gateway should NOT perform authorization decisions based on business logic.
+
+The Gateway is responsible only for
+
+Authentication
+
+JWT Validation
+
+Trusted User Context Forwarding
+
+Business authorization will remain inside the downstream microservices.
+
+===========================================================
+OUTPUT
+===========================================================
+
+After implementation provide
+
+1. Gateway Request Flow Diagram
+
+2. JWT Validation Flow
+
+3. Header Forwarding Diagram
+
+4. Security Architecture
+
+5. Files Created
+
+6. Files Modified
+
+7. Verification Checklist
+
+8. Git Commit Message
+
+After completing the Gateway migration, stop and wait for the next implementation task.

@@ -1,0 +1,259 @@
+You are a Principal Software Architect and Senior Spring Cloud Gateway & Spring Security Engineer.
+
+The Authentication Service has successfully migrated to JWT Authentication.
+
+JWT generation, validation, and protected endpoints are working.
+
+Now integrate JWT Authentication into the API Gateway.
+
+IMPORTANT
+
+Analyze the existing project before making any changes.
+
+Do NOT regenerate the project.
+
+Do NOT rewrite existing code.
+
+Modify ONLY api-gateway.
+
+Do NOT modify auth-service.
+
+Do NOT modify user-service.
+
+Do NOT modify course-service.
+
+Do NOT modify content-service.
+
+Do NOT modify enrollment-service.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Secure the API Gateway using JWT.
+
+The API Gateway will become the single entry point for every external request.
+
+All client requests must go through the API Gateway.
+
+===========================================================
+ARCHITECTURE
+===========================================================
+
+Client
+
+↓
+
+API Gateway
+
+↓
+
+Microservices
+
+Never allow direct external access to business microservices.
+
+===========================================================
+JWT FILTER
+===========================================================
+
+Implement a Gateway JWT Authentication Filter.
+
+The filter must
+
+Read the Authorization header.
+
+Extract the Bearer token.
+
+Validate the JWT.
+
+Verify
+
+Signature
+
+Expiration
+
+Issuer
+
+User ID
+
+Authorities
+
+If the token is valid
+
+Allow the request.
+
+If invalid
+
+Return HTTP 401.
+
+===========================================================
+PUBLIC ROUTES
+===========================================================
+
+Allow unauthenticated access to
+
+/auth/register
+
+/auth/login
+
+/swagger-ui/**
+
+/v3/api-docs/**
+
+/actuator/health
+
+Everything else must require JWT.
+
+===========================================================
+FORWARD USER CONTEXT
+===========================================================
+
+After validating the JWT,
+
+extract
+
+User ID
+
+Email
+
+Role
+
+Authorities
+
+Forward them to downstream services using HTTP headers.
+
+Use
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-User-Authorities
+
+These headers must be added only by the Gateway.
+
+Clients must never send these headers directly.
+
+Remove any incoming versions of these headers from client requests before forwarding.
+
+===========================================================
+SECURITY
+===========================================================
+
+Prevent header spoofing.
+
+Strip any client-supplied
+
+X-User-Id
+
+X-User-Role
+
+X-User-Email
+
+X-User-Authorities
+
+Generate trusted headers only after successful JWT validation.
+
+===========================================================
+ERROR HANDLING
+===========================================================
+
+Return structured JSON responses for
+
+401 Unauthorized
+
+403 Forbidden
+
+Expired Token
+
+Invalid Token
+
+Malformed Token
+
+Missing Token
+
+===========================================================
+ROUTING
+===========================================================
+
+Verify all existing routes continue working.
+
+Do not change route mappings unless necessary.
+
+===========================================================
+SWAGGER
+===========================================================
+
+Ensure Swagger for auth-service remains publicly accessible.
+
+Other service Swagger endpoints can remain protected for now.
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Register works
+
+✓ Login works
+
+✓ JWT accepted by Gateway
+
+✓ JWT rejected if invalid
+
+✓ JWT rejected if expired
+
+✓ Protected routes require JWT
+
+✓ Public routes remain accessible
+
+✓ User context headers are forwarded correctly
+
+✓ Header spoofing is prevented
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/api-gateway-jwt.md
+
+Include
+
+Gateway Architecture
+
+JWT Validation Flow
+
+Header Forwarding Strategy
+
+Security Flow
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Gateway Authentication Flow
+
+2. Header Forwarding Diagram
+
+3. Public Routes
+
+4. Protected Routes
+
+5. Files Modified
+
+6. Verification Checklist
+
+7. Git Commit Message
+
+Stop after API Gateway JWT integration is complete.
+
+Wait for the next implementation task.

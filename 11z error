@@ -1,0 +1,140 @@
+You are a Principal Spring Boot Microservices Architect and Senior Debugging Engineer.
+
+I am facing an application startup failure in my Spring Boot Microservices project.
+
+Do NOT guess the solution.
+
+First analyze the entire project.
+
+Analyze
+
+- parent pom.xml
+- discovery-service pom.xml
+- dependency management
+- Spring Boot version
+- Spring Cloud version
+- application.properties
+- DiscoveryServiceApplication.java
+- Eureka configuration
+- Maven dependencies
+- Plugin configuration
+
+===========================================================
+CURRENT ERROR
+===========================================================
+
+Application fails during Eureka startup.
+
+Important exceptions include
+
+NoSuchBeanDefinitionException
+
+No qualifying bean of type
+
+com.netflix.discovery.shared.transport.jersey.TransportClientFactories
+
+and
+
+Failed to start bean
+
+eurekaAutoServiceRegistration
+
+and
+
+NullPointerException
+
+EurekaRegistration.getEurekaClient()
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Identify the ROOT CAUSE.
+
+Do not apply random fixes.
+
+Find exactly why Eureka Server is failing.
+
+===========================================================
+DEBUGGING STEPS
+===========================================================
+
+Check
+
+1. Spring Boot version compatibility.
+
+2. Spring Cloud version compatibility.
+
+3. Parent pom dependency management.
+
+4. Discovery service dependencies.
+
+5. Missing Eureka Server dependency.
+
+6. Wrong Eureka Client dependency.
+
+7. Duplicate dependencies.
+
+8. Incorrect starter versions.
+
+9. Wrong plugin versions.
+
+10. Wrong application.properties.
+
+11. Missing @EnableEurekaServer annotation.
+
+12. Whether discovery-service is trying to register itself.
+
+13. Whether
+
+eureka.client.register-with-eureka
+
+is configured correctly.
+
+14. Whether
+
+eureka.client.fetch-registry
+
+is configured correctly.
+
+15. Whether API Gateway and Discovery Service have conflicting ports.
+
+16. Whether Spring WebFlux or Jersey dependencies are conflicting.
+
+17. Any dependency exclusions causing TransportClientFactories bean to disappear.
+
+===========================================================
+IMPORTANT
+===========================================================
+
+Do NOT regenerate the project.
+
+Do NOT rewrite unrelated code.
+
+Only fix the actual root cause.
+
+Explain
+
+- what is wrong
+- why it happens
+- why your fix is correct
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Root Cause
+
+2. Files to modify
+
+3. Exact changes
+
+4. Why the application failed
+
+5. Why the new configuration works
+
+6. Verification steps
+
+Ensure discovery-service starts successfully and Eureka Dashboard is accessible.

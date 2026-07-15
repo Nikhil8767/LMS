@@ -1,0 +1,267 @@
+Your proposed plan is good, but before implementing it I want to improve the architecture so that the JWT implementation is production-quality and scalable for the entire LMS microservices project.
+
+Please modify the implementation according to the following requirements.
+
+===========================================================
+GENERAL REQUIREMENTS
+===========================================================
+
+Analyze the existing auth-service completely before making any changes.
+
+Do NOT regenerate the project.
+
+Do NOT rewrite unrelated code.
+
+Modify ONLY auth-service.
+
+Keep the existing architecture and coding standards.
+
+===========================================================
+JWT LIBRARY
+===========================================================
+
+Use the latest stable JJWT version compatible with Spring Boot 3.x.
+
+Do not use outdated versions if a newer compatible version exists.
+
+===========================================================
+JWT CLAIMS
+===========================================================
+
+Do NOT use email as the JWT subject.
+
+Use the authenticated user's UUID as the JWT subject.
+
+JWT should contain the following claims:
+
+sub = userId (UUID)
+
+email
+
+role
+
+authorities
+
+tokenVersion
+
+issuedAt
+
+expiration
+
+issuer
+
+Generate the authorities in Spring Security format.
+
+Examples
+
+ROLE_STUDENT
+
+ROLE_INSTRUCTOR
+
+ROLE_ADMIN
+
+===========================================================
+TOKEN CONFIGURATION
+===========================================================
+
+Read all JWT configuration from application.properties.
+
+jwt.secret
+
+jwt.expiration
+
+jwt.issuer
+
+Do not hardcode secrets.
+
+===========================================================
+AUTHENTICATION
+===========================================================
+
+Keep BCrypt password encoding.
+
+Convert the application to Stateless Authentication.
+
+Remove HttpSession usage.
+
+Configure Spring Security correctly.
+
+Implement JwtAuthenticationFilter.
+
+Implement JwtAuthenticationEntryPoint.
+
+Populate SecurityContext from JWT.
+
+===========================================================
+LOGIN RESPONSE
+===========================================================
+
+Instead of modifying the existing AuthResponse, create a dedicated LoginResponse DTO.
+
+The login response should contain
+
+accessToken
+
+tokenType
+
+expiresIn
+
+userId
+
+email
+
+role
+
+===========================================================
+REGISTER
+===========================================================
+
+Registration should remain unchanged.
+
+Default role must remain
+
+STUDENT
+
+Do not allow users to register as ADMIN or INSTRUCTOR.
+
+===========================================================
+LOGOUT
+===========================================================
+
+For now implement stateless logout.
+
+Logout should simply instruct the client to remove the access token.
+
+Do NOT implement token blacklist yet.
+
+===========================================================
+REFRESH TOKEN
+===========================================================
+
+Do NOT implement refresh tokens yet.
+
+However,
+
+prepare the architecture for future refresh token support.
+
+Design the code so RefreshTokenService can be added later without major refactoring.
+
+===========================================================
+SWAGGER
+===========================================================
+
+Configure Swagger to support JWT Bearer Authentication.
+
+The Authorize button should work correctly.
+
+Authenticated APIs should be testable directly from Swagger.
+
+===========================================================
+SECURITY
+===========================================================
+
+Public Endpoints
+
+/api/v1/auth/register
+
+/api/v1/auth/login
+
+Swagger UI
+
+/v3/api-docs/**
+
+/swagger-ui/**
+
+All remaining endpoints should require JWT authentication.
+
+===========================================================
+CODE QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Constructor Injection
+
+DTO Pattern
+
+Layered Architecture
+
+Meaningful Package Structure
+
+Reusable Utility Classes
+
+===========================================================
+DO NOT MODIFY
+===========================================================
+
+Do NOT modify
+
+API Gateway
+
+User Service
+
+Course Service
+
+Content Service
+
+Enrollment Service
+
+Frontend Service
+
+Those services will be migrated in later phases.
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/authentication/jwt-authentication.md
+
+Include
+
+JWT Architecture
+
+Authentication Flow
+
+Token Structure
+
+JWT Claims
+
+Security Configuration
+
+Swagger Usage
+
+Future Refresh Token Design
+
+===========================================================
+OUTPUT
+===========================================================
+
+After implementation provide
+
+1. Files Created
+
+2. Files Modified
+
+3. JWT Flow Diagram
+
+4. Security Flow Diagram
+
+5. Package Structure
+
+6. Swagger Verification
+
+7. Manual Testing Steps
+
+8. Git Commit Message
+
+Stop after auth-service JWT migration is complete.
+
+Do not start modifying any other microservice until I explicitly ask for the next phase.

@@ -1,0 +1,179 @@
+You are a Principal Software Architect and Senior Spring Security Engineer.
+
+The Online Learning Management System currently uses Session Authentication.
+
+We have decided to migrate to JWT Authentication.
+
+IMPORTANT
+
+Do NOT regenerate the project.
+
+Do NOT rewrite the entire Authentication Service.
+
+Analyze the existing auth-service completely before making any changes.
+
+Modify ONLY auth-service.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Prepare the Authentication Service for JWT Authentication.
+
+This is only the foundation.
+
+Do NOT modify User Service, Course Service, Content Service, Enrollment Service, API Gateway, or Frontend.
+
+===========================================================
+CURRENT ARCHITECTURE
+===========================================================
+
+Spring Boot 3
+
+Spring Security
+
+PostgreSQL
+
+BCrypt
+
+Role Based Authentication
+
+Microservices
+
+API Gateway
+
+WebClient
+
+===========================================================
+REQUIREMENTS
+===========================================================
+
+Remove Session Authentication.
+
+Configure Stateless Security.
+
+Configure JWT Authentication.
+
+Keep the existing UserCredential entity.
+
+Keep BCrypt Password Encoding.
+
+Keep Role enum.
+
+Keep existing APIs wherever possible.
+
+===========================================================
+IMPLEMENT
+===========================================================
+
+Create
+
+JwtService
+
+JwtAuthenticationFilter
+
+JwtAuthenticationEntryPoint
+
+JwtAuthenticationProvider
+
+JwtAuthenticationConverter
+
+JwtProperties
+
+Update
+
+SecurityConfig
+
+AuthenticationService
+
+Login Flow
+
+===========================================================
+JWT
+===========================================================
+
+Generate JWT containing
+
+User ID
+
+Email
+
+Role
+
+Issued Time
+
+Expiration Time
+
+Use HS256.
+
+Read secret and expiration from application.properties.
+
+===========================================================
+LOGIN
+===========================================================
+
+POST /api/v1/auth/login
+
+should return
+
+accessToken
+
+tokenType
+
+expiresIn
+
+user information
+
+===========================================================
+REGISTER
+===========================================================
+
+Keep registration behavior unchanged.
+
+Default role
+
+STUDENT
+
+===========================================================
+DO NOT IMPLEMENT YET
+===========================================================
+
+Refresh Token
+
+Blacklist
+
+Logout
+
+Gateway Validation
+
+Inter-service Authentication
+
+===========================================================
+SWAGGER
+===========================================================
+
+Update Swagger documentation.
+
+Document JWT Bearer Authentication.
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. New package structure
+
+2. JWT flow
+
+3. Classes created
+
+4. Classes modified
+
+5. Swagger changes
+
+6. Verification checklist
+
+7. Git commit message
+
+Stop after JWT foundation is complete.

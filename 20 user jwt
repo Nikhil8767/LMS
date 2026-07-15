@@ -1,0 +1,321 @@
+You are a Principal Software Architect, Senior Spring Boot Engineer, and Senior Spring Security Engineer.
+
+The Online Learning Management System has completed the following phases.
+
+✓ JWT Authentication in auth-service
+
+✓ API Gateway JWT Validation
+
+✓ Trusted User Context Forwarding
+
+The API Gateway now validates JWTs and forwards trusted headers to downstream services.
+
+Analyze the existing user-service before making any changes.
+
+Do NOT regenerate the project.
+
+Do NOT rewrite the service.
+
+Modify ONLY user-service.
+
+Do NOT modify auth-service.
+
+Do NOT modify api-gateway.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Migrate user-service to use JWT-based identity provided by the API Gateway.
+
+Remove all dependency on authUserId in request bodies.
+
+Remove all dependency on client-supplied authentication headers.
+
+Trust ONLY the headers injected by the API Gateway.
+
+===========================================================
+CURRENT PROBLEMS
+===========================================================
+
+The Create Profile API requires authUserId.
+
+This is incorrect.
+
+The frontend should never send internal user identifiers.
+
+Users can potentially update other users.
+
+This must be prevented.
+
+===========================================================
+HEADER INTEGRATION
+===========================================================
+
+The API Gateway now forwards trusted headers.
+
+Read ONLY
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-User-Authorities
+
+Never trust headers coming directly from external clients.
+
+Assume the Gateway has already sanitized them.
+
+===========================================================
+PROFILE CREATION
+===========================================================
+
+Remove authUserId from every request DTO.
+
+Profile creation should automatically associate the profile with
+
+X-User-Id
+
+received from the Gateway.
+
+The frontend should never provide authUserId.
+
+===========================================================
+NEW APIS
+===========================================================
+
+Implement
+
+GET
+
+/api/v1/users/me
+
+Return the currently authenticated user's profile.
+
+Implement
+
+PUT
+
+/api/v1/users/me
+
+Update only the authenticated user's profile.
+
+Implement
+
+DELETE
+
+/api/v1/users/me
+
+Allow users to delete only their own profile.
+
+===========================================================
+ADMIN APIS
+===========================================================
+
+Keep
+
+GET
+
+/api/v1/users/{id}
+
+PUT
+
+/api/v1/users/{id}
+
+DELETE
+
+/api/v1/users/{id}
+
+Restrict these endpoints to
+
+ROLE_ADMIN
+
+only.
+
+===========================================================
+AUTHORIZATION
+===========================================================
+
+STUDENT
+
+Can
+
+Create own profile
+
+View own profile
+
+Update own profile
+
+Delete own profile
+
+Cannot access other users.
+
+-----------------------------------------------------------
+
+INSTRUCTOR
+
+Can
+
+Create own profile
+
+View own profile
+
+Update own profile
+
+Delete own profile
+
+Cannot modify other users.
+
+-----------------------------------------------------------
+
+ADMIN
+
+Can
+
+View any profile
+
+Update any profile
+
+Delete any profile
+
+===========================================================
+DTOS
+===========================================================
+
+Remove authUserId from all public request DTOs.
+
+Update Swagger examples.
+
+Update validation.
+
+===========================================================
+SERVICE LAYER
+===========================================================
+
+Refactor business logic so that
+
+current user information
+
+comes from
+
+X-User-Id
+
+instead of request bodies.
+
+===========================================================
+SECURITY
+===========================================================
+
+Never allow
+
+PUT /users/{id}
+
+unless
+
+ROLE_ADMIN
+
+Users must never update another user's profile.
+
+===========================================================
+EXCEPTION HANDLING
+===========================================================
+
+Return proper JSON responses for
+
+401 Unauthorized
+
+403 Forbidden
+
+404 User Not Found
+
+409 Duplicate Profile
+
+400 Validation Errors
+
+===========================================================
+SWAGGER
+===========================================================
+
+Update Swagger documentation.
+
+Document
+
+/me
+
+endpoints.
+
+Document JWT authentication.
+
+Provide example request and response bodies.
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Create Profile
+
+✓ Get My Profile
+
+✓ Update My Profile
+
+✓ Delete My Profile
+
+✓ Admin Get User
+
+✓ Admin Update User
+
+✓ Admin Delete User
+
+✓ Student cannot access another profile
+
+✓ Instructor cannot access another profile
+
+✓ JWT headers are used correctly
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/user-service-jwt.md
+
+Include
+
+JWT Integration
+
+Profile Flow
+
+Authorization Rules
+
+API Documentation
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Updated User Flow
+
+2. Authorization Matrix
+
+3. API Summary
+
+4. Files Modified
+
+5. Verification Checklist
+
+6. Git Commit Message
+
+Stop after user-service JWT migration is complete.
+
+Do not modify any other microservice.
+
+Wait for the next implementation task.

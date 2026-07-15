@@ -1,0 +1,25 @@
+You are a Principal Software Architect and Senior QA Engineer.
+
+Analyze ONLY content-service.
+
+Integrate Swagger.
+
+Document every endpoint.
+
+Test
+
+• Section CRUD
+
+• Lesson CRUD
+
+• Resource CRUD
+
+• Validation
+
+• Ordering
+
+Fix discovered bugs.
+
+Generate API Test Report.
+
+Stop after content-service testing.

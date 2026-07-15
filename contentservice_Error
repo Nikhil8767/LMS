@@ -1,0 +1,121 @@
+You are a Principal Java Architect and Senior Spring Boot Debugging Engineer.
+
+The project is already implemented.
+
+Do NOT regenerate code.
+
+Do NOT rewrite existing classes.
+
+Analyze the existing project first.
+
+Find the root cause of the compilation errors.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Fix ONLY the compilation errors inside content-service.
+
+Current issue:
+
+ResourceNotFoundException.java has compilation errors.
+
+There may also be related errors in GlobalExceptionHandler or any dependent classes.
+
+Analyze the entire exception package before making changes.
+
+===========================================================
+IMPORTANT
+===========================================================
+
+Do NOT create duplicate exception classes.
+
+Do NOT rename packages.
+
+Do NOT change project architecture.
+
+Do NOT change APIs.
+
+Do NOT modify unrelated services.
+
+Only modify files that are actually causing the errors.
+
+===========================================================
+DEBUGGING PROCESS
+===========================================================
+
+Follow this order.
+
+1. Identify every compilation error.
+
+2. Identify the root cause.
+
+3. Explain why the error occurs.
+
+4. Fix the minimum number of files required.
+
+5. Ensure the fix follows existing project architecture.
+
+===========================================================
+VERIFY
+===========================================================
+
+Check for
+
+• Wrong imports
+
+• Missing constructors
+
+• Incorrect inheritance
+
+• Package mismatch
+
+• Duplicate class names
+
+• Missing superclass
+
+• Incorrect exception hierarchy
+
+• Missing ResponseEntity imports
+
+• Generic type mismatch
+
+• Build configuration issues
+
+• Lombok issues
+
+• Java version issues
+
+===========================================================
+QUALITY
+===========================================================
+
+Keep the existing architecture.
+
+Do not introduce breaking changes.
+
+Follow SOLID principles.
+
+Use clean exception handling.
+
+Maintain consistent coding style.
+
+===========================================================
+OUTPUT
+===========================================================
+
+After fixing,
+
+provide
+
+1. Root cause of every error
+
+2. Files modified
+
+3. Explanation of each fix
+
+4. Why the solution is correct
+
+5. Confirmation that content-service compiles successfully
+
+Do not modify anything outside content-service unless absolutely required for compilation.

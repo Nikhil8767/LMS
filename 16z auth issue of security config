@@ -1,0 +1,163 @@
+You are a Principal Spring Security Architect and Senior Spring Boot Debugging Engineer.
+
+The Authentication Service has already been implemented.
+
+The registration endpoint exists but is returning HTTP 403 Forbidden.
+
+Do NOT regenerate the project.
+
+Do NOT rewrite the Authentication Service.
+
+Analyze the existing implementation before making any changes.
+
+===========================================================
+CURRENT ISSUE
+===========================================================
+
+POST
+
+/api/v1/auth/register
+
+returns
+
+HTTP 403 Forbidden
+
+Swagger reaches the endpoint but Spring Security blocks the request.
+
+This is most likely a Spring Security configuration issue.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Identify the exact root cause.
+
+Do NOT apply random fixes.
+
+Analyze the complete security configuration first.
+
+===========================================================
+ANALYZE
+===========================================================
+
+Check
+
+SecurityConfig
+
+SecurityFilterChain
+
+AuthenticationManager
+
+PasswordEncoder
+
+UserDetailsService
+
+Custom AuthenticationEntryPoint
+
+AccessDeniedHandler
+
+CSRF configuration
+
+Session configuration
+
+Request matchers
+
+Authorization rules
+
+===========================================================
+VERIFY
+===========================================================
+
+Check whether
+
+/api/v1/auth/register
+
+/api/v1/auth/login
+
+/api/v1/auth/logout
+
+/api/v1/auth/session
+
+/api/v1/auth/me
+
+have the correct authorization rules.
+
+Registration and Login should be publicly accessible.
+
+Current User and Session should require authentication.
+
+Logout should work for authenticated users.
+
+===========================================================
+CSRF
+===========================================================
+
+Analyze whether CSRF is causing the request to fail.
+
+If CSRF is blocking Swagger testing,
+
+configure Spring Security appropriately for a development environment.
+
+Do not simply disable security without explanation.
+
+If CSRF is disabled, explain why and document that this is for development/testing.
+
+===========================================================
+REQUEST MATCHERS
+===========================================================
+
+Verify that
+
+/api/v1/auth/register
+
+/api/v1/auth/login
+
+Swagger UI
+
+/v3/api-docs/**
+
+/swagger-ui/**
+
+/swagger-ui.html
+
+are configured with permitAll().
+
+===========================================================
+TESTING
+===========================================================
+
+After applying the fix verify
+
+✓ Registration works
+
+✓ Login works
+
+✓ Swagger can execute POST requests
+
+✓ Session endpoints remain protected
+
+✓ Role-based authorization still works
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Root Cause
+
+2. Files Modified
+
+3. Exact Security Changes
+
+4. Why the issue occurred
+
+5. Why the fix is correct
+
+6. Verification checklist
+
+Do not modify business logic.
+
+Only modify the minimum required security configuration.
+
+Ensure the Authentication Service remains production-ready while allowing Swagger testing in development.

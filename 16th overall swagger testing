@@ -1,0 +1,79 @@
+You are a Principal QA Engineer and Senior Spring Boot Architect.
+
+Every microservice has been individually tested.
+
+Now perform complete backend integration testing.
+
+Verify
+
+✓ Eureka Registration
+
+✓ API Gateway Routing
+
+✓ WebClient Communication
+
+✓ Authentication Flow
+
+✓ User Flow
+
+✓ Course Flow
+
+✓ Content Flow
+
+✓ Enrollment Flow
+
+Perform end-to-end testing.
+
+Scenario
+
+Student Registration
+
+↓
+
+Student Login
+
+↓
+
+Create Profile
+
+↓
+
+Browse Courses
+
+↓
+
+View Course
+
+↓
+
+Enroll
+
+↓
+
+Access Lessons
+
+↓
+
+Update Progress
+
+↓
+
+Complete Course
+
+↓
+
+Logout
+
+Fix bugs if discovered.
+
+Generate
+
+Integration Test Report
+
+Bug Report
+
+Verification Checklist
+
+Git Commit Message
+
+Stop after backend integration testing.

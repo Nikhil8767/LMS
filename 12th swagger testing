@@ -1,0 +1,197 @@
+You are a Principal Software Architect, Senior Spring Boot Developer, and Senior QA Engineer.
+
+The Authentication Service has already been implemented.
+
+Do NOT regenerate the project.
+
+Do NOT rewrite the service.
+
+Analyze the existing auth-service completely before making any changes.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Integrate Swagger (OpenAPI 3) into ONLY the auth-service.
+
+After Swagger integration, manually verify every API using Swagger UI.
+
+Fix bugs only if they are discovered during testing.
+
+Do not modify any other microservice.
+
+===========================================================
+DEPENDENCY
+===========================================================
+
+Add Swagger using
+
+springdoc-openapi-starter-webmvc-ui
+
+Use the latest stable version compatible with Spring Boot 3.x.
+
+===========================================================
+SWAGGER CONFIGURATION
+===========================================================
+
+Configure Swagger correctly.
+
+Swagger UI
+
+/swagger-ui/index.html
+
+OpenAPI
+
+/v3/api-docs
+
+===========================================================
+DOCUMENT EVERY API
+===========================================================
+
+Document every REST endpoint.
+
+Include
+
+Summary
+
+Description
+
+Request Body
+
+Response Body
+
+Status Codes
+
+Validation Errors
+
+Authentication Requirement
+
+===========================================================
+DOCUMENT DTOs
+===========================================================
+
+Document every DTO.
+
+Examples
+
+RegisterRequest
+
+LoginRequest
+
+AuthResponse
+
+ApiResponse
+
+Validation Errors
+
+===========================================================
+TEST EVERY API
+===========================================================
+
+Test
+
+✓ Register
+
+✓ Login
+
+✓ Logout
+
+✓ Current User
+
+✓ Session Validation
+
+===========================================================
+NEGATIVE TESTS
+===========================================================
+
+Test
+
+Duplicate Email
+
+Invalid Email
+
+Wrong Password
+
+Blank Fields
+
+Weak Password
+
+Unauthorized Access
+
+Expired Session
+
+===========================================================
+VERIFY
+===========================================================
+
+Verify
+
+Swagger UI loads.
+
+OpenAPI JSON loads.
+
+All APIs appear.
+
+Validation messages appear.
+
+DTO schemas appear.
+
+All endpoints execute successfully.
+
+===========================================================
+BUG FIXING
+===========================================================
+
+If any endpoint fails
+
+Find the root cause.
+
+Fix only the minimum required code.
+
+Retest.
+
+Continue until every endpoint works correctly.
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/swagger-auth-service.md
+
+Include
+
+Swagger URL
+
+Available APIs
+
+Authentication Flow
+
+Testing Results
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Swagger URL
+
+2. APIs Tested
+
+3. Passed Tests
+
+4. Failed Tests
+
+5. Bugs Fixed
+
+6. Verification Checklist
+
+7. Git Commit Message
+
+Stop after auth-service testing is complete.
+
+Wait for the next implementation task.

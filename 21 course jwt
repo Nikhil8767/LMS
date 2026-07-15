@@ -1,0 +1,305 @@
+You are a Principal Software Architect, Senior Spring Boot Engineer, and Senior Spring Security Engineer.
+
+The Online Learning Management System has completed the following phases.
+
+✓ JWT Authentication (Auth Service)
+
+✓ API Gateway JWT Validation
+
+✓ Trusted Header Forwarding
+
+✓ User Service JWT Migration
+
+Analyze the existing course-service before making any changes.
+
+Do NOT regenerate the project.
+
+Do NOT rewrite unrelated code.
+
+Modify ONLY course-service.
+
+Do NOT modify auth-service.
+
+Do NOT modify api-gateway.
+
+Do NOT modify user-service.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Migrate course-service to JWT authentication using the trusted user information forwarded by the API Gateway.
+
+The Course Service must never parse JWT directly.
+
+The Course Service must never trust client supplied headers.
+
+It must trust ONLY the authenticated SecurityContext populated by HeaderAuthenticationFilter.
+
+===========================================================
+COMMON SECURITY
+===========================================================
+
+Do NOT duplicate security code.
+
+Reuse the security components already created during the User Service migration.
+
+If UserPrincipal, HeaderAuthenticationFilter, SecurityConstants, JwtHeaderNames or related reusable classes exist, move them into common-library so every business service can reuse them.
+
+The Course Service should depend on these reusable security classes.
+
+Avoid duplicate implementations.
+
+===========================================================
+SECURITY CONTEXT
+===========================================================
+
+Populate SecurityContext using the reusable HeaderAuthenticationFilter.
+
+Controllers should obtain the authenticated user using
+
+@AuthenticationPrincipal UserPrincipal
+
+Never manually read request headers.
+
+===========================================================
+AUTHORIZATION
+===========================================================
+
+ROLE_STUDENT
+
+Can
+
+View Courses
+
+Search Courses
+
+View Categories
+
+Cannot
+
+Create Course
+
+Update Course
+
+Delete Course
+
+Approve Course
+
+-----------------------------------------------------------
+
+ROLE_INSTRUCTOR
+
+Can
+
+Create Course
+
+Update Own Course
+
+Delete Own Course
+
+View Own Courses
+
+Manage Own Courses
+
+Cannot
+
+Modify another instructor's course
+
+-----------------------------------------------------------
+
+ROLE_ADMIN
+
+Can
+
+Create Course
+
+Update Any Course
+
+Delete Any Course
+
+Approve Course
+
+Manage Categories
+
+===========================================================
+COURSE OWNERSHIP
+===========================================================
+
+Every Course must contain
+
+ownerId
+
+(UUID of the Instructor)
+
+The ownerId must always come from the authenticated UserPrincipal.
+
+Never accept ownerId from the request body.
+
+Never trust the frontend.
+
+===========================================================
+REQUEST DTO
+===========================================================
+
+Remove any field that allows the frontend to specify
+
+ownerId
+
+instructorId
+
+creatorId
+
+or similar ownership fields.
+
+Ownership must always be assigned automatically.
+
+===========================================================
+NEW APIS
+===========================================================
+
+Implement
+
+GET
+
+/api/v1/courses/my
+
+Return only the authenticated instructor's courses.
+
+===========================================================
+ADMIN APIS
+===========================================================
+
+Admin can
+
+Approve Course
+
+Reject Course
+
+Delete Any Course
+
+View All Courses
+
+Manage Categories
+
+Protect these endpoints using
+
+@PreAuthorize("hasRole('ADMIN')")
+
+===========================================================
+SERVICE LAYER
+===========================================================
+
+Business rules belong only in the service layer.
+
+Verify
+
+Instructor owns the course
+
+before update/delete.
+
+===========================================================
+SWAGGER
+===========================================================
+
+Update Swagger.
+
+Document
+
+JWT Bearer Authentication
+
+Course Ownership
+
+Instructor APIs
+
+Admin APIs
+
+Student APIs
+
+===========================================================
+VALIDATION
+===========================================================
+
+Verify
+
+Student cannot create course.
+
+Instructor cannot modify another instructor's course.
+
+Admin can manage every course.
+
+OwnerId is automatically assigned.
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Student View Courses
+
+✓ Student Search
+
+✓ Student Forbidden Create
+
+✓ Instructor Create Course
+
+✓ Instructor Update Own Course
+
+✓ Instructor Delete Own Course
+
+✓ Instructor Forbidden Update Another Course
+
+✓ Admin Manage Any Course
+
+✓ Course Ownership
+
+✓ SecurityContext
+
+✓ @AuthenticationPrincipal
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/course-service-jwt.md
+
+Include
+
+Authorization Matrix
+
+Course Ownership
+
+Security Flow
+
+Swagger Guide
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Updated Architecture Diagram
+
+2. Authorization Matrix
+
+3. Course Ownership Flow
+
+4. Files Created
+
+5. Files Modified
+
+6. Swagger Verification
+
+7. Testing Checklist
+
+8. Git Commit Message
+
+Stop after course-service JWT migration is complete.
+
+Wait for the next implementation task.

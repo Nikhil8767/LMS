@@ -1,0 +1,223 @@
+You are a Principal Software Architect and Senior Spring Security Engineer.
+
+The Authentication Service has been migrated to JWT Authentication.
+
+JWT generation is complete.
+
+Now implement the complete JWT authentication flow.
+
+IMPORTANT
+
+Analyze the existing auth-service before making any changes.
+
+Do NOT regenerate the project.
+
+Do NOT rewrite existing code.
+
+Modify ONLY auth-service.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Implement complete JWT authentication and authorization.
+
+Ensure every protected endpoint is authenticated using JWT.
+
+Do NOT modify any other microservice.
+
+===========================================================
+JWT FILTER
+===========================================================
+
+Verify and improve JwtAuthenticationFilter.
+
+For every incoming request
+
+Extract Authorization header.
+
+Validate
+
+Bearer Token.
+
+Verify
+
+Signature
+
+Expiration
+
+Issuer
+
+Token Structure
+
+If valid
+
+Load user details.
+
+Populate SecurityContextHolder.
+
+Continue request processing.
+
+If invalid
+
+Return proper HTTP 401 response.
+
+===========================================================
+SECURITY CONFIGURATION
+===========================================================
+
+Verify SecurityFilterChain.
+
+Public APIs
+
+POST /api/v1/auth/register
+
+POST /api/v1/auth/login
+
+Swagger
+
+/swagger-ui/**
+
+/v3/api-docs/**
+
+All remaining APIs must require JWT authentication.
+
+Disable Session Authentication.
+
+Use
+
+SessionCreationPolicy.STATELESS
+
+===========================================================
+CURRENT USER
+===========================================================
+
+Modify
+
+GET
+
+/api/v1/auth/me
+
+The endpoint must return the currently authenticated user by reading the JWT from SecurityContext.
+
+Do not require request parameters.
+
+Do not require custom headers.
+
+===========================================================
+TOKEN VALIDATION
+===========================================================
+
+Validate
+
+Signature
+
+Expiration
+
+Issuer
+
+Authorities
+
+User Existence
+
+If user no longer exists
+
+Return HTTP 401.
+
+===========================================================
+ERROR HANDLING
+===========================================================
+
+Return proper JSON responses for
+
+401 Unauthorized
+
+403 Forbidden
+
+Expired Token
+
+Invalid Token
+
+Malformed Token
+
+Missing Token
+
+===========================================================
+SWAGGER
+===========================================================
+
+Configure Swagger Bearer Authentication correctly.
+
+The Authorize button must work.
+
+After clicking Authorize
+
+All protected APIs should execute successfully.
+
+===========================================================
+MANUAL TESTING
+===========================================================
+
+Verify
+
+✓ Register
+
+✓ Login
+
+✓ Copy JWT
+
+✓ Swagger Authorize
+
+✓ Call /auth/me
+
+✓ Invalid Token
+
+✓ Expired Token
+
+✓ Missing Token
+
+✓ Unauthorized Access
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/authentication/jwt-testing.md
+
+Include
+
+Authentication Flow
+
+Swagger Usage
+
+Bearer Token Example
+
+Testing Guide
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. JWT Authentication Flow
+
+2. Security Flow
+
+3. Protected Endpoints
+
+4. Public Endpoints
+
+5. Swagger Testing Steps
+
+6. Manual Testing Checklist
+
+7. Git Commit Message
+
+Stop after auth-service JWT authentication is completely verified.
+
+Wait for the next implementation task.

@@ -1,0 +1,31 @@
+You are a Principal Software Architect and Senior QA Engineer.
+
+Analyze ONLY course-service.
+
+Integrate Swagger.
+
+Document every endpoint.
+
+Test all APIs.
+
+Fix bugs if discovered.
+
+Test
+
+• Course CRUD
+
+• Category CRUD
+
+• Search
+
+• Pagination
+
+• Sorting
+
+• Validation
+
+Verify Swagger UI and OpenAPI documentation.
+
+Generate API Test Report.
+
+Stop after course-service testing.

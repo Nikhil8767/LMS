@@ -1,0 +1,233 @@
+This plan is much better and I approve the overall architecture.
+
+Using a HeaderAuthenticationFilter to populate the Spring Security SecurityContext is the correct enterprise approach.
+
+Using @AuthenticationPrincipal instead of manually reading headers in every controller is also the correct approach.
+
+Before implementation, I want to make a few architectural improvements so that the User Service remains scalable and reusable across the entire LMS.
+
+===========================================================
+GENERAL
+===========================================================
+
+Analyze the existing user-service before making any changes.
+
+Do NOT regenerate the project.
+
+Do NOT rewrite unrelated code.
+
+Modify ONLY user-service.
+
+===========================================================
+USER PRINCIPAL
+===========================================================
+
+Create a reusable UserPrincipal class.
+
+It should contain
+
+userId
+
+email
+
+role
+
+authorities
+
+The UserPrincipal should be reusable by every microservice in the future.
+
+===========================================================
+HEADER FILTER
+===========================================================
+
+The HeaderAuthenticationFilter should ONLY
+
+• Read trusted headers
+
+• Create UserPrincipal
+
+• Populate SecurityContext
+
+• Continue the filter chain
+
+It must NOT contain business logic.
+
+===========================================================
+METHOD SECURITY
+===========================================================
+
+Enable method-level security.
+
+Use
+
+@EnableMethodSecurity
+
+Use
+
+@PreAuthorize
+
+wherever role-based authorization is required.
+
+Avoid manual role comparisons inside controllers.
+
+===========================================================
+CONTROLLER
+===========================================================
+
+Controllers should remain lightweight.
+
+Controllers should
+
+Validate request
+
+Read authenticated principal
+
+Call service
+
+Return response
+
+No business logic should exist inside controllers.
+
+===========================================================
+SERVICE
+===========================================================
+
+The service layer should receive
+
+authenticatedUserId
+
+from the controller.
+
+All business rules must remain inside the service layer.
+
+===========================================================
+PROFILE RULES
+===========================================================
+
+A user can create only one profile.
+
+A user can update only their own profile.
+
+A user can delete only their own profile.
+
+Admin can manage every profile.
+
+Students and instructors must never access another user's profile.
+
+===========================================================
+ADMIN APIS
+===========================================================
+
+Restrict
+
+GET /users
+
+GET /users/search
+
+GET /users/{id}
+
+PUT /users/{id}
+
+DELETE /users/{id}
+
+to ROLE_ADMIN only.
+
+===========================================================
+SWAGGER
+===========================================================
+
+Document Bearer Authentication.
+
+Document the /me endpoints.
+
+Clearly document that
+
+X-User-* headers are injected automatically by the API Gateway.
+
+Clients must never send these headers manually.
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Create Profile
+
+✓ Duplicate Profile Prevention
+
+✓ Get My Profile
+
+✓ Update My Profile
+
+✓ Delete My Profile
+
+✓ Admin User Management
+
+✓ Student Forbidden Access
+
+✓ Instructor Forbidden Access
+
+✓ SecurityContext is populated correctly
+
+✓ @AuthenticationPrincipal works correctly
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/user-service-jwt.md
+
+Include
+
+Authentication Flow
+
+Authorization Matrix
+
+UserPrincipal Structure
+
+SecurityContext Flow
+
+API Documentation
+
+===========================================================
+IMPORTANT
+===========================================================
+
+Design the implementation so the same HeaderAuthenticationFilter and UserPrincipal pattern can be reused later in
+
+course-service
+
+content-service
+
+enrollment-service
+
+with minimal changes.
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Authentication Flow Diagram
+
+2. Authorization Matrix
+
+3. SecurityContext Flow
+
+4. Files Created
+
+5. Files Modified
+
+6. Verification Checklist
+
+7. Git Commit Message
+
+Stop after user-service JWT migration is complete.
+
+Wait for the next implementation task.

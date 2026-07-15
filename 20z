@@ -1,0 +1,239 @@
+The proposed plan is good and follows the overall JWT migration strategy. However, before implementation I want to improve the architecture so that the User Service follows enterprise microservice best practices.
+
+Please modify the implementation according to the following requirements before generating code.
+
+===========================================================
+GENERAL REQUIREMENTS
+===========================================================
+
+Analyze the complete user-service before making any changes.
+
+Do NOT regenerate the project.
+
+Do NOT rewrite unrelated code.
+
+Modify ONLY user-service.
+
+Do NOT modify auth-service or api-gateway.
+
+===========================================================
+IDENTITY
+===========================================================
+
+The frontend must NEVER send
+
+authUserId
+
+or any internal identifier.
+
+The User Service must ONLY trust the following headers injected by the API Gateway.
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-User-Authorities
+
+Do not read any user identity from the request body.
+
+===========================================================
+CONTROLLER DESIGN
+===========================================================
+
+Keep business logic out of controllers.
+
+Controllers should only
+
+• Extract trusted headers
+
+• Validate request
+
+• Delegate to service layer
+
+Authorization decisions should not be duplicated across multiple controllers.
+
+Move reusable authorization logic into a dedicated authorization component or service where appropriate.
+
+===========================================================
+PROFILE APIS
+===========================================================
+
+Implement
+
+POST /api/v1/users/profile
+
+GET /api/v1/users/me
+
+PUT /api/v1/users/me
+
+DELETE /api/v1/users/me
+
+These endpoints must always operate on the authenticated user obtained from X-User-Id.
+
+The request body must never contain authUserId.
+
+===========================================================
+ADMIN APIS
+===========================================================
+
+Keep
+
+GET /api/v1/users/{id}
+
+PUT /api/v1/users/{id}
+
+DELETE /api/v1/users/{id}
+
+Restrict these endpoints to ROLE_ADMIN only.
+
+Students and Instructors must never access another user's profile.
+
+===========================================================
+LISTING APIS
+===========================================================
+
+Review
+
+GET /api/v1/users
+
+GET /api/v1/users/search
+
+These endpoints should not be public.
+
+Restrict them to ROLE_ADMIN unless there is a specific business requirement.
+
+===========================================================
+SERVICE LAYER
+===========================================================
+
+The Service layer should remain responsible for business logic.
+
+Controllers should never perform database-related authorization.
+
+Pass the authenticated user information to the service layer.
+
+===========================================================
+AUTHORIZATION
+===========================================================
+
+Implement role-based authorization using Spring Security.
+
+Do not rely only on manual role comparisons inside controllers.
+
+Use proper security annotations where appropriate.
+
+Ensure
+
+ROLE_STUDENT
+
+ROLE_INSTRUCTOR
+
+ROLE_ADMIN
+
+are consistently enforced.
+
+===========================================================
+VALIDATION
+===========================================================
+
+Ensure
+
+A user cannot create more than one profile.
+
+A user cannot update another user's profile.
+
+A user cannot delete another user's profile.
+
+Admin can manage every profile.
+
+===========================================================
+SWAGGER
+===========================================================
+
+Update Swagger documentation.
+
+Document
+
+/me
+
+and
+
+/profile
+
+endpoints.
+
+Document Bearer Authentication.
+
+Clearly state that X-User-* headers are injected automatically by the API Gateway and must never be supplied manually by clients.
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Create Profile
+
+✓ Get My Profile
+
+✓ Update My Profile
+
+✓ Delete My Profile
+
+✓ Admin Get User
+
+✓ Admin Update User
+
+✓ Admin Delete User
+
+✓ Student cannot access another user's profile
+
+✓ Instructor cannot access another user's profile
+
+✓ Duplicate profile prevention
+
+✓ JWT headers are correctly consumed
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/user-service-jwt.md
+
+Include
+
+Profile Lifecycle
+
+Authorization Matrix
+
+JWT Header Usage
+
+API Documentation
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Updated User Flow
+
+2. Authorization Matrix
+
+3. Updated API List
+
+4. Files Modified
+
+5. Verification Checklist
+
+6. Git Commit Message
+
+Stop after user-service JWT migration is complete.
+
+Wait for the next implementation task.
