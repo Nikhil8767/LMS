@@ -1,0 +1,361 @@
+You are a Principal Software Architect, Enterprise Java Architect, Senior Spring Boot Architect, and Technical Lead.
+
+We are building a production-quality Enterprise Online Learning Management System (LMS) completely from scratch.
+
+This project must follow enterprise software engineering standards and be suitable for production deployment, GitHub portfolio, resume, and technical interviews.
+
+IMPORTANT
+
+This is Prompt 1.
+
+Create ONLY the project foundation.
+
+Do NOT implement any business logic.
+
+Do NOT generate Controllers.
+
+Do NOT generate Services.
+
+Do NOT generate Repositories.
+
+Do NOT generate Entities.
+
+Do NOT generate DTOs.
+
+Do NOT generate Security implementation.
+
+Do NOT generate JWT implementation.
+
+Do NOT generate OpenFeign clients.
+
+Do NOT generate database configuration.
+
+Generate ONLY the project structure.
+
+===========================================================
+TECH STACK
+===========================================================
+
+Backend
+
+Java 21
+
+Spring Boot 3.x (latest stable 3.x version compatible with Java 21)
+
+Spring Cloud (matching version)
+
+Spring Security
+
+Spring Cloud Gateway
+
+Netflix Eureka
+
+Spring Cloud OpenFeign
+
+Spring Data JPA
+
+Hibernate
+
+PostgreSQL
+
+Flyway
+
+JWT (dependencies only)
+
+Spring Validation
+
+Lombok
+
+Spring Boot Actuator
+
+SpringDoc OpenAPI
+
+Maven
+
+Frontend
+
+Thymeleaf
+
+Bootstrap 5
+
+HTML5
+
+CSS3
+
+Minimal JavaScript
+
+===========================================================
+ARCHITECTURE
+===========================================================
+
+Use Microservices Architecture.
+
+Communication between services must use
+
+OpenFeign
+
+NOT
+
+WebClient
+
+NOT
+
+RestTemplate
+
+Authentication will use
+
+JWT
+
+from the beginning.
+
+===========================================================
+MICROSERVICES
+===========================================================
+
+Create the following modules.
+
+common-library
+
+discovery-service
+
+api-gateway
+
+auth-service
+
+user-service
+
+course-service
+
+content-service
+
+enrollment-service
+
+frontend-service
+
+===========================================================
+ROOT PROJECT
+===========================================================
+
+Create
+
+Parent pom.xml
+
+Dependency Management
+
+Plugin Management
+
+Spring Cloud BOM
+
+Java 21 configuration
+
+Shared properties
+
+Module declarations
+
+Common plugin configuration
+
+===========================================================
+FOR EVERY MODULE
+===========================================================
+
+Create
+
+pom.xml
+
+src/main/java
+
+src/main/resources
+
+src/test/java
+
+Main Application class
+
+Correct package structure
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+Use
+
+com.lms.common
+
+com.lms.discovery
+
+com.lms.gateway
+
+com.lms.auth
+
+com.lms.user
+
+com.lms.course
+
+com.lms.content
+
+com.lms.enrollment
+
+com.lms.frontend
+
+===========================================================
+CONFIGURATION
+===========================================================
+
+Generate ONLY
+
+application.properties
+
+Do NOT generate
+
+application.yml
+
+Create empty application.properties for every service.
+
+===========================================================
+DEPENDENCIES
+===========================================================
+
+Each microservice should contain ONLY the required dependencies.
+
+Avoid unnecessary dependencies.
+
+Use starter dependencies whenever possible.
+
+Configure dependencies for
+
+OpenFeign
+
+JWT
+
+Flyway
+
+PostgreSQL
+
+Swagger
+
+Actuator
+
+Lombok
+
+Validation
+
+without implementing their logic.
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Layered Architecture
+
+DRY
+
+KISS
+
+Enterprise Coding Standards
+
+Constructor Injection
+
+Meaningful Package Naming
+
+===========================================================
+BUILD
+===========================================================
+
+Ensure
+
+The parent project builds successfully.
+
+Every module compiles successfully.
+
+No dependency conflicts.
+
+No circular dependencies.
+
+No warnings.
+
+===========================================================
+DO NOT IMPLEMENT
+===========================================================
+
+Do NOT create
+
+Business Logic
+
+Entities
+
+Repositories
+
+Controllers
+
+Services
+
+Security
+
+JWT
+
+Feign Clients
+
+Swagger Configurations
+
+Database Configurations
+
+===========================================================
+README
+===========================================================
+
+Create a README.md that contains
+
+Project Overview
+
+Technology Stack
+
+Microservice List
+
+Project Structure
+
+How to Build
+
+Folder Structure
+
+===========================================================
+VERIFICATION
+===========================================================
+
+Verify
+
+✓ Parent project builds successfully
+
+✓ Every module compiles
+
+✓ Maven recognizes all modules
+
+✓ No dependency errors
+
+✓ Java 21 compatibility
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Complete Project Tree
+
+2. Maven Module Structure
+
+3. Dependencies of each module
+
+4. Build Verification
+
+5. Folder Structure
+
+6. Git Commit Message
+
+Stop after project creation.
+
+Wait for Prompt 2.

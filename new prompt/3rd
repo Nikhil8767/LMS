@@ -1,0 +1,253 @@
+You are a Principal Software Architect, Senior Spring Boot Architect, and Spring Cloud Expert.
+
+The Enterprise Online Learning Management System (LMS) project has already been created.
+
+The following modules already exist.
+
+✓ Parent Project
+
+✓ Common Library
+
+This is Prompt 3.
+
+Analyze ONLY the discovery-service module before making any changes.
+
+Do NOT analyze the entire project.
+
+Do NOT regenerate the project.
+
+Modify ONLY discovery-service.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Implement a production-ready Eureka Discovery Server.
+
+This service will be responsible only for service discovery.
+
+It must not contain any business logic.
+
+===========================================================
+TECHNOLOGY
+===========================================================
+
+Java 21
+
+Spring Boot 3.x
+
+Spring Cloud Netflix Eureka Server
+
+Spring Boot Actuator
+
+Lombok
+
+===========================================================
+RESPONSIBILITIES
+===========================================================
+
+The Discovery Service should
+
+• Register itself
+
+• Allow all microservices to register
+
+• Provide the Eureka Dashboard
+
+• Support service discovery
+
+• Provide health monitoring
+
+===========================================================
+CONFIGURATION
+===========================================================
+
+Use ONLY
+
+application.properties
+
+Do NOT generate
+
+application.yml
+
+Configure
+
+Application Name
+
+Server Port
+
+Eureka Server
+
+Health Check
+
+Actuator
+
+Graceful Shutdown
+
+Logging
+
+===========================================================
+SERVER PORT
+===========================================================
+
+Use
+
+8761
+
+===========================================================
+EUREKA CONFIGURATION
+===========================================================
+
+Configure
+
+Register With Eureka = false
+
+Fetch Registry = false
+
+Self Preservation = enabled
+
+Response Cache
+
+Health Check
+
+Lease Renewal
+
+Lease Expiration
+
+Use production-ready values.
+
+===========================================================
+ACTUATOR
+===========================================================
+
+Configure
+
+Health
+
+Info
+
+Metrics
+
+Environment
+
+Beans
+
+Mappings
+
+===========================================================
+LOGGING
+===========================================================
+
+Use structured logging.
+
+Do not enable DEBUG logging by default.
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+Use
+
+com.lms.discovery
+
+Only create
+
+DiscoveryServiceApplication
+
+Configuration classes if required.
+
+No controllers.
+
+No services.
+
+No repositories.
+
+===========================================================
+DEPENDENCIES
+===========================================================
+
+Only include the required dependencies.
+
+Do not add unnecessary libraries.
+
+===========================================================
+SECURITY
+===========================================================
+
+No JWT.
+
+No Spring Security.
+
+This service should remain public inside the development environment.
+
+===========================================================
+SWAGGER
+===========================================================
+
+Do NOT integrate Swagger into discovery-service.
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Enterprise Coding Standards
+
+===========================================================
+VERIFICATION
+===========================================================
+
+Verify
+
+✓ Service starts successfully
+
+✓ Eureka Dashboard loads
+
+✓ http://localhost:8761
+
+✓ Application builds successfully
+
+✓ No warnings
+
+===========================================================
+README
+===========================================================
+
+Update README.
+
+Include
+
+Purpose
+
+Port
+
+Responsibilities
+
+How other services will register
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Files Created
+
+2. Files Modified
+
+3. application.properties
+
+4. Dependency List
+
+5. Verification Checklist
+
+6. Git Commit Message
+
+Stop after Discovery Service is complete.
+
+Wait for Prompt 4.

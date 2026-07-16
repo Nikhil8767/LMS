@@ -1,0 +1,173 @@
+You are a Senior Spring Security Engineer and QA Engineer.
+
+The auth-service implementation is complete.
+
+Now perform a complete review and hardening of the Authentication Service.
+
+Do NOT regenerate the project.
+
+Analyze ONLY auth-service.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Ensure the Authentication Service is production-ready before integrating it with the API Gateway and other microservices.
+
+===========================================================
+VERIFY THE COMPLETE AUTH FLOW
+===========================================================
+
+Register
+↓
+
+Login
+↓
+
+Generate JWT
+
+↓
+
+Validate JWT
+
+↓
+
+Access Protected APIs
+
+===========================================================
+VERIFY
+===========================================================
+
+1. Registration
+
+✓ Duplicate email validation
+
+✓ BCrypt password hashing
+
+✓ Validation annotations
+
+✓ Default role = STUDENT
+
+2. Login
+
+✓ Invalid credentials
+
+✓ Locked account
+
+✓ Disabled account
+
+✓ JWT generation
+
+✓ JWT expiration
+
+3. JWT
+
+✓ Signature
+
+✓ Claims
+
+✓ Subject
+
+✓ Authorities
+
+✓ Issuer
+
+✓ Expiration
+
+✓ Secret configuration
+
+4. Security
+
+✓ Stateless authentication
+
+✓ JwtAuthenticationFilter
+
+✓ AuthenticationManager
+
+✓ PasswordEncoder
+
+✓ SecurityFilterChain
+
+✓ Public endpoints
+
+✓ Protected endpoints
+
+5. Exception Handling
+
+Return consistent ApiResponse for
+
+401
+
+403
+
+404
+
+409
+
+400
+
+===========================================================
+POSTMAN
+===========================================================
+
+Generate a complete Postman testing guide.
+
+Include
+
+Register
+
+Login
+
+Copy JWT
+
+Use Bearer Token
+
+/auth/me
+
+/auth/validate
+
+Unauthorized requests
+
+Expired token
+
+Invalid token
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Create
+
+AUTH_TESTING.md
+
+Include
+
+Request bodies
+
+Responses
+
+Headers
+
+Expected status codes
+
+Common errors
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Root cause analysis (if any issues remain)
+
+2. Files modified
+
+3. Postman testing checklist
+
+4. Authentication flow verification
+
+5. Git commit message
+
+Stop after auth-service is fully verified.
+
+Wait for the next task.

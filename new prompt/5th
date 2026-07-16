@@ -1,0 +1,451 @@
+You are a Principal Software Architect, Enterprise Java Architect, Senior Spring Security Expert, and JWT Security Specialist.
+
+The Enterprise Online Learning Management System (LMS) project already contains
+
+✓ Parent Project
+
+✓ Common Library
+
+✓ Discovery Service
+
+✓ API Gateway Infrastructure
+
+This is Prompt 5.
+
+Analyze ONLY auth-service.
+
+Do NOT analyze the entire project.
+
+Do NOT regenerate the project.
+
+Modify ONLY auth-service.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Build a production-ready Authentication Service using JWT Authentication from the beginning.
+
+This Authentication Service will become the Identity Provider for the entire LMS.
+
+The implementation must be scalable, secure, reusable, and production-ready.
+
+===========================================================
+TECH STACK
+===========================================================
+
+Java 21
+
+Spring Boot 3.x
+
+Spring Security 6
+
+Spring Data JPA
+
+PostgreSQL
+
+JWT (JJWT latest compatible version)
+
+BCrypt
+
+OpenFeign (dependency only)
+
+Swagger
+
+Actuator
+
+Validation
+
+Lombok
+
+===========================================================
+DATABASE
+===========================================================
+
+Use PostgreSQL.
+
+Database Name
+
+lms_auth_db
+
+Schema
+
+auth_schema
+
+Use Flyway for database migrations.
+
+===========================================================
+ENTITY
+===========================================================
+
+Create
+
+UserCredential
+
+Fields
+
+id (UUID)
+
+email
+
+password
+
+role
+
+accountStatus
+
+emailVerified
+
+createdAt
+
+updatedAt
+
+===========================================================
+ENUMS
+===========================================================
+
+Reuse enums from common-library.
+
+Role
+
+STUDENT
+
+INSTRUCTOR
+
+ADMIN
+
+Create AccountStatus
+
+ACTIVE
+
+INACTIVE
+
+LOCKED
+
+PENDING
+
+===========================================================
+JWT
+===========================================================
+
+Implement JWT from the beginning.
+
+Use
+
+HS256
+
+JWT Claims
+
+sub = userId
+
+email
+
+role
+
+authorities
+
+iat
+
+exp
+
+iss
+
+Read
+
+jwt.secret
+
+jwt.expiration
+
+jwt.issuer
+
+from application.properties.
+
+Never hardcode secrets.
+
+===========================================================
+SPRING SECURITY
+===========================================================
+
+Configure
+
+SecurityFilterChain
+
+PasswordEncoder
+
+AuthenticationManager
+
+JwtAuthenticationFilter
+
+JwtService
+
+JwtAuthenticationEntryPoint
+
+JwtAuthenticationProvider
+
+JwtProperties
+
+Use
+
+SessionCreationPolicy.STATELESS
+
+===========================================================
+AUTHENTICATION FLOW
+===========================================================
+
+Register
+
+↓
+
+Hash Password
+
+↓
+
+Save User
+
+↓
+
+Login
+
+↓
+
+Validate Credentials
+
+↓
+
+Generate JWT
+
+↓
+
+Return Access Token
+
+===========================================================
+PUBLIC APIS
+===========================================================
+
+POST
+
+/api/v1/auth/register
+
+POST
+
+/api/v1/auth/login
+
+===========================================================
+PROTECTED APIS
+===========================================================
+
+GET
+
+/api/v1/auth/me
+
+Returns authenticated user.
+
+GET
+
+/api/v1/auth/validate
+
+Returns JWT validity.
+
+===========================================================
+REGISTER
+===========================================================
+
+Users can register ONLY as
+
+STUDENT
+
+Do NOT allow
+
+ADMIN
+
+INSTRUCTOR
+
+registration.
+
+Instructor role will be obtained later through an approval workflow.
+
+===========================================================
+LOGIN RESPONSE
+===========================================================
+
+Return
+
+accessToken
+
+tokenType
+
+expiresIn
+
+userId
+
+email
+
+role
+
+===========================================================
+REFRESH TOKEN
+===========================================================
+
+Do NOT implement Refresh Tokens yet.
+
+Design the architecture so Refresh Tokens can be added later.
+
+===========================================================
+OPENFEIGN
+===========================================================
+
+Do NOT create Feign Clients yet.
+
+Only include the dependency.
+
+===========================================================
+SWAGGER
+===========================================================
+
+Configure
+
+Bearer Authentication
+
+Authorize Button
+
+Document every endpoint.
+
+===========================================================
+VALIDATION
+===========================================================
+
+Validate
+
+Email
+
+Password
+
+Duplicate Email
+
+Invalid Credentials
+
+Disabled Account
+
+Locked Account
+
+===========================================================
+EXCEPTION HANDLING
+===========================================================
+
+Use GlobalExceptionHandler from common-library.
+
+Return ApiResponse.
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+No Field Injection
+
+Meaningful Naming
+
+Reusable Components
+
+===========================================================
+DO NOT IMPLEMENT
+===========================================================
+
+User Profile
+
+Course
+
+Enrollment
+
+Content
+
+Instructor Approval
+
+Refresh Token
+
+Forgot Password
+
+Email Verification
+
+OTP
+
+===========================================================
+VERIFICATION
+===========================================================
+
+Verify
+
+✓ Register
+
+✓ Login
+
+✓ BCrypt Password
+
+✓ JWT Generated
+
+✓ JWT Validated
+
+✓ /auth/me
+
+✓ Swagger Works
+
+✓ Build Passes
+
+✓ Flyway Migration Executes
+
+===========================================================
+README
+===========================================================
+
+Update README.
+
+Include
+
+Authentication Flow
+
+JWT Structure
+
+Database Schema
+
+API Documentation
+
+Security Architecture
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Folder Structure
+
+2. Classes Created
+
+3. Security Flow Diagram
+
+4. JWT Flow Diagram
+
+5. Database Schema
+
+6. API List
+
+7. Swagger Verification
+
+8. Build Verification
+
+9. Git Commit Message
+
+Stop after auth-service is completely finished.
+
+Do NOT modify API Gateway.
+
+Wait for Prompt 6.

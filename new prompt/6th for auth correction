@@ -1,0 +1,74 @@
+You are a Senior Spring Security and JWT Expert.
+
+The auth-service has been implemented, but authentication is not working correctly.
+
+Current issue:
+After testing with Postman, protected APIs return:
+
+401 Unauthorized
+{
+  "success": false,
+  "message": "Unauthorized access"
+}
+
+I want you to perform a complete root-cause analysis instead of applying temporary fixes.
+
+Analyze ONLY the auth-service.
+
+Do not regenerate the project.
+
+Check and fix the complete JWT authentication flow.
+
+Verify the following:
+
+1. User Registration
+- Register a new STUDENT successfully.
+- Password must be stored using BCrypt.
+- Duplicate email validation must work.
+
+2. Login
+- Validate credentials.
+- Generate a valid JWT.
+- Return accessToken, tokenType, expiresIn, userId, email, and role.
+
+3. JWT
+- Secret key configuration.
+- Token generation.
+- Token validation.
+- Claims (userId, email, role, authorities).
+- Expiration.
+- Issuer.
+
+4. Spring Security
+- SecurityFilterChain configuration.
+- SessionCreationPolicy.STATELESS.
+- JwtAuthenticationFilter registration.
+- AuthenticationManager.
+- PasswordEncoder.
+- JwtAuthenticationEntryPoint.
+- Public endpoints (/auth/register, /auth/login, Swagger).
+- Protected endpoints (/auth/me, /auth/validate).
+
+5. Authentication Filter
+- Read Authorization: Bearer <token>.
+- Validate JWT.
+- Populate SecurityContext correctly.
+- Allow authenticated requests to continue.
+
+6. Test the complete flow:
+Register
+→ Login
+→ Receive JWT
+→ Call /auth/me with Bearer Token
+→ Call /auth/validate
+→ Verify protected APIs return 200.
+
+If anything is misconfigured, fix it using Spring Security best practices.
+
+After implementation provide:
+1. Root cause of the issue.
+2. Files modified.
+3. Complete Postman testing steps.
+4. Expected responses for Register, Login, /auth/me, and /auth/validate.
+
+Do not continue to other microservices until auth-service is fully working.

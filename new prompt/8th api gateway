@@ -1,0 +1,289 @@
+You are a Principal Software Architect, Senior Spring Cloud Gateway Engineer, and Spring Security Expert.
+
+The Enterprise LMS currently contains
+
+✓ Parent Project
+
+✓ Common Library
+
+✓ Discovery Service
+
+✓ API Gateway Infrastructure
+
+✓ Auth Service (JWT Authentication)
+
+The Authentication Service is fully working and tested using Postman.
+
+JWT generation and validation are working correctly.
+
+This is Prompt 6.
+
+Analyze ONLY the api-gateway module.
+
+Do NOT analyze the entire project.
+
+Do NOT regenerate the project.
+
+Modify ONLY api-gateway.
+
+Do NOT modify auth-service.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Integrate JWT Authentication into the API Gateway.
+
+The Gateway must become the single security checkpoint for the entire LMS.
+
+All external requests must pass through the Gateway.
+
+===========================================================
+ARCHITECTURE
+===========================================================
+
+Client
+
+↓
+
+API Gateway
+
+↓
+
+Microservices
+
+The Gateway validates JWT.
+
+Business services trust the Gateway.
+
+===========================================================
+JWT VALIDATION
+===========================================================
+
+Implement JWT validation inside the Gateway.
+
+Validate
+
+• Signature
+
+• Expiration
+
+• Issuer
+
+• Subject
+
+• Authorities
+
+Reject invalid requests before they reach downstream services.
+
+===========================================================
+PUBLIC ROUTES
+===========================================================
+
+Allow unauthenticated access only to
+
+POST /api/v1/auth/register
+
+POST /api/v1/auth/login
+
+/swagger-ui/**
+
+/v3/api-docs/**
+
+/actuator/health
+
+Everything else must require a valid JWT.
+
+===========================================================
+HEADER PROPAGATION
+===========================================================
+
+After successful JWT validation,
+
+extract
+
+userId
+
+email
+
+role
+
+authorities
+
+Forward them to downstream services using
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-User-Authorities
+
+These headers must be generated ONLY by the Gateway.
+
+===========================================================
+HEADER SPOOFING
+===========================================================
+
+Remove any incoming client headers
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-User-Authorities
+
+before forwarding the request.
+
+Never trust client supplied identity headers.
+
+===========================================================
+FILTER
+===========================================================
+
+Create a Gateway Authentication Filter.
+
+The filter should
+
+• Read Authorization header
+
+• Extract Bearer Token
+
+• Validate JWT
+
+• Remove spoofed headers
+
+• Add trusted headers
+
+• Forward request
+
+The filter should NOT contain business logic.
+
+===========================================================
+ERROR HANDLING
+===========================================================
+
+Return consistent JSON responses using ApiResponse.
+
+Handle
+
+401 Unauthorized
+
+403 Forbidden
+
+Expired Token
+
+Malformed Token
+
+Invalid Signature
+
+Missing Token
+
+===========================================================
+ACTUATOR
+===========================================================
+
+Keep existing Gateway configuration.
+
+Do not remove any existing functionality.
+
+===========================================================
+SWAGGER
+===========================================================
+
+Keep Auth Service Swagger publicly accessible.
+
+Other services will be secured later.
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Constructor Injection
+
+Single Responsibility Principle
+
+No duplicated JWT logic.
+
+===========================================================
+TESTING
+===========================================================
+
+Generate a complete Postman testing guide.
+
+Verify
+
+✓ Register through Gateway
+
+✓ Login through Gateway
+
+✓ Receive JWT
+
+✓ Access protected endpoint
+
+✓ Missing Token
+
+✓ Invalid Token
+
+✓ Expired Token
+
+✓ Header spoofing protection
+
+✓ Trusted header forwarding
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Create
+
+API_GATEWAY_SECURITY.md
+
+Include
+
+Gateway Flow
+
+JWT Validation
+
+Header Forwarding
+
+Header Spoofing Prevention
+
+Protected Routes
+
+Public Routes
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Files Created
+
+2. Files Modified
+
+3. JWT Gateway Flow Diagram
+
+4. Header Propagation Diagram
+
+5. Verification Checklist
+
+6. Postman Testing Guide
+
+7. Git Commit Message
+
+Stop after API Gateway JWT integration is complete.
+
+Do not modify any other microservice.
+
+Wait for Prompt 7.

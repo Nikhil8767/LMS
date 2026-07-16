@@ -1,0 +1,548 @@
+You are a Principal Software Architect, Enterprise Java Architect, Senior Spring Boot Engineer, Spring Security Expert, and Microservices Specialist.
+
+The Enterprise LMS project currently contains
+
+✓ Parent Multi-Module Maven Project
+✓ Common Library
+✓ Discovery Service
+✓ API Gateway
+✓ JWT Authentication
+✓ API Gateway JWT Validation
+
+All of the above modules are fully implemented and tested.
+
+JWT authentication is working correctly.
+
+Gateway authentication is working correctly.
+
+This is Prompt 7.
+
+Analyze ONLY the user-service module.
+
+Do NOT analyze the entire project.
+
+Do NOT regenerate any existing module.
+
+Modify ONLY user-service.
+
+Do NOT modify
+
+Auth Service
+
+API Gateway
+
+Discovery Service
+
+Common Library
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Build a production-ready User Service.
+
+The User Service is responsible ONLY for user profile management.
+
+Authentication is completely handled by Auth Service.
+
+Authorization is handled by API Gateway and Spring Security.
+
+User Service must NEVER
+
+Generate JWT
+
+Validate JWT
+
+Store passwords
+
+Authenticate users
+
+===========================================================
+TECH STACK
+===========================================================
+
+Java 21
+
+Spring Boot 3.x
+
+Spring Security
+
+Spring Data JPA
+
+Hibernate
+
+PostgreSQL
+
+Flyway
+
+OpenFeign
+
+Swagger
+
+Validation
+
+Lombok
+
+Actuator
+
+===========================================================
+DATABASE
+===========================================================
+
+Database
+
+lms_user_db
+
+Schema
+
+user_schema
+
+Use Flyway migrations.
+
+===========================================================
+ENTITY
+===========================================================
+
+Create UserProfile entity.
+
+Primary Key
+
+UUID
+
+Fields
+
+id
+
+authUserId
+
+email
+
+firstName
+
+lastName
+
+phone
+
+gender
+
+dateOfBirth
+
+bio
+
+profilePicture
+
+country
+
+state
+
+city
+
+address
+
+zipCode
+
+createdAt
+
+updatedAt
+
+Constraints
+
+authUserId UNIQUE
+
+email UNIQUE
+
+One profile per authenticated user.
+
+===========================================================
+SECURITY
+===========================================================
+
+The API Gateway already validates JWT.
+
+The API Gateway injects
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-User-Authorities
+
+The HeaderAuthenticationFilter converts these trusted headers into a UserPrincipal.
+
+Controllers MUST NOT read HTTP headers directly.
+
+Controllers MUST ONLY use
+
+@AuthenticationPrincipal UserPrincipal
+
+The Service layer must receive the authenticated user's ID from the controller.
+
+Never trust any client supplied ID.
+
+===========================================================
+OPENFEIGN
+===========================================================
+
+Create AuthServiceClient using OpenFeign.
+
+OpenFeign must NOT be called on every request.
+
+Do NOT call Auth Service for
+
+GET /me
+
+PUT /me
+
+DELETE /me
+
+GET profile
+
+Use OpenFeign ONLY when business logic requires it.
+
+Examples
+
+Profile creation
+
+Future role synchronization
+
+Future account verification
+
+Never create unnecessary synchronous calls.
+
+===========================================================
+BUSINESS RULES
+===========================================================
+
+One authenticated user can own only one profile.
+
+The client must NEVER send
+
+authUserId
+
+email
+
+role
+
+These values always come from the authenticated principal.
+
+Email is copied automatically from the authenticated user.
+
+authUserId is copied automatically from the authenticated user.
+
+===========================================================
+API DESIGN
+===========================================================
+
+Implement
+
+POST
+
+/api/v1/users/profile
+
+Create Profile
+
+------------------------------------------------
+
+GET
+
+/api/v1/users/me
+
+Return authenticated user's profile.
+
+------------------------------------------------
+
+PUT
+
+/api/v1/users/me
+
+Update authenticated user's profile.
+
+------------------------------------------------
+
+DELETE
+
+/api/v1/users/me
+
+Delete authenticated user's profile.
+
+===========================================================
+ADMIN APIs
+===========================================================
+
+Implement
+
+GET
+
+/api/v1/users
+
+Support
+
+Pagination
+
+Sorting
+
+Searching
+
+------------------------------------------------
+
+GET
+
+/api/v1/users/{id}
+
+------------------------------------------------
+
+PUT
+
+/api/v1/users/{id}
+
+------------------------------------------------
+
+DELETE
+
+/api/v1/users/{id}
+
+Protect every Admin API using
+
+@PreAuthorize("hasRole('ADMIN')")
+
+===========================================================
+AUTHORIZATION MATRIX
+===========================================================
+
+ROLE_STUDENT
+
+Create Profile
+
+View Own Profile
+
+Update Own Profile
+
+Delete Own Profile
+
+Cannot access another user's profile.
+
+------------------------------------------------
+
+ROLE_INSTRUCTOR
+
+Same permissions as Student.
+
+------------------------------------------------
+
+ROLE_ADMIN
+
+View every profile
+
+Update every profile
+
+Delete every profile
+
+List every profile
+
+===========================================================
+VALIDATION
+===========================================================
+
+Validate
+
+Phone
+
+Email
+
+Date of Birth
+
+Name Length
+
+Address Length
+
+Duplicate Profile
+
+Duplicate Email
+
+===========================================================
+EXCEPTION HANDLING
+===========================================================
+
+Reuse GlobalExceptionHandler from common-library.
+
+Return ApiResponse.
+
+Handle
+
+400
+
+401
+
+403
+
+404
+
+409
+
+===========================================================
+SWAGGER
+===========================================================
+
+Configure Swagger.
+
+Enable Bearer Authentication.
+
+Document every endpoint.
+
+Provide request examples.
+
+Provide response examples.
+
+===========================================================
+POSTMAN
+===========================================================
+
+Generate a complete Postman testing guide.
+
+Include
+
+Register
+
+Login
+
+Copy JWT
+
+Create Profile
+
+View Profile
+
+Update Profile
+
+Delete Profile
+
+Admin APIs
+
+Duplicate Profile
+
+Unauthorized Requests
+
+Forbidden Requests
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Create
+
+USER_SERVICE.md
+
+Include
+
+Architecture
+
+Entity Diagram
+
+Sequence Diagram
+
+API Documentation
+
+Authorization Matrix
+
+OpenFeign Communication
+
+Database Design
+
+Security Flow
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+DRY
+
+KISS
+
+Enterprise Coding Standards
+
+Meaningful Naming
+
+No duplicate code
+
+===========================================================
+VERIFICATION
+===========================================================
+
+Verify
+
+✓ Flyway executes successfully
+
+✓ PostgreSQL tables created
+
+✓ Profile creation works
+
+✓ Duplicate profile blocked
+
+✓ GET /me works
+
+✓ PUT /me works
+
+✓ DELETE /me works
+
+✓ Admin pagination works
+
+✓ Authorization works
+
+✓ OpenFeign only used where required
+
+✓ No unnecessary Auth Service calls
+
+✓ Build passes
+
+✓ Swagger works
+
+===========================================================
+OUTPUT
+===========================================================
+
+After implementation provide
+
+1. Folder Structure
+
+2. Package Structure
+
+3. Entity Diagram
+
+4. API List
+
+5. OpenFeign Communication Flow
+
+6. Database Schema
+
+7. Swagger URLs
+
+8. Postman Collection
+
+9. Files Created
+
+10. Files Modified
+
+11. Verification Checklist
+
+12. Git Commit Message
+
+Do NOT ask implementation questions.
+
+Make all architectural decisions according to the requirements above.
+
+Implement the complete User Service following enterprise production standards.
+
+Stop after User Service is complete.
+
+Wait for the next prompt.

@@ -1,0 +1,349 @@
+You are a Principal Software Architect, Enterprise Java Architect, and Senior Spring Boot Technical Lead.
+
+The Enterprise Online Learning Management System (LMS) multi-module Maven project has already been created successfully.
+
+All modules compile successfully.
+
+This is Prompt 2.
+
+Analyze ONLY the common-library module before making any changes.
+
+Do NOT analyze the entire project.
+
+Do NOT regenerate the project.
+
+Modify ONLY common-library.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Build a reusable Common Library that will be shared by every microservice.
+
+The Common Library must contain ONLY reusable components.
+
+It must NOT contain any business logic.
+
+===========================================================
+RESPONSIBILITIES
+===========================================================
+
+The Common Library should contain only common reusable code.
+
+Examples include
+
+• Common API Response
+
+• Global Exception Handling
+
+• Base Exceptions
+
+• Common Enums
+
+• Security Models
+
+• Authentication Utilities
+
+• Constants
+
+• Utility Classes
+
+• Validation Constants
+
+• Shared DTOs
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+Create the following package structure.
+
+com.lms.common
+
+├── api
+
+├── constants
+
+├── dto
+
+├── enums
+
+├── exception
+
+├── security
+
+├── util
+
+├── validation
+
+===========================================================
+API PACKAGE
+===========================================================
+
+Create
+
+ApiResponse<T>
+
+Standard response object for every microservice.
+
+Fields
+
+timestamp
+
+success
+
+message
+
+data
+
+===========================================================
+EXCEPTION PACKAGE
+===========================================================
+
+Create
+
+BaseException
+
+ResourceNotFoundException
+
+DuplicateResourceException
+
+UnauthorizedException
+
+ForbiddenException
+
+BadRequestException
+
+GlobalExceptionHandler
+
+Use @RestControllerAdvice.
+
+Return ApiResponse.
+
+===========================================================
+ENUM PACKAGE
+===========================================================
+
+Create
+
+Role
+
+Values
+
+STUDENT
+
+INSTRUCTOR
+
+ADMIN
+
+Create
+
+CourseStatus
+
+DRAFT
+
+PENDING_APPROVAL
+
+PUBLISHED
+
+REJECTED
+
+ARCHIVED
+
+Create
+
+EnrollmentStatus
+
+ACTIVE
+
+COMPLETED
+
+CANCELLED
+
+===========================================================
+SECURITY PACKAGE
+===========================================================
+
+Create reusable security components only.
+
+Create
+
+UserPrincipal
+
+Fields
+
+userId
+
+email
+
+role
+
+authorities
+
+Create
+
+JwtHeaderNames
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-User-Authorities
+
+Create
+
+SecurityConstants
+
+Bearer Prefix
+
+Authorization Header
+
+JWT Header Names
+
+Do NOT implement JWT logic.
+
+Do NOT implement authentication filters yet.
+
+===========================================================
+CONSTANTS PACKAGE
+===========================================================
+
+Create reusable application constants.
+
+API version
+
+Header names
+
+Pagination defaults
+
+Validation messages
+
+===========================================================
+UTIL PACKAGE
+===========================================================
+
+Create utility classes only.
+
+Examples
+
+DateTimeUtil
+
+StringUtil
+
+ResponseUtil
+
+Do NOT create business utilities.
+
+===========================================================
+VALIDATION PACKAGE
+===========================================================
+
+Create reusable validation constants.
+
+Maximum lengths
+
+Minimum lengths
+
+Password rules
+
+Email rules
+
+===========================================================
+DEPENDENCIES
+===========================================================
+
+Add ONLY dependencies required by common-library.
+
+Do NOT add unnecessary Spring Boot starters.
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+DRY
+
+KISS
+
+Reusable Design
+
+No duplicate code
+
+===========================================================
+DO NOT IMPLEMENT
+===========================================================
+
+Do NOT create
+
+JWT Service
+
+Authentication Filter
+
+Controllers
+
+Repositories
+
+Entities
+
+Business Logic
+
+Feign Clients
+
+===========================================================
+VERIFICATION
+===========================================================
+
+Verify
+
+✓ Module compiles successfully
+
+✓ Every other microservice can depend on common-library
+
+✓ No circular dependencies
+
+✓ No business logic exists
+
+===========================================================
+README
+===========================================================
+
+Update README.
+
+Explain
+
+Purpose of common-library
+
+Packages
+
+Reusable Components
+
+How every microservice will use it
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Folder Structure
+
+2. Classes Created
+
+3. Package Structure
+
+4. Dependencies Added
+
+5. Build Verification
+
+6. Git Commit Message
+
+Stop after common-library is complete.
+
+Wait for Prompt 3.

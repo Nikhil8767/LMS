@@ -1,0 +1,331 @@
+You are a Principal Software Architect, Enterprise Java Architect, Senior Spring Cloud Gateway Expert, and Spring Boot Technical Lead.
+
+The Enterprise Online Learning Management System (LMS) project already contains
+
+✓ Parent Project
+
+✓ Common Library
+
+✓ Discovery Service
+
+This is Prompt 4.
+
+Analyze ONLY the api-gateway module.
+
+Do NOT analyze the entire project.
+
+Do NOT regenerate the project.
+
+Modify ONLY api-gateway.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Implement a production-ready Spring Cloud API Gateway.
+
+This Gateway will become the single entry point for every external request.
+
+At this stage,
+
+DO NOT implement JWT Authentication.
+
+DO NOT implement Authorization.
+
+DO NOT implement Security Filters.
+
+Only build the Gateway infrastructure.
+
+===========================================================
+TECH STACK
+===========================================================
+
+Java 21
+
+Spring Boot 3.x
+
+Spring Cloud Gateway
+
+Netflix Eureka Client
+
+Spring Boot Actuator
+
+OpenFeign (dependency only)
+
+Lombok
+
+===========================================================
+RESPONSIBILITIES
+===========================================================
+
+The Gateway must
+
+Register itself with Eureka
+
+Discover services automatically
+
+Route requests
+
+Support Load Balancing
+
+Support future JWT integration
+
+Support future Rate Limiting
+
+Support future Logging
+
+Support future Circuit Breaker
+
+===========================================================
+APPLICATION CONFIGURATION
+===========================================================
+
+Use ONLY
+
+application.properties
+
+Do NOT generate application.yml
+
+Configure
+
+Application Name
+
+Server Port
+
+Eureka Client
+
+Gateway Routes
+
+Logging
+
+Actuator
+
+Graceful Shutdown
+
+===========================================================
+SERVER PORT
+===========================================================
+
+Use
+
+8080
+
+===========================================================
+SERVICE REGISTRATION
+===========================================================
+
+Register with Eureka.
+
+Use service discovery instead of hardcoded URLs.
+
+Configure
+
+Discovery Locator
+
+Lower Case Service IDs
+
+===========================================================
+ROUTES
+===========================================================
+
+Configure routes for
+
+Auth Service
+
+/api/v1/auth/**
+
+↓
+
+auth-service
+
+----------------------------------
+
+User Service
+
+/api/v1/users/**
+
+↓
+
+user-service
+
+----------------------------------
+
+Course Service
+
+/api/v1/courses/**
+
+↓
+
+course-service
+
+----------------------------------
+
+Content Service
+
+/api/v1/content/**
+
+↓
+
+content-service
+
+----------------------------------
+
+Enrollment Service
+
+/api/v1/enrollments/**
+
+↓
+
+enrollment-service
+
+Use Load Balanced routing.
+
+===========================================================
+FILTERS
+===========================================================
+
+Do NOT implement JWT Filter.
+
+Do NOT implement Authentication Filter.
+
+Do NOT implement Global Filter.
+
+Leave extension points so they can be added later.
+
+===========================================================
+ERROR HANDLING
+===========================================================
+
+Implement only common Gateway error handling.
+
+No authentication errors yet.
+
+===========================================================
+ACTUATOR
+===========================================================
+
+Configure
+
+Health
+
+Gateway
+
+Mappings
+
+Metrics
+
+===========================================================
+LOGGING
+===========================================================
+
+Configure production-ready logging.
+
+Do not enable DEBUG logging.
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+Use
+
+com.lms.gateway
+
+Create
+
+GatewayApplication
+
+Configuration package
+
+Route configuration if required
+
+No Controllers
+
+No Services
+
+No Repositories
+
+===========================================================
+DEPENDENCIES
+===========================================================
+
+Only include required dependencies.
+
+Avoid unnecessary libraries.
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Layered Architecture
+
+DRY
+
+Enterprise Coding Standards
+
+===========================================================
+VERIFICATION
+===========================================================
+
+Verify
+
+✓ Gateway starts successfully
+
+✓ Registers with Eureka
+
+✓ Gateway appears on Eureka Dashboard
+
+✓ Routes are configured correctly
+
+✓ Build passes
+
+✓ No dependency issues
+
+===========================================================
+README
+===========================================================
+
+Update README.
+
+Include
+
+Purpose
+
+Port
+
+Gateway Responsibilities
+
+Configured Routes
+
+How routing works
+
+Future JWT Integration
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Files Created
+
+2. Files Modified
+
+3. application.properties
+
+4. Gateway Routes
+
+5. Dependency List
+
+6. Verification Checklist
+
+7. Git Commit Message
+
+Stop after API Gateway infrastructure is complete.
+
+Wait for Prompt 5.

@@ -1,0 +1,361 @@
+The proposed plan is excellent and aligns with the enterprise architecture of the LMS.
+
+I approve the overall direction.
+
+Before implementation, I want to make a few improvements so that the Course Service remains scalable, reusable, and maintainable across the entire microservices ecosystem.
+
+===========================================================
+GENERAL REQUIREMENTS
+===========================================================
+
+Analyze the complete course-service before making any changes.
+
+Do NOT regenerate the project.
+
+Do NOT rewrite unrelated code.
+
+Modify ONLY
+
+common-library
+
+course-service
+
+Update user-service imports only if required because security classes are moved to common-library.
+
+Do NOT modify
+
+auth-service
+
+api-gateway
+
+content-service
+
+enrollment-service
+
+frontend-service
+
+===========================================================
+COMMON LIBRARY
+===========================================================
+
+Move only reusable security infrastructure into common-library.
+
+This should include
+
+UserPrincipal
+
+HeaderAuthenticationFilter
+
+AuthenticatedUserProvider
+
+SecurityConstants
+
+JwtHeaderNames
+
+Any reusable authentication utility classes
+
+Do NOT place any business logic inside common-library.
+
+The common-library must remain framework-independent as much as possible.
+
+===========================================================
+COURSE OWNERSHIP
+===========================================================
+
+Every Course must have
+
+ownerId
+
+This value must always come from the authenticated UserPrincipal.
+
+Never accept
+
+ownerId
+
+instructorId
+
+creatorId
+
+createdBy
+
+or any ownership field from the client.
+
+The frontend must never specify course ownership.
+
+===========================================================
+AUTHORIZATION
+===========================================================
+
+Use Spring Security method-level authorization.
+
+Enable
+
+@EnableMethodSecurity
+
+Use
+
+@PreAuthorize
+
+where appropriate.
+
+Avoid manual role comparisons whenever possible.
+
+===========================================================
+ROLE MATRIX
+===========================================================
+
+ROLE_STUDENT
+
+Can
+
+Browse Courses
+
+Search Courses
+
+View Categories
+
+View Course Details
+
+Cannot
+
+Create Course
+
+Edit Course
+
+Delete Course
+
+Approve Course
+
+Reject Course
+
+-----------------------------------------------------------
+
+ROLE_INSTRUCTOR
+
+Can
+
+Create Course
+
+View Own Courses
+
+Update Own Courses
+
+Delete Own Courses
+
+Cannot
+
+Modify another instructor's course
+
+Approve Courses
+
+Reject Courses
+
+-----------------------------------------------------------
+
+ROLE_ADMIN
+
+Can
+
+Manage every course
+
+Approve Course
+
+Reject Course
+
+Delete Any Course
+
+Manage Categories
+
+===========================================================
+COURSE STATUS
+===========================================================
+
+Introduce course lifecycle support if it does not already exist.
+
+Suggested statuses
+
+DRAFT
+
+PENDING_APPROVAL
+
+PUBLISHED
+
+REJECTED
+
+ARCHIVED
+
+A newly created course should default to
+
+DRAFT
+
+Only instructors can submit a course for approval.
+
+Only administrators can approve or reject it.
+
+Students should only see
+
+PUBLISHED
+
+courses.
+
+===========================================================
+NEW APIS
+===========================================================
+
+Implement
+
+GET /api/v1/courses/my
+
+Return only courses owned by the authenticated instructor.
+
+Implement
+
+PUT /api/v1/courses/{id}/submit
+
+Allow instructors to submit a draft for approval.
+
+Implement
+
+PUT /api/v1/courses/{id}/approve
+
+Admin only.
+
+Implement
+
+PUT /api/v1/courses/{id}/reject
+
+Admin only.
+
+===========================================================
+VALIDATION
+===========================================================
+
+Verify
+
+Instructor owns the course before update.
+
+Instructor owns the course before delete.
+
+Instructor owns the course before submit.
+
+Admin bypasses ownership validation.
+
+===========================================================
+SERVICE LAYER
+===========================================================
+
+Keep all ownership validation inside the service layer.
+
+Controllers should remain lightweight.
+
+Controllers should
+
+Validate request
+
+Extract authenticated principal
+
+Delegate to service layer
+
+Return response
+
+===========================================================
+SWAGGER
+===========================================================
+
+Update Swagger documentation.
+
+Document
+
+Course lifecycle
+
+Course ownership
+
+JWT Bearer Authentication
+
+Instructor APIs
+
+Student APIs
+
+Admin APIs
+
+Provide realistic request and response examples.
+
+===========================================================
+TESTING
+===========================================================
+
+Verify
+
+✓ Student can browse published courses
+
+✓ Student cannot create course
+
+✓ Instructor creates course
+
+✓ Instructor updates own course
+
+✓ Instructor deletes own course
+
+✓ Instructor cannot modify another instructor's course
+
+✓ Instructor submits course for approval
+
+✓ Admin approves course
+
+✓ Admin rejects course
+
+✓ Admin manages categories
+
+✓ SecurityContext populated correctly
+
+✓ @AuthenticationPrincipal works correctly
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Update
+
+README.md
+
+docs/course-service-jwt.md
+
+Include
+
+Authorization Matrix
+
+Course Lifecycle
+
+Ownership Rules
+
+API Documentation
+
+Security Flow
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Updated Architecture Diagram
+
+2. Authorization Matrix
+
+3. Course Lifecycle Diagram
+
+4. Ownership Flow
+
+5. Files Created
+
+6. Files Modified
+
+7. Swagger Verification
+
+8. Testing Checklist
+
+9. Git Commit Message
+
+Stop after course-service migration is complete.
+
+Wait for the next implementation task.
