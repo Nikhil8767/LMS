@@ -1,0 +1,535 @@
+You are a Principal Software Architect, Enterprise Spring Security Expert, Spring Cloud Gateway Expert, JWT Expert, and Microservices Architect.
+
+Analyze ONLY the following modules:
+
+1. API Gateway
+2. Auth Service
+
+Do NOT modify any other microservice unless absolutely necessary.
+
+==========================================================
+CURRENT ISSUE
+==========================================================
+
+The Auth Service works correctly when accessed directly.
+
+Example:
+
+http://localhost:8081/api/v1/auth/register/student
+
+returns
+
+201 Created
+
+However,
+
+calling the same endpoint through the API Gateway
+
+http://localhost:8080/api/v1/auth/register/student
+
+returns
+
+403 Forbidden
+
+This is incorrect.
+
+==========================================================
+OBJECTIVE
+==========================================================
+
+Implement a complete enterprise authentication flow where
+
+ALL CLIENT REQUESTS MUST GO THROUGH THE API GATEWAY.
+
+The client should NEVER directly access Auth Service.
+
+Postman
+
+Frontend
+
+Mobile App
+
+must always communicate only with
+
+http://localhost:8080
+
+==========================================================
+EXPECTED FLOW
+==========================================================
+
+Student Registration
+
+POST
+
+/api/v1/auth/register/student
+
+↓
+
+Gateway
+
+↓
+
+Auth Service
+
+↓
+
+Registration Successful
+
+↓
+
+NO JWT GENERATED
+
+==========================================================
+
+Tutor Registration
+
+POST
+
+/api/v1/auth/register/tutor
+
+↓
+
+Gateway
+
+↓
+
+Auth Service
+
+↓
+
+Registration Successful
+
+↓
+
+NO JWT GENERATED
+
+==========================================================
+
+Login
+
+POST
+
+/api/v1/auth/login
+
+↓
+
+Gateway
+
+↓
+
+Auth Service
+
+↓
+
+Credentials Verified
+
+↓
+
+JWT Generated
+
+↓
+
+Gateway returns JWT to client
+
+==========================================================
+
+Protected API
+
+Authorization: Bearer <token>
+
+↓
+
+Gateway validates JWT
+
+↓
+
+Gateway extracts claims
+
+↓
+
+Gateway forwards
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-Account-Status
+
+↓
+
+Downstream Service
+
+==========================================================
+API GATEWAY SECURITY
+==========================================================
+
+Analyze the complete Spring Security configuration.
+
+Ensure the following endpoints are PUBLIC.
+
+They MUST NEVER require JWT.
+
+Permit All
+
+/api/v1/auth/register/**
+
+/api/v1/auth/login
+
+/api/v1/auth/forgot-password
+
+/api/v1/auth/reset-password
+
+/api/v1/auth/verify-email
+
+/v3/api-docs/**
+
+/swagger-ui/**
+
+/swagger-ui.html
+
+/actuator/health
+
+/actuator/info
+
+==========================================================
+JWT FILTER
+==========================================================
+
+Analyze the JWT Authentication Filter.
+
+The filter MUST completely bypass
+
+/api/v1/auth/register/**
+
+/api/v1/auth/login
+
+Swagger
+
+Actuator
+
+Health endpoints
+
+Do NOT attempt to validate JWT for public endpoints.
+
+Do NOT return
+
+401
+
+403
+
+for public endpoints.
+
+Simply continue the filter chain.
+
+==========================================================
+ROUTE VALIDATOR
+==========================================================
+
+Analyze RouteValidator.
+
+Ensure public routes include
+
+/auth/register/**
+
+/auth/login
+
+/swagger-ui/**
+
+/v3/api-docs/**
+
+/actuator/**
+
+Route matching must work correctly.
+
+Use proper Ant Path patterns.
+
+==========================================================
+SECURITY FILTER CHAIN
+==========================================================
+
+Configure Spring Security correctly.
+
+Public endpoints
+
+Permit All
+
+Protected endpoints
+
+Authenticated
+
+Do not accidentally protect Auth APIs.
+
+==========================================================
+AUTH SERVICE
+==========================================================
+
+Registration
+
+Must NOT generate JWT.
+
+Return
+
+201 Created
+
+Example
+
+{
+    "success": true,
+    "message": "Registration completed successfully. Please login to continue.",
+    "data": {
+        "userId": "...",
+        "email": "...",
+        "role": "STUDENT"
+    }
+}
+
+==========================================================
+
+Login
+
+Must generate JWT.
+
+Return
+
+{
+    "success": true,
+    "message": "Login successful.",
+    "data": {
+
+        "accessToken":"...",
+
+        "tokenType":"Bearer",
+
+        "expiresIn":3600,
+
+        "userId":"...",
+
+        "email":"...",
+
+        "role":"STUDENT",
+
+        "accountStatus":"ACTIVE"
+
+    }
+
+}
+
+==========================================================
+JWT VALIDATION
+==========================================================
+
+Gateway validates ONLY
+
+Protected APIs.
+
+Registration and Login must completely bypass JWT validation.
+
+==========================================================
+POSTMAN TESTS
+==========================================================
+
+Verify the following requests using ONLY
+
+localhost:8080
+
+----------------------------------------------------------
+
+POST
+
+/api/v1/auth/register/student
+
+Expected
+
+201
+
+----------------------------------------------------------
+
+POST
+
+/api/v1/auth/register/tutor
+
+Expected
+
+201
+
+----------------------------------------------------------
+
+POST
+
+/api/v1/auth/login
+
+Expected
+
+200
+
+JWT Returned
+
+----------------------------------------------------------
+
+GET
+
+/api/v1/users/me
+
+Without JWT
+
+401
+
+----------------------------------------------------------
+
+GET
+
+/api/v1/users/me
+
+With JWT
+
+200
+
+----------------------------------------------------------
+
+POST
+
+/api/v1/courses
+
+Without JWT
+
+401
+
+----------------------------------------------------------
+
+POST
+
+/api/v1/courses
+
+Student JWT
+
+403
+
+----------------------------------------------------------
+
+POST
+
+/api/v1/courses
+
+Tutor JWT
+
+200
+
+==========================================================
+MICROSERVICE COMMUNICATION
+==========================================================
+
+Gateway should forward
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-Account-Status
+
+Only after successful JWT validation.
+
+==========================================================
+ERROR RESPONSES
+==========================================================
+
+Registration
+
+201
+
+Login
+
+200
+
+Missing JWT
+
+401
+
+Expired JWT
+
+401
+
+Invalid JWT
+
+401
+
+Access Denied
+
+403
+
+==========================================================
+BUILD VERIFICATION
+==========================================================
+
+Before finishing
+
+1. Analyze Gateway routes.
+
+2. Analyze RouteValidator.
+
+3. Analyze JWT Filter.
+
+4. Analyze Security Configuration.
+
+5. Analyze Auth Service.
+
+6. Resolve every 403 issue.
+
+7. Resolve every Route matching issue.
+
+8. Resolve every Filter issue.
+
+9. Resolve every Security issue.
+
+10. Verify Register works through Gateway.
+
+11. Verify Login works through Gateway.
+
+12. Verify JWT generation only after Login.
+
+13. Verify JWT validation.
+
+14. Verify Protected APIs.
+
+15. Verify Swagger through Gateway.
+
+16. Verify Eureka routing.
+
+17. Verify every module compiles.
+
+18. Verify Gateway starts successfully.
+
+19. Verify Auth Service starts successfully.
+
+20. Verify ZERO startup errors.
+
+==========================================================
+OUTPUT
+==========================================================
+
+Provide
+
+1. Root Cause
+
+2. Security Changes
+
+3. Route Changes
+
+4. JWT Filter Changes
+
+5. RouteValidator Changes
+
+6. Gateway Configuration Changes
+
+7. Auth Service Changes
+
+8. Postman Test Results
+
+9. Verification Checklist
+
+10. Git Commit Message
+
+Do not stop until ALL authentication APIs work through API Gateway on port 8080 and the complete authentication flow follows enterprise best practices.
