@@ -1,0 +1,379 @@
+You are a Principal Software Architect, Enterprise Java Architect, Senior Spring Boot Engineer, and Microservices Expert.
+
+The Enterprise LMS currently contains:
+
+✓ Parent Multi-Module Project
+✓ Common Library
+✓ Discovery Service
+✓ API Gateway (JWT Validation)
+✓ Auth Service
+
+Everything is working correctly.
+
+Implement ONLY the user-service.
+
+Do NOT modify any other microservice.
+
+===========================================================
+PRIMARY OBJECTIVE
+===========================================================
+
+Build a production-ready User Service.
+
+The User Service manages ONLY user profile information.
+
+It must NEVER manage:
+
+Authentication
+
+Passwords
+
+JWT Generation
+
+JWT Validation
+
+Roles
+
+Login
+
+Registration
+
+These belong exclusively to Auth Service.
+
+===========================================================
+TECH STACK
+===========================================================
+
+Java 21
+
+Spring Boot 3.5.x
+
+Spring Data JPA
+
+PostgreSQL
+
+Flyway
+
+OpenFeign
+
+Swagger
+
+Validation
+
+Lombok
+
+Actuator
+
+application.properties only
+
+===========================================================
+DATABASE
+===========================================================
+
+Create UserProfile entity.
+
+Fields
+
+id (UUID)
+
+authUserId (UUID from Auth Service)
+
+firstName
+
+lastName
+
+phoneNumber
+
+dateOfBirth
+
+gender
+
+bio
+
+profileImageUrl
+
+country
+
+state
+
+city
+
+zipCode
+
+address
+
+linkedinUrl
+
+githubUrl
+
+websiteUrl
+
+createdAt
+
+updatedAt
+
+===========================================================
+MICROSERVICE COMMUNICATION
+===========================================================
+
+Use OpenFeign.
+
+User Service communicates with Auth Service ONLY when necessary.
+
+Do NOT store password.
+
+Do NOT store email.
+
+Do NOT store role.
+
+Do NOT store accountStatus.
+
+These remain the source of truth in Auth Service.
+
+===========================================================
+JWT
+===========================================================
+
+Do NOT validate JWT.
+
+The API Gateway already validates JWT.
+
+Read authenticated user information from the trusted headers forwarded by the Gateway.
+
+Use only trusted forwarded headers.
+
+===========================================================
+API RESPONSE STANDARD
+===========================================================
+
+Every endpoint MUST return ApiResponse<T>.
+
+Every response must include
+
+success
+
+message
+
+data
+
+timestamp
+
+path
+
+===========================================================
+USER FRIENDLY SUCCESS MESSAGES
+===========================================================
+
+Profile created successfully.
+
+Profile retrieved successfully.
+
+Profile updated successfully.
+
+Profiles fetched successfully.
+
+===========================================================
+USER FRIENDLY ERROR MESSAGES
+===========================================================
+
+Profile not found.
+
+Phone number already exists.
+
+Invalid phone number.
+
+Invalid URL.
+
+Validation failed.
+
+Unauthorized access.
+
+Access denied.
+
+Internal server error.
+
+Please try again later.
+
+===========================================================
+VALIDATION
+===========================================================
+
+Validate
+
+Phone number
+
+URLs
+
+Required fields
+
+Maximum lengths
+
+Minimum lengths
+
+===========================================================
+GLOBAL EXCEPTION HANDLING
+===========================================================
+
+Implement centralized exception handling.
+
+Never expose Java exceptions.
+
+Never expose SQL errors.
+
+Never expose stack traces.
+
+===========================================================
+API ENDPOINTS
+===========================================================
+
+POST
+
+/api/v1/users/profile
+
+Create profile for authenticated user.
+
+-----------------------------------------------------------
+
+GET
+
+/api/v1/users/me
+
+Return authenticated user's profile.
+
+-----------------------------------------------------------
+
+PUT
+
+/api/v1/users/me
+
+Update authenticated user's profile.
+
+-----------------------------------------------------------
+
+GET
+
+/api/v1/users/{id}
+
+Admin only.
+
+-----------------------------------------------------------
+
+GET
+
+/api/v1/users
+
+Admin only.
+
+-----------------------------------------------------------
+
+DELETE
+
+/api/v1/users/{id}
+
+Admin only.
+
+===========================================================
+SWAGGER
+===========================================================
+
+Document every endpoint.
+
+Provide request examples.
+
+Provide response examples.
+
+===========================================================
+FLYWAY
+===========================================================
+
+Versioned migration.
+
+No ddl-auto=create.
+
+===========================================================
+CODE QUALITY
+===========================================================
+
+Follow
+
+SOLID
+
+DRY
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+Reusable DTOs
+
+Reusable Validators
+
+Meaningful package names
+
+Meaningful variable names
+
+JavaDoc where useful
+
+No duplicate code
+
+===========================================================
+BUILD VERIFICATION
+===========================================================
+
+Before finishing
+
+1. Build the module.
+
+2. Resolve every compilation error.
+
+3. Resolve every dependency issue.
+
+4. Resolve every import issue.
+
+5. Resolve every warning.
+
+6. Verify OpenFeign communication.
+
+7. Verify Flyway migration.
+
+8. Verify Swagger.
+
+9. Verify Eureka registration.
+
+10. Verify Maven builds successfully.
+
+11. Ensure the service starts successfully.
+
+Do not stop until the User Service builds successfully with ZERO compilation errors.
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Folder Structure
+
+2. Files Created
+
+3. Database Schema
+
+4. Flyway Scripts
+
+5. API Endpoints
+
+6. OpenFeign Configuration
+
+7. application.properties
+
+8. Swagger Configuration
+
+9. Verification Checklist
+
+10. Git Commit Message
+
+Stop after the User Service is complete.
+
+Wait for the next prompt.

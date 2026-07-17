@@ -1,0 +1,573 @@
+You are a Principal Software Architect, Enterprise Java Architect, Senior Spring Boot Engineer, Hibernate Expert, PostgreSQL Expert, Flyway Expert, and Microservices Architect.
+
+The Enterprise LMS already contains:
+
+✓ Parent Multi Module Project
+✓ Common Library
+✓ Discovery Service
+✓ API Gateway
+✓ Auth Service
+✓ User Service
+
+All services compile successfully.
+
+Implement ONLY the course-service.
+
+Never modify another service.
+
+==========================================================
+PRIMARY OBJECTIVE
+==========================================================
+
+Build a production-ready Course Service.
+
+The generated code must be enterprise quality.
+
+The generated code must compile.
+
+The generated code must start successfully.
+
+The generated code must not contain runtime errors.
+
+Do not stop until every compilation error and startup error has been resolved.
+
+==========================================================
+RESPONSIBILITY
+==========================================================
+
+The Course Service is responsible ONLY for
+
+• Course Management
+• Course Publishing
+• Course Categories
+• Course Metadata
+
+It must NEVER manage
+
+Authentication
+
+JWT
+
+Passwords
+
+Profiles
+
+Enrollments
+
+Lessons
+
+Videos
+
+Progress
+
+Certificates
+
+==========================================================
+TECH STACK
+==========================================================
+
+Java 21
+
+Spring Boot 3.5.x
+
+Spring Data JPA
+
+Hibernate 6
+
+PostgreSQL
+
+Flyway
+
+OpenFeign
+
+Validation
+
+Swagger
+
+Actuator
+
+Lombok
+
+application.properties only
+
+==========================================================
+DATABASE DESIGN
+==========================================================
+
+Normalize the database.
+
+Do NOT store category as plain text.
+
+Create
+
+Category
+
+Course
+
+Relationship
+
+Category
+
+id UUID
+
+name
+
+description
+
+icon
+
+isActive
+
+createdAt
+
+updatedAt
+
+Course
+
+id UUID
+
+title
+
+subtitle
+
+description
+
+shortDescription
+
+thumbnailUrl
+
+bannerUrl
+
+language
+
+courseLevel
+
+courseStatus
+
+price
+
+discountPrice
+
+currency
+
+estimatedDurationMinutes
+
+categoryId
+
+instructorId
+
+createdBy
+
+updatedBy
+
+publishedAt
+
+createdAt
+
+updatedAt
+
+==========================================================
+IMPORTANT
+==========================================================
+
+Use
+
+estimatedDurationMinutes
+
+(Integer)
+
+Never use
+
+Double
+
+Float
+
+BigDecimal
+
+for duration.
+
+Duration should always be stored as integer minutes.
+
+==========================================================
+HIBERNATE
+==========================================================
+
+Ensure every Entity matches Flyway exactly.
+
+No schema validation errors.
+
+No type mismatch.
+
+No NUMERIC vs FLOAT mismatch.
+
+No Hibernate startup errors.
+
+==========================================================
+FLYWAY
+==========================================================
+
+Flyway is the ONLY source of truth.
+
+Never use
+
+ddl-auto=create
+
+Never disable validation.
+
+Generate proper versioned migration.
+
+==========================================================
+CATEGORY
+==========================================================
+
+A Course belongs to exactly one Category.
+
+Categories are reusable.
+
+Future services will use categories.
+
+==========================================================
+JWT
+==========================================================
+
+Do NOT validate JWT.
+
+Trust only headers forwarded by API Gateway.
+
+Read
+
+X-User-Id
+
+X-User-Role
+
+X-Account-Status
+
+Never parse JWT.
+
+==========================================================
+BUSINESS RULES
+==========================================================
+
+Only ACTIVE Tutors can
+
+Create Course
+
+Update Course
+
+Publish Course
+
+Archive Course
+
+Admins can manage all courses.
+
+Students cannot create courses.
+
+Draft courses are invisible to students.
+
+Only Published courses are public.
+
+==========================================================
+API RESPONSE
+==========================================================
+
+Every endpoint MUST return
+
+ApiResponse<T>
+
+Every response must contain
+
+success
+
+message
+
+data
+
+timestamp
+
+path
+
+Never return String.
+
+==========================================================
+SUCCESS MESSAGES
+==========================================================
+
+Course created successfully.
+
+Course updated successfully.
+
+Course published successfully.
+
+Course archived successfully.
+
+Course deleted successfully.
+
+Course details fetched successfully.
+
+Courses fetched successfully.
+
+==========================================================
+ERROR MESSAGES
+==========================================================
+
+Course not found.
+
+Category not found.
+
+Only active tutors can create courses.
+
+Duplicate course title.
+
+Validation failed.
+
+Unauthorized access.
+
+Access denied.
+
+Internal server error.
+
+Please try again later.
+
+==========================================================
+VALIDATION
+==========================================================
+
+Validate
+
+Title
+
+Subtitle
+
+Description
+
+Price
+
+Discount Price
+
+Thumbnail URL
+
+Banner URL
+
+Estimated Duration Minutes
+
+Category
+
+Maximum lengths
+
+Minimum lengths
+
+Reject
+
+Negative duration
+
+Zero duration
+
+Negative prices
+
+Invalid URLs
+
+==========================================================
+GLOBAL EXCEPTION HANDLER
+==========================================================
+
+Implement one centralized exception handler.
+
+Handle
+
+ValidationException
+
+DuplicateResourceException
+
+BusinessException
+
+IllegalArgumentException
+
+ResourceNotFoundException
+
+AccessDeniedException
+
+DatabaseException
+
+Generic Exception
+
+Never expose
+
+SQL
+
+Hibernate
+
+Stack traces
+
+Java exceptions
+
+Return user friendly messages.
+
+==========================================================
+API
+==========================================================
+
+POST
+
+/api/v1/courses
+
+Create Course
+
+PUT
+
+/api/v1/courses/{id}
+
+Update Course
+
+PATCH
+
+/api/v1/courses/{id}/publish
+
+PATCH
+
+/api/v1/courses/{id}/archive
+
+GET
+
+/api/v1/courses
+
+Public published courses
+
+GET
+
+/api/v1/courses/{id}
+
+Course details
+
+GET
+
+/api/v1/courses/my
+
+Tutor's own courses
+
+DELETE
+
+/api/v1/courses/{id}
+
+Admin only
+
+==========================================================
+SWAGGER
+==========================================================
+
+Document every endpoint.
+
+Provide
+
+Request Example
+
+Success Response
+
+Error Response
+
+Bearer Authentication
+
+==========================================================
+CODE QUALITY
+==========================================================
+
+Follow
+
+SOLID
+
+DRY
+
+KISS
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+Reusable DTOs
+
+Reusable Validators
+
+Meaningful Naming
+
+JavaDoc where appropriate
+
+No duplicate code.
+
+==========================================================
+BUILD VERIFICATION
+==========================================================
+
+Before finishing
+
+Analyze every generated file.
+
+Resolve every compilation error.
+
+Resolve every dependency conflict.
+
+Resolve every import conflict.
+
+Resolve every Hibernate validation error.
+
+Resolve every Flyway migration issue.
+
+Resolve every PostgreSQL mismatch.
+
+Resolve every Swagger issue.
+
+Resolve every startup warning.
+
+Build the module.
+
+Run the module.
+
+Verify it starts successfully.
+
+Verify Eureka registration.
+
+Verify Flyway migration.
+
+Verify Hibernate validation.
+
+Verify Swagger.
+
+Verify Maven builds successfully.
+
+Do NOT stop until Course Service starts successfully with ZERO startup errors and ZERO compilation errors.
+
+==========================================================
+OUTPUT
+==========================================================
+
+Provide
+
+Folder Structure
+
+Files Created
+
+Database Schema
+
+ER Diagram Description
+
+Flyway Scripts
+
+API Endpoints
+
+DTOs
+
+Entities
+
+Validation Rules
+
+Swagger Configuration
+
+application.properties
+
+Verification Checklist
+
+Git Commit Message
+
+Stop after Course Service is fully working.
+
+Wait for the next prompt.

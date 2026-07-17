@@ -1,0 +1,303 @@
+You are a Principal Software Architect, Enterprise Java Architect, Spring Cloud Gateway Expert, and Senior Spring Boot Engineer.
+
+The Enterprise LMS currently contains
+
+✓ Parent Multi-Module Project
+✓ Common Library
+✓ Discovery Service
+
+Everything is working correctly.
+
+This is Prompt 4.
+
+Analyze ONLY the api-gateway module.
+
+Do NOT modify any other module.
+
+Do NOT generate JWT authentication yet.
+
+Do NOT generate authorization filters yet.
+
+Do NOT generate business logic.
+
+Generate ONLY the API Gateway infrastructure.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Build a production-ready API Gateway that will become the single entry point for the entire Enterprise LMS.
+
+All requests from the frontend must pass through this Gateway.
+
+JWT validation and authorization will be implemented later after Auth Service is completed.
+
+===========================================================
+TECH STACK
+===========================================================
+
+Java 21
+
+Spring Boot 3.5.x
+
+Spring Cloud Gateway
+
+Spring Cloud Netflix Eureka Client
+
+Spring Boot Actuator
+
+OpenFeign (dependency only)
+
+Lombok
+
+Use application.properties only.
+
+Do NOT generate application.yml.
+
+===========================================================
+RESPONSIBILITIES
+===========================================================
+
+The Gateway must
+
+• Register itself with Eureka
+
+• Discover services dynamically
+
+• Route requests
+
+• Centralize all incoming traffic
+
+It must NOT
+
+• Validate JWT yet
+
+• Generate JWT
+
+• Authenticate users
+
+• Access PostgreSQL
+
+• Contain business logic
+
+===========================================================
+CONFIGURATION
+===========================================================
+
+Use application.properties.
+
+Configure
+
+Application Name
+
+api-gateway
+
+Server Port
+
+8080
+
+Register with Eureka
+
+Fetch Registry
+
+Service URL
+
+http://localhost:8761/eureka
+
+Enable Discovery Locator
+
+Use lower-case service IDs
+
+Enable Actuator
+
+===========================================================
+ROUTING
+===========================================================
+
+Configure routes for the following services.
+
+Auth Service
+
+/api/v1/auth/**
+
+↓
+
+lb://AUTH-SERVICE
+
+------------------------------------------------
+
+User Service
+
+/api/v1/users/**
+
+↓
+
+lb://USER-SERVICE
+
+------------------------------------------------
+
+Course Service
+
+/api/v1/courses/**
+
+↓
+
+lb://COURSE-SERVICE
+
+------------------------------------------------
+
+Content Service
+
+/api/v1/content/**
+
+↓
+
+lb://CONTENT-SERVICE
+
+------------------------------------------------
+
+Enrollment Service
+
+/api/v1/enrollments/**
+
+↓
+
+lb://ENROLLMENT-SERVICE
+
+===========================================================
+DISCOVERY
+===========================================================
+
+The Gateway must discover services through Eureka.
+
+Do NOT use hardcoded localhost ports for routing.
+
+Use load-balanced routes.
+
+===========================================================
+CORS
+===========================================================
+
+Configure global CORS.
+
+Allow
+
+GET
+
+POST
+
+PUT
+
+DELETE
+
+PATCH
+
+OPTIONS
+
+Allow frontend origin
+
+http://localhost:8085
+
+Allow Authorization header.
+
+Allow Content-Type.
+
+Allow Credentials.
+
+===========================================================
+HEALTH
+===========================================================
+
+Enable
+
+Actuator
+
+Gateway Health
+
+Health Endpoint
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Enterprise Coding Standards
+
+Constructor Injection
+
+Minimal Configuration
+
+No Duplicate Code
+
+===========================================================
+DO NOT IMPLEMENT
+===========================================================
+
+Do NOT implement
+
+JWT
+
+Authentication Filter
+
+Authorization Filter
+
+Role Checking
+
+Header Manipulation
+
+Route Validation
+
+SecurityConfig
+
+These will be implemented in the next prompt.
+
+===========================================================
+VERIFICATION
+===========================================================
+
+Verify
+
+✓ Gateway starts successfully
+
+✓ Registers with Eureka
+
+✓ Appears on Eureka Dashboard
+
+✓ Route configuration loads successfully
+
+✓ No startup exceptions
+
+✓ Health endpoint works
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Folder Structure
+
+2. Files Created
+
+3. Dependencies Added
+
+4. application.properties
+
+5. Route Configuration
+
+6. Verification Checklist
+
+7. Git Commit Message
+
+Do NOT ask implementation questions.
+
+Implement ONLY the API Gateway infrastructure.
+
+Stop after API Gateway is fully working.
+
+Wait for Prompt 5.

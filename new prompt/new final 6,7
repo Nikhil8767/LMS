@@ -1,0 +1,365 @@
+You are a Principal Software Architect, Senior Spring Security Engineer, Spring Boot Expert, and JWT Expert.
+
+The Enterprise LMS project already contains:
+
+✓ Parent Multi-Module Project
+✓ Common Library
+✓ Discovery Service
+✓ API Gateway (Spring Boot 3.5.x compatible)
+✓ PostgreSQL
+✓ Eureka Registration
+
+Everything compiles successfully.
+
+Now implement ONLY the auth-service.
+
+Do NOT modify any other module.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Build a production-ready Authentication Service that compiles successfully without any errors.
+
+This service is responsible ONLY for
+
+• User Registration
+• Login
+• BCrypt Password Encoding
+• JWT Generation
+• JWT Validation
+• Bootstrap Admin
+• User Credentials
+• Account Status
+
+It must NOT manage
+
+Profiles
+
+Courses
+
+Enrollments
+
+Content
+
+Business Logic
+
+===========================================================
+TECH STACK
+===========================================================
+
+Java 21
+
+Spring Boot 3.5.x
+
+Spring Security 6
+
+Spring Data JPA
+
+PostgreSQL
+
+Flyway
+
+Spring Validation
+
+Spring Boot Actuator
+
+OpenAPI / Swagger
+
+Lombok
+
+JJWT (latest stable version compatible with Spring Boot 3.5.x)
+
+application.properties only
+
+Do NOT generate YAML.
+
+===========================================================
+IMPORTANT
+===========================================================
+
+Use ONE consistent JJWT version.
+
+Do NOT mix APIs from different JJWT versions.
+
+Ensure every JWT dependency is compatible.
+
+Ensure JwtUtils compiles successfully.
+
+No deprecated JWT APIs.
+
+No import conflicts.
+
+No compilation errors.
+
+===========================================================
+DATABASE
+===========================================================
+
+Create UserCredential
+
+UUID id
+
+email (unique)
+
+password (BCrypt)
+
+role
+
+ROLE_STUDENT
+
+ROLE_TUTOR
+
+ROLE_ADMIN
+
+accountStatus
+
+ACTIVE
+
+PENDING
+
+REJECTED
+
+SUSPENDED
+
+enabled
+
+emailVerified
+
+createdAt
+
+updatedAt
+
+lastLogin
+
+failedLoginAttempts
+
+lockedUntil
+
+===========================================================
+BOOTSTRAP ADMIN
+===========================================================
+
+Automatically create
+
+admin@lms.com
+
+Password
+
+Admin@123
+
+ROLE_ADMIN
+
+ACTIVE
+
+only if it does not already exist.
+
+===========================================================
+REGISTRATION
+===========================================================
+
+Student
+
+ROLE_STUDENT
+
+ACTIVE
+
+Tutor
+
+ROLE_TUTOR
+
+PENDING
+
+No Admin registration endpoint.
+
+Validate
+
+Unique email
+
+Strong password
+
+Required fields
+
+===========================================================
+LOGIN
+===========================================================
+
+Authenticate
+
+Email
+
+Password
+
+Reject
+
+Disabled
+
+Suspended
+
+Rejected
+
+Locked
+
+Wrong password
+
+Update lastLogin.
+
+===========================================================
+JWT
+===========================================================
+
+Generate JWT containing
+
+userId
+
+email
+
+role
+
+accountStatus
+
+Use HS256.
+
+Implement
+
+JwtUtils
+
+JwtAuthenticationFilter
+
+JwtAuthenticationEntryPoint
+
+JwtAuthenticationResponse
+
+SecurityConfig
+
+JwtProperties
+
+Use only APIs compatible with the selected JJWT version.
+
+===========================================================
+JWT RESPONSE
+===========================================================
+
+Return
+
+accessToken
+
+tokenType
+
+expiresIn
+
+userId
+
+email
+
+role
+
+accountStatus
+
+===========================================================
+SECURITY
+===========================================================
+
+Stateless
+
+Disable CSRF
+
+Use BCrypt
+
+Use SecurityFilterChain
+
+No WebSecurityConfigurerAdapter
+
+===========================================================
+API
+===========================================================
+
+POST
+
+/api/v1/auth/register
+
+POST
+
+/api/v1/auth/login
+
+GET
+
+/api/v1/auth/me
+
+===========================================================
+FLYWAY
+===========================================================
+
+Generate migration scripts.
+
+Do not use ddl-auto=create.
+
+===========================================================
+SWAGGER
+===========================================================
+
+Enable OpenAPI.
+
+Configure Bearer Authentication.
+
+===========================================================
+EUREKA
+===========================================================
+
+Register with Eureka.
+
+===========================================================
+MOST IMPORTANT
+===========================================================
+
+Before finishing
+
+1. Build the module.
+
+2. Resolve every compilation error.
+
+3. Resolve every dependency conflict.
+
+4. Resolve every import conflict.
+
+5. Resolve every JWT version mismatch.
+
+6. Ensure JwtUtils compiles.
+
+7. Ensure SecurityConfig compiles.
+
+8. Ensure Flyway compiles.
+
+9. Ensure the module starts successfully.
+
+10. Ensure Maven builds with ZERO compilation errors.
+
+Do NOT stop until the Auth Service builds successfully.
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+Folder structure
+
+Files created
+
+Dependencies
+
+Database schema
+
+Flyway scripts
+
+application.properties
+
+API endpoints
+
+Swagger configuration
+
+Verification checklist
+
+Git commit message
+
+Stop after the Auth Service is completely working.

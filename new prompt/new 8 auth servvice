@@ -1,0 +1,496 @@
+You are a Principal Software Architect, Enterprise Java Architect, Spring Security Expert, JWT Expert, and Senior Spring Boot Engineer.
+
+The Enterprise LMS project already contains:
+
+✓ Parent Multi-Module Project
+✓ Common Library
+✓ Discovery Service
+✓ API Gateway
+✓ PostgreSQL
+✓ Eureka
+
+Everything compiles successfully.
+
+Implement ONLY the auth-service.
+
+Do NOT modify any other module.
+
+===========================================================
+PRIMARY OBJECTIVE
+===========================================================
+
+Build a production-ready Authentication Service using enterprise coding standards.
+
+The service must compile successfully with ZERO compilation errors.
+
+The service must provide USER-FRIENDLY API RESPONSES.
+
+This project is intended for production use.
+
+===========================================================
+RESPONSIBILITIES
+===========================================================
+
+This service is responsible ONLY for
+
+• Registration
+• Login
+• JWT Generation
+• JWT Validation
+• Password Encryption
+• Authentication
+• Bootstrap Admin
+• User Credentials
+
+It must NOT manage
+
+Profiles
+
+Courses
+
+Enrollments
+
+Content
+
+Business Logic
+
+===========================================================
+TECH STACK
+===========================================================
+
+Java 21
+
+Spring Boot 3.5.x
+
+Spring Security 6
+
+Spring Data JPA
+
+PostgreSQL
+
+Flyway
+
+Spring Validation
+
+Swagger
+
+Actuator
+
+Lombok
+
+JJWT (latest stable version fully compatible with Spring Boot 3.5.x)
+
+application.properties only
+
+Never generate YAML.
+
+===========================================================
+DATABASE
+===========================================================
+
+UserCredential
+
+UUID id
+
+email (unique)
+
+password (BCrypt)
+
+role
+
+ROLE_STUDENT
+
+ROLE_TUTOR
+
+ROLE_ADMIN
+
+accountStatus
+
+ACTIVE
+
+PENDING
+
+REJECTED
+
+SUSPENDED
+
+enabled
+
+emailVerified
+
+createdAt
+
+updatedAt
+
+lastLogin
+
+failedLoginAttempts
+
+lockedUntil
+
+===========================================================
+BOOTSTRAP ADMIN
+===========================================================
+
+Automatically create
+
+admin@lms.com
+
+Password
+
+Admin@123
+
+ROLE_ADMIN
+
+ACTIVE
+
+only if admin does not exist.
+
+===========================================================
+REGISTRATION
+===========================================================
+
+Allow only
+
+ROLE_STUDENT
+
+ROLE_TUTOR
+
+Students
+
+ACTIVE
+
+Tutors
+
+PENDING
+
+Admin registration must not exist.
+
+Validate
+
+Unique Email
+
+Strong Password
+
+Required Fields
+
+===========================================================
+LOGIN
+===========================================================
+
+Authenticate
+
+Email
+
+Password
+
+Reject
+
+Suspended
+
+Rejected
+
+Disabled
+
+Locked
+
+Wrong Password
+
+Update Last Login.
+
+===========================================================
+JWT
+===========================================================
+
+Generate JWT containing
+
+userId
+
+email
+
+role
+
+accountStatus
+
+Use HS256.
+
+Use one consistent JJWT version.
+
+No deprecated APIs.
+
+===========================================================
+API RESPONSE STANDARD
+===========================================================
+
+EVERY API RESPONSE MUST USE ApiResponse<T>.
+
+Never return raw String.
+
+Never expose stack traces.
+
+Never expose SQL exceptions.
+
+Never expose Hibernate exceptions.
+
+Never expose internal implementation details.
+
+Every response must contain
+
+success
+
+message
+
+data
+
+timestamp
+
+path
+
+===========================================================
+USER FRIENDLY SUCCESS MESSAGES
+===========================================================
+
+Registration completed successfully.
+
+Login successful.
+
+Profile fetched successfully.
+
+Profile updated successfully.
+
+Password changed successfully.
+
+===========================================================
+USER FRIENDLY ERROR MESSAGES
+===========================================================
+
+Email is already registered.
+
+Invalid email or password.
+
+Account is pending admin approval.
+
+Account has been suspended.
+
+Account has been rejected.
+
+Account is temporarily locked.
+
+Email is required.
+
+Password is required.
+
+Password must contain at least
+
+8 characters
+
+one uppercase
+
+one lowercase
+
+one digit
+
+one special character
+
+Invalid email format.
+
+User not found.
+
+Unauthorized access.
+
+Access denied.
+
+Resource not found.
+
+Internal server error.
+
+Please try again later.
+
+===========================================================
+VALIDATION ERRORS
+===========================================================
+
+Return field level validation errors.
+
+Example
+
+{
+  "success": false,
+  "message": "Validation failed.",
+  "errors": [
+      {
+         "field":"email",
+         "message":"Email format is invalid."
+      },
+      {
+         "field":"password",
+         "message":"Password must contain one uppercase letter."
+      }
+  ]
+}
+
+===========================================================
+GLOBAL EXCEPTION HANDLING
+===========================================================
+
+Implement one centralized GlobalExceptionHandler.
+
+Handle
+
+Duplicate Email
+
+Validation
+
+JWT Errors
+
+Authentication
+
+Access Denied
+
+Resource Not Found
+
+Business Exceptions
+
+Database Exceptions
+
+Generic Exceptions
+
+Return meaningful user friendly responses.
+
+Never expose Java exception messages.
+
+===========================================================
+SECURITY
+===========================================================
+
+Stateless
+
+BCrypt
+
+SecurityFilterChain
+
+Disable CSRF
+
+JWT Filter
+
+JwtAuthenticationEntryPoint
+
+===========================================================
+API
+===========================================================
+
+POST
+
+/api/v1/auth/register
+
+POST
+
+/api/v1/auth/login
+
+GET
+
+/api/v1/auth/me
+
+===========================================================
+SWAGGER
+===========================================================
+
+Bearer Authentication
+
+Document every endpoint
+
+Add request and response examples
+
+===========================================================
+FLYWAY
+===========================================================
+
+Versioned migrations.
+
+No ddl-auto=create.
+
+===========================================================
+CODE QUALITY
+===========================================================
+
+Follow
+
+SOLID
+
+DRY
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+Reusable DTOs
+
+Reusable Validators
+
+Meaningful package names
+
+Meaningful variable names
+
+JavaDoc where useful
+
+No duplicate code
+
+===========================================================
+MOST IMPORTANT
+===========================================================
+
+Before finishing
+
+Build the module.
+
+Resolve every compilation error.
+
+Resolve every dependency issue.
+
+Resolve every JWT version mismatch.
+
+Resolve every import issue.
+
+Resolve every warning.
+
+Ensure Swagger works.
+
+Ensure Flyway works.
+
+Ensure Maven builds successfully.
+
+Ensure the service starts successfully.
+
+Do not stop until the Auth Service is fully working.
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+Folder Structure
+
+Files Created
+
+Dependencies
+
+Database Schema
+
+Flyway Scripts
+
+API Endpoints
+
+application.properties
+
+Swagger Configuration
+
+Verification Checklist
+
+Git Commit Message
+
+Stop after the Auth Service is complete.
+
+Wait for the next prompt.

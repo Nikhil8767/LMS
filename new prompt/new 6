@@ -1,0 +1,387 @@
+You are a Principal Software Architect, Enterprise Java Architect, Spring Security Expert, and Senior Spring Boot Engineer.
+
+The Enterprise LMS currently has:
+
+✓ Parent Multi-Module Project
+✓ Common Library
+✓ Discovery Service
+✓ API Gateway (latest Spring Cloud Gateway configuration)
+✓ PostgreSQL
+✓ Eureka Service Discovery
+
+Everything is working correctly.
+
+This is Prompt 5.
+
+Analyze ONLY the auth-service module.
+
+Do NOT modify any other microservice.
+
+Generate ONLY the Auth Service.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Build a production-ready Authentication Service.
+
+This service is responsible ONLY for:
+
+• User Registration
+• Login
+• JWT Generation
+• Password Encryption
+• Authentication
+• User Credentials
+• Account Status
+• Bootstrap Admin Creation
+
+It must NOT manage user profiles, courses, enrollments, or business data.
+
+===========================================================
+TECH STACK
+===========================================================
+
+Java 21
+
+Spring Boot 3.5.x
+
+Spring Security
+
+JWT (jjwt)
+
+Spring Data JPA
+
+PostgreSQL
+
+Flyway
+
+OpenFeign (dependency only)
+
+Lombok
+
+Validation
+
+Swagger / OpenAPI
+
+Actuator
+
+application.properties only
+
+Do NOT generate application.yml.
+
+===========================================================
+DATABASE DESIGN
+===========================================================
+
+Create a UserCredential entity.
+
+Fields
+
+id (UUID)
+
+email (Unique)
+
+password (BCrypt)
+
+role
+
+ROLE_STUDENT
+
+ROLE_TUTOR
+
+ROLE_ADMIN
+
+accountStatus
+
+PENDING
+
+ACTIVE
+
+REJECTED
+
+SUSPENDED
+
+enabled
+
+emailVerified
+
+createdAt
+
+updatedAt
+
+lastLogin
+
+failedLoginAttempts
+
+lockedUntil
+
+===========================================================
+BOOTSTRAP ADMIN
+===========================================================
+
+On application startup:
+
+If no admin exists:
+
+Create one automatically.
+
+Email
+
+admin@lms.com
+
+Password
+
+Admin@123
+
+Role
+
+ROLE_ADMIN
+
+Account Status
+
+ACTIVE
+
+Enabled = true
+
+Password must be BCrypt encoded.
+
+===========================================================
+REGISTRATION
+===========================================================
+
+Allow registration only for:
+
+ROLE_STUDENT
+
+ROLE_TUTOR
+
+Admin registration must NOT exist.
+
+Student Registration
+
+ROLE_STUDENT
+
+AccountStatus = ACTIVE
+
+Enabled = true
+
+Tutor Registration
+
+ROLE_TUTOR
+
+AccountStatus = PENDING
+
+Enabled = true
+
+Password must be BCrypt encoded.
+
+Validate:
+
+Email uniqueness
+
+Strong password
+
+Required fields
+
+===========================================================
+LOGIN
+===========================================================
+
+Authenticate using
+
+Email
+
+Password
+
+Reject login if
+
+AccountStatus = REJECTED
+
+AccountStatus = SUSPENDED
+
+Enabled = false
+
+Incorrect password
+
+Locked account
+
+Update lastLogin after successful login.
+
+===========================================================
+JWT
+===========================================================
+
+Generate JWT.
+
+Include claims:
+
+userId
+
+email
+
+role
+
+accountStatus
+
+Do NOT implement refresh tokens.
+
+Keep architecture ready for future refresh-token support.
+
+===========================================================
+SECURITY
+===========================================================
+
+Stateless authentication.
+
+BCrypt Password Encoder.
+
+JWT Authentication.
+
+Disable CSRF.
+
+Use Spring Security 6 style configuration.
+
+===========================================================
+API ENDPOINTS
+===========================================================
+
+POST
+
+/api/v1/auth/register
+
+POST
+
+/api/v1/auth/login
+
+GET
+
+/api/v1/auth/me
+
+(The /me endpoint returns information extracted from the authenticated JWT.)
+
+===========================================================
+JWT RESPONSE
+===========================================================
+
+Return
+
+{
+  "accessToken": "...",
+  "tokenType": "Bearer",
+  "expiresIn": 86400,
+  "userId": "...",
+  "email": "...",
+  "role": "...",
+  "accountStatus": "..."
+}
+
+===========================================================
+SWAGGER
+===========================================================
+
+Configure Swagger.
+
+Support Bearer Authentication.
+
+Document every endpoint.
+
+===========================================================
+FLYWAY
+===========================================================
+
+Create versioned migration scripts.
+
+No Hibernate automatic schema creation.
+
+===========================================================
+EUREKA
+===========================================================
+
+Register Auth Service with Eureka.
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow:
+
+SOLID Principles
+
+DRY
+
+Clean Architecture
+
+Constructor Injection
+
+Layered Architecture
+
+Global Exception Handling
+
+Reusable DTOs
+
+Validation
+
+Meaningful package structure
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+config
+
+controller
+
+dto
+
+entity
+
+repository
+
+service
+
+service.impl
+
+security
+
+jwt
+
+mapper
+
+exception
+
+validation
+
+startup
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide:
+
+1. Folder Structure
+
+2. Files Created
+
+3. Database Design
+
+4. API Endpoints
+
+5. Flyway Scripts
+
+6. Dependencies
+
+7. application.properties
+
+8. Swagger Configuration
+
+9. Verification Checklist
+
+10. Git Commit Message
+
+Do NOT generate code for any other microservice.
+
+Stop after Auth Service is complete.
+
+Wait for Prompt 6.

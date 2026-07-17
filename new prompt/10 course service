@@ -1,0 +1,459 @@
+You are a Principal Software Architect, Enterprise Java Architect, Senior Spring Boot Engineer, and Microservices Specialist.
+
+The Enterprise LMS currently contains
+
+✓ Parent Project
+✓ Common Library
+✓ Discovery Service
+✓ API Gateway
+✓ Auth Service
+✓ Gateway JWT Authentication
+✓ User Service
+
+Everything has been fully implemented and tested.
+
+This is Prompt 8.
+
+Analyze ONLY course-service.
+
+Do NOT analyze the entire project.
+
+Do NOT regenerate existing modules.
+
+Modify ONLY course-service.
+
+Do NOT modify
+
+Auth Service
+
+Gateway
+
+User Service
+
+Common Library
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Build a production-ready Course Service.
+
+The Course Service is responsible ONLY for managing courses.
+
+It must NOT manage lessons or videos.
+
+Those belong to Content Service.
+
+===========================================================
+TECH STACK
+===========================================================
+
+Java 21
+
+Spring Boot 3.x
+
+Spring Security
+
+Spring Data JPA
+
+Hibernate
+
+PostgreSQL
+
+Flyway
+
+OpenFeign
+
+Swagger
+
+Validation
+
+Lombok
+
+===========================================================
+DATABASE
+===========================================================
+
+Database
+
+lms_course_db
+
+Schema
+
+course_schema
+
+===========================================================
+ENTITY
+===========================================================
+
+Create Course entity.
+
+Use UUID.
+
+Fields
+
+id
+
+instructorId
+
+title
+
+subtitle
+
+description
+
+language
+
+categoryId
+
+level
+
+price
+
+thumbnail
+
+status
+
+published
+
+createdAt
+
+updatedAt
+
+===========================================================
+ENUMS
+===========================================================
+
+Reuse common-library.
+
+CourseStatus
+
+DRAFT
+
+UNDER_REVIEW
+
+PUBLISHED
+
+REJECTED
+
+ARCHIVED
+
+CourseLevel
+
+BEGINNER
+
+INTERMEDIATE
+
+ADVANCED
+
+===========================================================
+BUSINESS RULES
+===========================================================
+
+Only authenticated INSTRUCTOR or ADMIN can create a course.
+
+A STUDENT cannot create courses.
+
+Every course belongs to exactly one instructor.
+
+The instructorId must always come from
+
+@AuthenticationPrincipal UserPrincipal
+
+Never accept instructorId from the request body.
+
+Every new course starts as
+
+DRAFT
+
+===========================================================
+APIs
+===========================================================
+
+POST
+
+/api/v1/courses
+
+Create Course
+
+------------------------------------------------
+
+GET
+
+/api/v1/courses/my
+
+Return courses of logged-in instructor.
+
+------------------------------------------------
+
+GET
+
+/api/v1/courses/{id}
+
+Return course details.
+
+------------------------------------------------
+
+PUT
+
+/api/v1/courses/{id}
+
+Update course.
+
+Only owner or ADMIN.
+
+------------------------------------------------
+
+DELETE
+
+/api/v1/courses/{id}
+
+Delete course.
+
+Only owner or ADMIN.
+
+------------------------------------------------
+
+GET
+
+/api/v1/courses
+
+Public course search.
+
+Support
+
+Pagination
+
+Sorting
+
+Filtering
+
+Keyword Search
+
+===========================================================
+ADMIN APIs
+===========================================================
+
+PUT
+
+/api/v1/courses/{id}/publish
+
+Publish course.
+
+------------------------------------------------
+
+PUT
+
+/api/v1/courses/{id}/reject
+
+Reject course.
+
+------------------------------------------------
+
+GET
+
+/api/v1/courses/pending
+
+Pending approvals.
+
+===========================================================
+OPENFEIGN
+===========================================================
+
+Create Feign Client for User Service only if additional profile information is required.
+
+Do NOT make unnecessary synchronous calls.
+
+Never call User Service for every request.
+
+===========================================================
+AUTHORIZATION
+===========================================================
+
+ROLE_STUDENT
+
+Browse Courses
+
+View Courses
+
+Cannot Create
+
+Cannot Edit
+
+Cannot Delete
+
+------------------------------------------------
+
+ROLE_INSTRUCTOR
+
+Create
+
+Update Own
+
+Delete Own
+
+View Own
+
+------------------------------------------------
+
+ROLE_ADMIN
+
+Manage Every Course
+
+Publish
+
+Reject
+
+Delete
+
+===========================================================
+VALIDATION
+===========================================================
+
+Validate
+
+Title
+
+Description
+
+Price
+
+Category
+
+Thumbnail URL
+
+Language
+
+===========================================================
+SWAGGER
+===========================================================
+
+Enable Bearer Authentication.
+
+Document every endpoint.
+
+Provide examples.
+
+===========================================================
+POSTMAN
+===========================================================
+
+Generate complete Postman guide.
+
+Test
+
+Create
+
+Update
+
+Delete
+
+Publish
+
+Reject
+
+Search
+
+Pagination
+
+Authorization
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Create
+
+COURSE_SERVICE.md
+
+Include
+
+Architecture
+
+Database Design
+
+Entity Diagram
+
+Authorization Matrix
+
+API Documentation
+
+Future Integration with Content Service
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+DRY
+
+KISS
+
+Enterprise Standards
+
+===========================================================
+VERIFICATION
+===========================================================
+
+Verify
+
+✓ Instructor creates course
+
+✓ Student cannot create course
+
+✓ Admin publishes
+
+✓ Admin rejects
+
+✓ Owner update works
+
+✓ Unauthorized update blocked
+
+✓ Pagination works
+
+✓ Swagger works
+
+✓ Build passes
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Folder Structure
+
+2. Entity Diagram
+
+3. API List
+
+4. Database Schema
+
+5. Swagger URL
+
+6. Postman Guide
+
+7. Files Created
+
+8. Files Modified
+
+9. Verification Checklist
+
+10. Git Commit Message
+
+Do NOT ask implementation questions.
+
+Make architectural decisions according to the requirements above.
+
+Stop after Course Service is complete.
+
+Wait for Prompt 9.

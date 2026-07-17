@@ -1,0 +1,273 @@
+You are a Principal Software Architect, Enterprise Java Architect, and Senior Spring Boot Engineer.
+
+The Enterprise LMS project structure has already been created successfully.
+
+This is Prompt 2.
+
+Analyze ONLY the common-library module.
+
+Do NOT modify any other microservice.
+
+Do NOT generate business logic.
+
+Do NOT generate controllers for other services.
+
+Do NOT generate JWT logic.
+
+Generate ONLY the shared common-library.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Build a reusable Common Library that will be shared by every microservice.
+
+Every service in the LMS must depend on this module.
+
+The goal is to eliminate duplicate code and enforce consistency across the entire project.
+
+===========================================================
+TECH STACK
+===========================================================
+
+Java 21
+
+Spring Boot 3.x
+
+Lombok
+
+Jakarta Validation
+
+Spring Web
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+Create the following packages.
+
+config
+
+constant
+
+dto
+
+dto.request
+
+dto.response
+
+entity
+
+enums
+
+exception
+
+handler
+
+security
+
+util
+
+validation
+
+===========================================================
+IMPLEMENT THE FOLLOWING
+===========================================================
+
+1. ApiResponse<T>
+
+A generic response wrapper.
+
+Fields
+
+success
+
+message
+
+data
+
+timestamp
+
+path
+
+Every microservice must return responses using ApiResponse.
+
+-----------------------------------------------------------
+
+2. GlobalExceptionHandler
+
+Implement @RestControllerAdvice.
+
+Handle
+
+ValidationException
+
+MethodArgumentNotValidException
+
+IllegalArgumentException
+
+ResourceNotFoundException
+
+DuplicateResourceException
+
+AccessDeniedException
+
+AuthenticationException
+
+Generic Exception
+
+Return ApiResponse.
+
+-----------------------------------------------------------
+
+3. Base Exceptions
+
+Create reusable exceptions.
+
+ResourceNotFoundException
+
+DuplicateResourceException
+
+BusinessException
+
+UnauthorizedException
+
+ForbiddenException
+
+-----------------------------------------------------------
+
+4. Enums
+
+Create reusable enums.
+
+Role
+
+ROLE_STUDENT
+
+ROLE_TUTOR
+
+ROLE_ADMIN
+
+------------------------------------------------
+
+AccountStatus
+
+PENDING
+
+ACTIVE
+
+REJECTED
+
+SUSPENDED
+
+------------------------------------------------
+
+CourseStatus
+
+DRAFT
+
+UNDER_REVIEW
+
+PUBLISHED
+
+REJECTED
+
+ARCHIVED
+
+------------------------------------------------
+
+CourseLevel
+
+BEGINNER
+
+INTERMEDIATE
+
+ADVANCED
+
+-----------------------------------------------------------
+
+5. Constants
+
+Create reusable constants.
+
+API paths
+
+Security constants
+
+Header names
+
+Application constants
+
+Validation constants
+
+-----------------------------------------------------------
+
+6. Validation
+
+Create reusable validation utilities.
+
+Phone validator
+
+Password validator
+
+URL validator
+
+===========================================================
+SECURITY
+===========================================================
+
+Do NOT implement JWT here.
+
+Do NOT implement authentication here.
+
+Do NOT implement authorization here.
+
+This module should only contain reusable classes.
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+DRY
+
+Clean Architecture
+
+Constructor Injection where applicable
+
+Enterprise Coding Standards
+
+Meaningful Naming
+
+No duplicate code
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Folder Structure
+
+2. Package Structure
+
+3. Files Created
+
+4. Purpose of every class
+
+5. Dependency changes
+
+6. Verification Checklist
+
+7. Git Commit Message
+
+Do NOT ask implementation questions.
+
+Implement the complete common-library.
+
+Stop after common-library is complete.
+
+Wait for Prompt 3.

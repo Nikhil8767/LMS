@@ -1,0 +1,117 @@
+The API Gateway no longer starts.
+
+Analyze ONLY the api-gateway module.
+
+Do NOT modify any other module.
+
+===========================================================
+PROBLEM
+===========================================================
+
+The application fails with:
+
+Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.
+
+Tomcat starts instead of Netty.
+
+The Gateway must run as a Reactive WebFlux application.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Convert the API Gateway into a proper Spring Cloud Gateway WebFlux application.
+
+===========================================================
+VERIFY THE FOLLOWING
+===========================================================
+
+1. pom.xml
+
+Remove every dependency that introduces Spring MVC.
+
+Ensure spring-boot-starter-web is NOT present.
+
+Ensure no transitive dependency pulls in Spring MVC.
+
+Use the latest Spring Cloud Gateway WebFlux dependency compatible with Spring Boot 3.5.x.
+
+Use Netty, not Tomcat.
+
+-----------------------------------------------------------
+
+2. Common Library
+
+Verify that common-library does NOT force spring-boot-starter-web into api-gateway.
+
+If necessary, replace it with spring-boot-starter or spring-web only.
+
+Do NOT introduce Spring MVC into Gateway.
+
+-----------------------------------------------------------
+
+3. Application Configuration
+
+Configure the Gateway as a Reactive application.
+
+Use WebFlux.
+
+Do NOT use Servlet stack.
+
+-----------------------------------------------------------
+
+4. Gateway
+
+Verify
+
+Service Discovery
+
+Routes
+
+CORS
+
+JWT Filter
+
+Global Filters
+
+all work with WebFlux.
+
+===========================================================
+MOST IMPORTANT
+===========================================================
+
+Before finishing
+
+1. Build api-gateway.
+
+2. Resolve every dependency conflict.
+
+3. Remove every Spring MVC dependency.
+
+4. Ensure Tomcat is removed.
+
+5. Ensure Netty starts.
+
+6. Ensure Eureka registration works.
+
+7. Ensure Maven builds successfully.
+
+8. Ensure the Gateway starts successfully.
+
+Do not stop until the Gateway starts with Netty and zero startup errors.
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Root cause
+
+2. Dependencies changed
+
+3. Files modified
+
+4. Verification checklist
+
+5. Git commit message

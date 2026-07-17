@@ -1,0 +1,159 @@
+You are a Senior Spring Security Engineer and JWT Expert.
+
+The Auth Service has already been generated.
+
+There is a compilation error in JwtUtils.java.
+
+The method
+
+signWith(...)
+
+is showing a compilation error (red).
+
+Analyze the ENTIRE auth-service.
+
+Do NOT modify any other microservice.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Find and fix the JWT implementation so it is fully compatible with the project's Spring Boot version and JJWT library version.
+
+===========================================================
+CHECK THE FOLLOWING
+===========================================================
+
+1. Analyze pom.xml.
+
+Verify that ALL JJWT dependencies are compatible with each other.
+
+Check for version mismatches.
+
+Use the latest stable JJWT version that is compatible with Spring Boot 3.5.x.
+
+-----------------------------------------------------------
+
+2. Analyze JwtUtils.java.
+
+Verify that:
+
+• signWith(...)
+• parser()
+• verifyWith(...)
+• claims()
+• subject()
+• issuedAt()
+• expiration()
+
+all use the correct API for the installed JJWT version.
+
+-----------------------------------------------------------
+
+3. Fix any incorrect imports.
+
+Remove deprecated imports.
+
+Replace outdated APIs with the latest supported APIs.
+
+-----------------------------------------------------------
+
+4. Ensure the secret key generation is correct.
+
+Verify that
+
+Keys.hmacShaKeyFor(...)
+
+uses a properly decoded Base64 secret.
+
+Ensure the secret length satisfies HS256 requirements.
+
+-----------------------------------------------------------
+
+5. Verify token generation.
+
+Include claims:
+
+userId
+
+email
+
+role
+
+accountStatus
+
+Set
+
+Issued At
+
+Expiration
+
+HS256 Signature
+
+-----------------------------------------------------------
+
+6. Verify token validation.
+
+Use the correct parser implementation.
+
+Validate
+
+Signature
+
+Expiration
+
+Malformed Token
+
+Unsupported Token
+
+Illegal Argument
+
+Expired Token
+
+-----------------------------------------------------------
+
+7. Remove any deprecated APIs.
+
+Use only the latest JJWT APIs.
+
+===========================================================
+DO NOT CHANGE
+===========================================================
+
+Do NOT change
+
+Controller logic
+
+Service layer
+
+Database
+
+Entities
+
+Repositories
+
+SecurityConfig
+
+API Endpoints
+
+Business Logic
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Root cause of the compilation error
+
+2. Files modified
+
+3. Dependencies updated
+
+4. Correct JwtUtils implementation
+
+5. Verification checklist
+
+6. Git Commit Message
+
+Ensure the Auth Service builds successfully with ZERO compilation errors.

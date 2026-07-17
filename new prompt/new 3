@@ -1,0 +1,185 @@
+You are a Principal Software Architect, Enterprise Java Architect, Spring Cloud Expert, and Senior Spring Boot Engineer.
+
+The Enterprise LMS project foundation and common-library are already completed successfully.
+
+This is Prompt 3.
+
+Analyze ONLY the discovery-service module.
+
+Do NOT modify any other module.
+
+Do NOT generate business logic.
+
+Do NOT generate controllers.
+
+Do NOT generate entities.
+
+Do NOT generate repositories.
+
+Generate ONLY the Discovery Service.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Build a production-ready Eureka Discovery Server for the Enterprise LMS.
+
+This service will act as the central Service Registry.
+
+Every microservice will register with Eureka.
+
+API Gateway will discover every service dynamically.
+
+===========================================================
+TECH STACK
+===========================================================
+
+Java 21
+
+Spring Boot 3.5.x
+
+Spring Cloud Netflix Eureka Server
+
+Spring Boot Actuator
+
+Lombok
+
+Use application.properties only.
+
+Do NOT generate application.yml.
+
+===========================================================
+RESPONSIBILITIES
+===========================================================
+
+The Discovery Service must
+
+• Start Eureka Server
+
+• Accept service registrations
+
+• Maintain registry
+
+• Allow service discovery
+
+It must NOT
+
+• Generate JWT
+
+• Validate JWT
+
+• Access Database
+
+• Expose Business APIs
+
+• Communicate with PostgreSQL
+
+===========================================================
+CONFIGURATION
+===========================================================
+
+Use
+
+application.properties
+
+Configure
+
+Application Name
+
+Server Port = 8761
+
+Hostname = localhost
+
+Disable self registration
+
+Disable registry fetching
+
+Enable health endpoint
+
+Enable actuator
+
+===========================================================
+PROJECT STRUCTURE
+===========================================================
+
+Create only
+
+Main Application
+
+Configuration
+
+application.properties
+
+Required dependencies
+
+No unnecessary packages.
+
+===========================================================
+DASHBOARD
+===========================================================
+
+The Eureka Dashboard should be available at
+
+http://localhost:8761
+
+Verify it starts successfully.
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Constructor Injection
+
+Enterprise Coding Standards
+
+No duplicate code
+
+Minimal implementation
+
+===========================================================
+VERIFICATION
+===========================================================
+
+Verify
+
+✓ Project builds successfully
+
+✓ Eureka starts
+
+✓ Dashboard opens
+
+✓ No exceptions
+
+✓ Health endpoint works
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Folder Structure
+
+2. Files Created
+
+3. Dependencies Added
+
+4. application.properties
+
+5. Verification Checklist
+
+6. Git Commit Message
+
+Do NOT ask implementation questions.
+
+Implement ONLY the Discovery Service.
+
+Stop after Discovery Service is fully working.
+
+Wait for Prompt 4.

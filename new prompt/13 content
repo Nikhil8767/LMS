@@ -1,0 +1,493 @@
+You are a Principal Software Architect, Enterprise Java Architect, Senior Spring Boot Engineer, Hibernate Expert, PostgreSQL Expert, Flyway Expert, and Microservices Architect.
+
+The Enterprise LMS currently contains:
+
+✓ Parent Multi Module Project
+✓ Common Library
+✓ Discovery Service
+✓ API Gateway
+✓ Auth Service
+✓ User Service
+✓ Course Service
+
+All services compile successfully.
+
+Implement ONLY the content-service.
+
+Never modify any other microservice.
+
+==========================================================
+PRIMARY OBJECTIVE
+==========================================================
+
+Build a production-ready Content Service.
+
+This service manages ONLY course content.
+
+It must NEVER manage
+
+Authentication
+
+JWT
+
+Passwords
+
+Profiles
+
+Courses
+
+Enrollments
+
+Certificates
+
+==========================================================
+CONTENT HIERARCHY
+==========================================================
+
+Design the LMS using a proper hierarchy.
+
+Course
+    │
+    ├── Sections (Modules)
+    │        │
+    │        ├── Lessons
+    │        │      │
+    │        │      ├── Video
+    │        │      ├── PDF
+    │        │      ├── Article
+    │        │      ├── Assignment
+    │        │      └── Quiz
+    │
+    └── Resources
+
+Use proper One-To-Many relationships.
+
+==========================================================
+TECH STACK
+==========================================================
+
+Java 21
+
+Spring Boot 3.5.x
+
+Spring Data JPA
+
+Hibernate 6
+
+PostgreSQL
+
+Flyway
+
+OpenFeign
+
+Validation
+
+Swagger
+
+Actuator
+
+Lombok
+
+application.properties only
+
+==========================================================
+DATABASE DESIGN
+==========================================================
+
+Create the following entities.
+
+Section
+
+id UUID
+
+courseId UUID
+
+title
+
+description
+
+displayOrder
+
+createdAt
+
+updatedAt
+
+----------------------------------------------------------
+
+Lesson
+
+id UUID
+
+sectionId UUID
+
+title
+
+description
+
+contentType
+
+videoUrl
+
+pdfUrl
+
+articleContent
+
+durationMinutes
+
+isPreview
+
+displayOrder
+
+createdAt
+
+updatedAt
+
+----------------------------------------------------------
+
+Resource
+
+id UUID
+
+lessonId UUID
+
+title
+
+resourceType
+
+fileUrl
+
+createdAt
+
+==========================================================
+ENUMS
+==========================================================
+
+LessonContentType
+
+VIDEO
+
+PDF
+
+ARTICLE
+
+QUIZ
+
+ASSIGNMENT
+
+RESOURCE
+
+==========================================================
+MICROSERVICE COMMUNICATION
+==========================================================
+
+Use OpenFeign.
+
+Verify that Course exists before allowing content creation.
+
+Do NOT duplicate Course information.
+
+==========================================================
+JWT
+==========================================================
+
+Do NOT validate JWT.
+
+Trust only headers forwarded by API Gateway.
+
+Read
+
+X-User-Id
+
+X-User-Role
+
+X-Account-Status
+
+Never parse JWT.
+
+==========================================================
+BUSINESS RULES
+==========================================================
+
+Only ACTIVE Tutors may
+
+Create Sections
+
+Update Sections
+
+Delete Sections
+
+Create Lessons
+
+Update Lessons
+
+Delete Lessons
+
+Admins may manage all content.
+
+Students have READ ONLY access.
+
+Preview lessons are visible without enrollment.
+
+Non-preview lessons require enrollment (future integration).
+
+==========================================================
+API RESPONSE
+==========================================================
+
+Every endpoint MUST return ApiResponse<T>
+
+Every response must contain
+
+success
+
+message
+
+data
+
+timestamp
+
+path
+
+==========================================================
+SUCCESS MESSAGES
+==========================================================
+
+Section created successfully.
+
+Section updated successfully.
+
+Lesson created successfully.
+
+Lesson updated successfully.
+
+Content fetched successfully.
+
+Lesson deleted successfully.
+
+==========================================================
+ERROR MESSAGES
+==========================================================
+
+Course not found.
+
+Section not found.
+
+Lesson not found.
+
+Invalid lesson type.
+
+Only active tutors may modify content.
+
+Display order already exists.
+
+Validation failed.
+
+Access denied.
+
+Internal server error.
+
+Please try again later.
+
+==========================================================
+VALIDATION
+==========================================================
+
+Validate
+
+Title
+
+Description
+
+Duration Minutes
+
+Video URL
+
+PDF URL
+
+Display Order
+
+Reject
+
+Negative duration
+
+Zero duration
+
+Duplicate display order within the same section
+
+Invalid URLs
+
+==========================================================
+GLOBAL EXCEPTION HANDLER
+==========================================================
+
+Use centralized exception handling.
+
+Never expose
+
+Hibernate exceptions
+
+SQL exceptions
+
+Stack traces
+
+Return user-friendly responses only.
+
+==========================================================
+API ENDPOINTS
+==========================================================
+
+POST   /api/v1/content/sections
+
+PUT    /api/v1/content/sections/{id}
+
+DELETE /api/v1/content/sections/{id}
+
+GET    /api/v1/content/sections/course/{courseId}
+
+----------------------------------------------------------
+
+POST   /api/v1/content/lessons
+
+PUT    /api/v1/content/lessons/{id}
+
+DELETE /api/v1/content/lessons/{id}
+
+GET    /api/v1/content/lessons/{id}
+
+GET    /api/v1/content/lessons/section/{sectionId}
+
+----------------------------------------------------------
+
+POST   /api/v1/content/resources
+
+GET    /api/v1/content/resources/{lessonId}
+
+==========================================================
+SWAGGER
+==========================================================
+
+Document every endpoint.
+
+Provide
+
+Request Example
+
+Success Response
+
+Error Response
+
+Bearer Authentication
+
+==========================================================
+FLYWAY
+==========================================================
+
+Flyway is the ONLY source of truth.
+
+Generate proper migration scripts.
+
+No ddl-auto=create.
+
+==========================================================
+CODE QUALITY
+==========================================================
+
+Follow
+
+SOLID
+
+DRY
+
+KISS
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+Reusable DTOs
+
+Reusable Validators
+
+Meaningful Naming
+
+JavaDoc where appropriate
+
+No duplicate code.
+
+==========================================================
+BUILD VERIFICATION
+==========================================================
+
+Before finishing
+
+Analyze every generated file.
+
+Resolve every compilation error.
+
+Resolve every dependency conflict.
+
+Resolve every import conflict.
+
+Resolve every Hibernate validation error.
+
+Resolve every Flyway issue.
+
+Resolve every PostgreSQL mismatch.
+
+Resolve every Swagger issue.
+
+Resolve every startup warning.
+
+Build the module.
+
+Run the module.
+
+Verify Eureka registration.
+
+Verify Flyway migration.
+
+Verify Hibernate validation.
+
+Verify Swagger.
+
+Verify OpenFeign communication with Course Service.
+
+Verify Maven builds successfully.
+
+Do NOT stop until Content Service starts successfully with ZERO startup errors and ZERO compilation errors.
+
+==========================================================
+OUTPUT
+==========================================================
+
+Provide
+
+1. Folder Structure
+
+2. Files Created
+
+3. Database Schema
+
+4. Entity Relationships
+
+5. Flyway Scripts
+
+6. API Endpoints
+
+7. DTOs
+
+8. OpenFeign Configuration
+
+9. Swagger Configuration
+
+10. application.properties
+
+11. Verification Checklist
+
+12. Git Commit Message
+
+Stop after Content Service is fully working.
+
+Wait for Prompt 10.

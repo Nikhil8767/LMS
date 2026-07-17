@@ -1,0 +1,487 @@
+You are a Principal Software Architect, Enterprise Java Architect, Senior Spring Boot Engineer, Hibernate Expert, PostgreSQL Expert, Flyway Expert, and Microservices Architect.
+
+The Enterprise LMS currently contains:
+
+✓ Parent Multi Module Project
+✓ Common Library
+✓ Discovery Service
+✓ API Gateway
+✓ Auth Service
+✓ User Service
+✓ Course Service
+✓ Content Service
+
+All services compile successfully.
+
+Implement ONLY the enrollment-service.
+
+Never modify any other microservice.
+
+==========================================================
+PRIMARY OBJECTIVE
+==========================================================
+
+Build a production-ready Enrollment Service.
+
+The Enrollment Service is responsible ONLY for
+
+• Course Enrollment
+• Learning Progress
+• Lesson Completion
+• Course Completion
+• Student Dashboard Data
+
+It must NEVER manage
+
+Authentication
+
+JWT
+
+Passwords
+
+Profiles
+
+Course Management
+
+Content Management
+
+Certificates
+
+Payments
+
+==========================================================
+TECH STACK
+==========================================================
+
+Java 21
+
+Spring Boot 3.5.x
+
+Spring Data JPA
+
+Hibernate 6
+
+PostgreSQL
+
+Flyway
+
+OpenFeign
+
+Validation
+
+Swagger
+
+Actuator
+
+Lombok
+
+application.properties only
+
+==========================================================
+DATABASE DESIGN
+==========================================================
+
+Create Enrollment entity
+
+id UUID
+
+studentId UUID
+
+courseId UUID
+
+status
+
+progressPercentage
+
+completedLessons
+
+totalLessons
+
+lastAccessedLessonId
+
+enrolledAt
+
+completedAt
+
+lastAccessedAt
+
+createdAt
+
+updatedAt
+
+----------------------------------------------------------
+
+Create LessonProgress entity
+
+id UUID
+
+enrollmentId UUID
+
+lessonId UUID
+
+completed
+
+completedAt
+
+watchTimeMinutes
+
+lastPositionSeconds
+
+createdAt
+
+updatedAt
+
+==========================================================
+ENUMS
+==========================================================
+
+EnrollmentStatus
+
+ENROLLED
+
+IN_PROGRESS
+
+COMPLETED
+
+DROPPED
+
+==========================================================
+MICROSERVICE COMMUNICATION
+==========================================================
+
+Use OpenFeign.
+
+Before enrollment
+
+Verify
+
+Student exists
+
+Course exists
+
+Course is PUBLISHED
+
+Retrieve total lesson count from Content Service.
+
+Do NOT duplicate Course data.
+
+Do NOT duplicate User Profile data.
+
+==========================================================
+JWT
+==========================================================
+
+Do NOT validate JWT.
+
+Trust only headers forwarded by API Gateway.
+
+Read
+
+X-User-Id
+
+X-User-Role
+
+X-Account-Status
+
+Never parse JWT.
+
+==========================================================
+BUSINESS RULES
+==========================================================
+
+Only STUDENTS may enroll.
+
+Tutors cannot enroll.
+
+Admins cannot enroll.
+
+A student cannot enroll twice in the same course.
+
+Enrollment is allowed only for PUBLISHED courses.
+
+Progress percentage must be calculated automatically.
+
+When all lessons are completed
+
+EnrollmentStatus becomes COMPLETED.
+
+==========================================================
+API RESPONSE
+==========================================================
+
+Every endpoint MUST return ApiResponse<T>
+
+Every response must contain
+
+success
+
+message
+
+data
+
+timestamp
+
+path
+
+==========================================================
+SUCCESS MESSAGES
+==========================================================
+
+Enrollment successful.
+
+Lesson marked as completed.
+
+Progress updated successfully.
+
+Enrollment details fetched successfully.
+
+Course completed successfully.
+
+==========================================================
+ERROR MESSAGES
+==========================================================
+
+Course not found.
+
+Course is not published.
+
+Already enrolled in this course.
+
+Enrollment not found.
+
+Lesson not found.
+
+Only students can enroll.
+
+Progress cannot exceed 100%.
+
+Validation failed.
+
+Unauthorized access.
+
+Access denied.
+
+Internal server error.
+
+Please try again later.
+
+==========================================================
+VALIDATION
+==========================================================
+
+Validate
+
+Course ID
+
+Lesson ID
+
+Progress
+
+Watch Time
+
+Reject
+
+Negative values
+
+Progress greater than 100
+
+Duplicate enrollments
+
+==========================================================
+GLOBAL EXCEPTION HANDLER
+==========================================================
+
+Implement centralized exception handling.
+
+Never expose
+
+Hibernate exceptions
+
+SQL exceptions
+
+Stack traces
+
+Return only user-friendly responses.
+
+==========================================================
+API ENDPOINTS
+==========================================================
+
+POST
+
+/api/v1/enrollments
+
+Enroll in course
+
+----------------------------------------------------------
+
+GET
+
+/api/v1/enrollments/my
+
+Authenticated student's enrollments
+
+----------------------------------------------------------
+
+GET
+
+/api/v1/enrollments/{courseId}
+
+Enrollment details
+
+----------------------------------------------------------
+
+PATCH
+
+/api/v1/enrollments/{courseId}/complete-lesson/{lessonId}
+
+Mark lesson completed
+
+----------------------------------------------------------
+
+GET
+
+/api/v1/enrollments/{courseId}/progress
+
+Get progress
+
+----------------------------------------------------------
+
+PATCH
+
+/api/v1/enrollments/{courseId}/drop
+
+Drop course
+
+==========================================================
+SWAGGER
+==========================================================
+
+Document every endpoint.
+
+Provide
+
+Request Example
+
+Success Response
+
+Error Response
+
+Bearer Authentication
+
+==========================================================
+FLYWAY
+==========================================================
+
+Flyway is the ONLY source of truth.
+
+Generate proper migration scripts.
+
+Never use ddl-auto=create.
+
+==========================================================
+CODE QUALITY
+==========================================================
+
+Follow
+
+SOLID
+
+DRY
+
+KISS
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+Reusable DTOs
+
+Reusable Validators
+
+Meaningful Naming
+
+JavaDoc where useful
+
+No duplicate code.
+
+==========================================================
+BUILD VERIFICATION
+==========================================================
+
+Before finishing
+
+Analyze every generated file.
+
+Resolve every compilation error.
+
+Resolve every dependency conflict.
+
+Resolve every import conflict.
+
+Resolve every Hibernate validation error.
+
+Resolve every Flyway issue.
+
+Resolve every PostgreSQL mismatch.
+
+Resolve every Swagger issue.
+
+Resolve every startup warning.
+
+Build the module.
+
+Run the module.
+
+Verify Eureka registration.
+
+Verify Flyway migration.
+
+Verify Hibernate validation.
+
+Verify Swagger.
+
+Verify OpenFeign communication with
+Course Service,
+Content Service,
+and User/Auth Service where applicable.
+
+Verify Maven builds successfully.
+
+Do NOT stop until Enrollment Service starts successfully with ZERO compilation errors and ZERO startup errors.
+
+==========================================================
+OUTPUT
+==========================================================
+
+Provide
+
+1. Folder Structure
+
+2. Files Created
+
+3. Database Schema
+
+4. Entity Relationships
+
+5. Flyway Scripts
+
+6. API Endpoints
+
+7. DTOs
+
+8. OpenFeign Configuration
+
+9. Swagger Configuration
+
+10. application.properties
+
+11. Verification Checklist
+
+12. Git Commit Message
+
+Stop after Enrollment Service is fully working.
+
+Wait for Prompt 11.

@@ -1,0 +1,541 @@
+You are a Principal Software Architect, Enterprise Java Architect, Senior Spring Boot Engineer, Spring Security Expert, and Microservices Specialist.
+
+The Enterprise LMS project currently contains
+
+✓ Parent Multi-Module Project
+✓ Common Library
+✓ Discovery Service
+✓ API Gateway
+✓ JWT Authentication
+✓ API Gateway JWT Validation
+✓ User Service
+
+Everything is fully implemented and tested.
+
+This is Prompt 8.
+
+Analyze ONLY the user-service module.
+
+Do NOT analyze the entire project.
+
+Do NOT regenerate existing modules.
+
+Modify ONLY user-service.
+
+Do NOT modify
+
+Auth Service (except exposing an API if absolutely required)
+
+API Gateway
+
+Discovery Service
+
+Common Library
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Extend the existing User Service by implementing the complete Instructor Application and Approval workflow.
+
+Do NOT create a new microservice.
+
+The User Service will now manage
+
+• User Profiles
+
+• Instructor Applications
+
+• Instructor Approval
+
+Authentication must continue to be handled only by Auth Service.
+
+JWT must continue to be handled only by API Gateway.
+
+===========================================================
+BUSINESS FLOW
+===========================================================
+
+Visitor
+
+↓
+
+Register
+
+↓
+
+Role = STUDENT
+
+↓
+
+Login
+
+↓
+
+Create Profile
+
+↓
+
+Apply as Instructor
+
+↓
+
+Application Status = PENDING
+
+↓
+
+Admin Reviews
+
+↓
+
+Approve / Reject
+
+↓
+
+If Approved
+
+↓
+
+Call Auth Service using OpenFeign
+
+↓
+
+Update Role
+
+STUDENT
+
+↓
+
+INSTRUCTOR
+
+↓
+
+User logs in again
+
+↓
+
+New JWT contains ROLE_INSTRUCTOR
+
+↓
+
+User can create courses
+
+===========================================================
+DATABASE
+===========================================================
+
+Create InstructorApplication entity.
+
+Primary Key
+
+UUID
+
+Fields
+
+id
+
+authUserId
+
+firstName
+
+lastName
+
+email
+
+phone
+
+experienceYears
+
+currentOccupation
+
+specialization
+
+skills
+
+linkedinUrl
+
+portfolioUrl
+
+resumeUrl
+
+motivation
+
+status
+
+reviewComments
+
+createdAt
+
+updatedAt
+
+reviewedAt
+
+reviewedBy
+
+===========================================================
+ENUM
+===========================================================
+
+ApplicationStatus
+
+PENDING
+
+UNDER_REVIEW
+
+APPROVED
+
+REJECTED
+
+===========================================================
+BUSINESS RULES
+===========================================================
+
+Only STUDENT can apply.
+
+Only one active application is allowed.
+
+INSTRUCTOR cannot apply.
+
+ADMIN cannot apply.
+
+Application can be updated only while
+
+PENDING
+
+Application can be withdrawn only while
+
+PENDING
+
+Once approved,
+
+application becomes read-only.
+
+===========================================================
+OPENFEIGN
+===========================================================
+
+Create AuthServiceClient.
+
+Use OpenFeign ONLY when the application is approved.
+
+Do NOT call Auth Service for every request.
+
+When Admin approves
+
+Call Auth Service
+
+Update user role
+
+STUDENT
+
+↓
+
+INSTRUCTOR
+
+Do NOT use WebClient.
+
+===========================================================
+AUTH SERVICE
+===========================================================
+
+If required,
+
+add ONE secure internal endpoint
+
+PUT
+
+/api/internal/users/{id}/role
+
+Purpose
+
+Update role
+
+This endpoint must NOT be public.
+
+Only trusted internal service communication should use it.
+
+===========================================================
+APIs
+===========================================================
+
+Student
+
+POST
+
+/api/v1/instructor/applications
+
+Apply as Instructor
+
+------------------------------------------------
+
+GET
+
+/api/v1/instructor/applications/me
+
+View my application
+
+------------------------------------------------
+
+PUT
+
+/api/v1/instructor/applications/me
+
+Update application
+
+Allowed only while
+
+PENDING
+
+------------------------------------------------
+
+DELETE
+
+/api/v1/instructor/applications/me
+
+Withdraw application
+
+Allowed only while
+
+PENDING
+
+===========================================================
+ADMIN APIs
+===========================================================
+
+GET
+
+/api/v1/admin/instructor-applications
+
+Support
+
+Pagination
+
+Sorting
+
+Filtering
+
+------------------------------------------------
+
+GET
+
+/api/v1/admin/instructor-applications/{id}
+
+------------------------------------------------
+
+PUT
+
+/api/v1/admin/instructor-applications/{id}/approve
+
+Approve application
+
+Automatically update role in Auth Service
+
+------------------------------------------------
+
+PUT
+
+/api/v1/admin/instructor-applications/{id}/reject
+
+Reject application
+
+Save review comments
+
+===========================================================
+AUTHORIZATION
+===========================================================
+
+ROLE_STUDENT
+
+Apply
+
+View Own
+
+Update Pending
+
+Withdraw Pending
+
+===========================================================
+
+ROLE_INSTRUCTOR
+
+Cannot Apply Again
+
+View Own Application
+
+===========================================================
+
+ROLE_ADMIN
+
+View All
+
+Approve
+
+Reject
+
+===========================================================
+SECURITY
+===========================================================
+
+Controllers must NEVER read HTTP headers directly.
+
+Always use
+
+@AuthenticationPrincipal UserPrincipal
+
+Never trust IDs coming from the client.
+
+===========================================================
+SWAGGER
+===========================================================
+
+Enable Bearer Authentication.
+
+Document every endpoint.
+
+Provide request examples.
+
+Provide response examples.
+
+===========================================================
+POSTMAN
+===========================================================
+
+Generate complete Postman collection.
+
+Verify
+
+✓ Student applies
+
+✓ Duplicate application blocked
+
+✓ Update pending application
+
+✓ Withdraw pending application
+
+✓ Admin lists applications
+
+✓ Admin approves
+
+✓ Admin rejects
+
+✓ Role updated successfully
+
+✓ Student logs in again
+
+✓ JWT now contains ROLE_INSTRUCTOR
+
+✓ Instructor can access Course APIs
+
+✓ Student cannot access Course APIs
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Create
+
+INSTRUCTOR_WORKFLOW.md
+
+Include
+
+Business Flow
+
+Approval Flow
+
+Role Upgrade Flow
+
+Database Design
+
+Entity Diagram
+
+Sequence Diagram
+
+OpenFeign Communication
+
+Authorization Matrix
+
+===========================================================
+QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+DRY
+
+KISS
+
+Enterprise Coding Standards
+
+Meaningful Naming
+
+===========================================================
+VERIFICATION
+===========================================================
+
+Verify
+
+✓ Flyway migration works
+
+✓ InstructorApplication table created
+
+✓ Student can apply
+
+✓ Duplicate application blocked
+
+✓ Admin approval works
+
+✓ Admin rejection works
+
+✓ OpenFeign updates Auth Service role
+
+✓ New login returns JWT with ROLE_INSTRUCTOR
+
+✓ Build passes
+
+✓ Swagger works
+
+===========================================================
+OUTPUT
+===========================================================
+
+Provide
+
+1. Folder Structure
+
+2. Entity Diagram
+
+3. API List
+
+4. OpenFeign Communication Flow
+
+5. Database Schema
+
+6. Swagger URLs
+
+7. Postman Collection
+
+8. Files Created
+
+9. Files Modified
+
+10. Verification Checklist
+
+11. Git Commit Message
+
+Do NOT ask implementation questions.
+
+Make all architectural decisions according to the requirements above.
+
+Implement the complete Instructor Application workflow inside the existing User Service.
+
+Stop after implementation.
+
+Wait for the next prompt.

@@ -1,0 +1,57 @@
+The API Gateway starts successfully.
+
+There are NO runtime errors.
+
+However, Spring Boot shows migration warnings because some Spring Cloud Gateway properties have been renamed.
+
+I want the project to follow the latest Spring Boot 3.5.x and Spring Cloud standards.
+
+Analyze ONLY api-gateway.
+
+Do NOT modify any other service.
+
+Update ONLY application.properties.
+
+Replace every deprecated Spring Cloud Gateway property with its latest supported equivalent.
+
+Examples include
+
+spring.cloud.gateway.*
+
+↓
+
+spring.cloud.gateway.server.webflux.*
+
+Update
+
+• Discovery Locator
+
+• Route Definitions
+
+• Global CORS
+
+• Gateway Configuration
+
+Make sure
+
+• Eureka registration still works
+
+• API Gateway still starts successfully
+
+• No functionality changes
+
+• No warnings remain during startup
+
+Use ONLY application.properties.
+
+Do not introduce YAML.
+
+Provide
+
+1. Properties changed
+
+2. Why they changed
+
+3. Verification checklist
+
+Do not modify any business logic.
