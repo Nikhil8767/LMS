@@ -1,0 +1,405 @@
+You are a Principal Software Architect, Enterprise Java Architect, and Senior Spring Boot Microservices Engineer.
+
+We are starting a brand-new Enterprise Online Learning Management System (LMS) from scratch.
+
+IMPORTANT
+
+This is Prompt 1.
+
+Do NOT implement business logic.
+
+Do NOT create controllers, services, repositories, or entities.
+
+Do NOT generate unnecessary documentation.
+
+Do NOT generate helper scripts.
+
+Do NOT generate Python files.
+
+Do NOT generate YAML files.
+
+Use ONLY application.properties.
+
+Generate ONLY the project foundation.
+
+===========================================================
+PROJECT NAME
+===========================================================
+
+Enterprise Online Learning Management System (LMS)
+
+===========================================================
+TECH STACK
+===========================================================
+
+Backend
+- Java 21
+- Spring Boot 3.5.x (latest stable Spring Boot 3.x)
+- Spring Cloud 2025 compatible version
+- Maven
+- Spring Data JPA
+- Spring Security
+- Spring Cloud Gateway
+- Eureka Discovery Server
+- OpenFeign
+- PostgreSQL
+- Flyway
+- Spring Validation
+- Lombok
+- Spring Actuator
+- SpringDoc OpenAPI (Swagger)
+
+Frontend
+- Thymeleaf
+- HTML5
+- CSS3
+- Bootstrap 5
+- JavaScript
+
+Database
+- PostgreSQL
+- One database per microservice
+
+Communication
+- REST APIs
+- OpenFeign only
+
+Authentication
+- JWT Authentication
+- JWT Validation ONLY in API Gateway
+
+Configuration
+- application.properties only
+- No application.yml
+
+===========================================================
+MICROSERVICES
+===========================================================
+
+Create the following Maven modules.
+
+common-library
+
+discovery-service
+
+api-gateway
+
+auth-service
+
+user-service
+
+course-service
+
+content-service
+
+enrollment-service
+
+frontend-service
+
+===========================================================
+ARCHITECTURE
+===========================================================
+
+Implement a clean Maven multi-module architecture.
+
+Parent Project
+
+↓
+
+Common Library
+
+↓
+
+Discovery Service
+
+↓
+
+API Gateway
+
+↓
+
+Business Services
+
+Each microservice must be independent.
+
+Each service must have its own pom.xml.
+
+Each service must have its own application.properties.
+
+Each service must have its own database.
+
+===========================================================
+PACKAGE STRUCTURE
+===========================================================
+
+Every microservice should follow the same package structure.
+
+config
+
+controller
+
+service
+
+service.impl
+
+repository
+
+entity
+
+dto.request
+
+dto.response
+
+mapper
+
+security
+
+exception
+
+validation
+
+util
+
+constant
+
+client
+
+===========================================================
+COMMON LIBRARY
+===========================================================
+
+Create a reusable common-library module.
+
+It will later contain
+
+ApiResponse
+
+GlobalExceptionHandler
+
+Constants
+
+Enums
+
+Utilities
+
+Base Exceptions
+
+Validation utilities
+
+Do NOT implement them yet.
+
+===========================================================
+ROLES
+===========================================================
+
+The system supports
+
+ROLE_STUDENT
+
+ROLE_TUTOR
+
+ROLE_ADMIN
+
+===========================================================
+BUSINESS RULES
+===========================================================
+
+Student
+
+Registers
+
+Logs in
+
+Can enroll in courses immediately
+
+Tutor
+
+Registers
+
+Logs in
+
+Status = PENDING
+
+Cannot upload courses until approved by Admin
+
+Admin
+
+There must be only ONE bootstrap administrator.
+
+Do NOT allow admin registration.
+
+Default Admin
+
+Email
+
+admin@lms.com
+
+Password
+
+Admin@123
+
+===========================================================
+SECURITY ARCHITECTURE
+===========================================================
+
+JWT validation must happen ONLY inside API Gateway.
+
+Business microservices must NOT validate JWT.
+
+Business microservices must NOT generate JWT.
+
+Business microservices must trust requests forwarded by the API Gateway.
+
+===========================================================
+API GATEWAY RESPONSIBILITIES
+===========================================================
+
+The Gateway will later
+
+Validate JWT
+
+Authorize Roles
+
+Protect Routes
+
+Forward requests
+
+===========================================================
+SERVICE RESPONSIBILITIES
+===========================================================
+
+Auth Service
+
+Authentication
+
+Registration
+
+Login
+
+JWT Generation
+
+Bootstrap Admin
+
+----------------------------------
+
+User Service
+
+User Profile
+
+Tutor Verification Status
+
+----------------------------------
+
+Course Service
+
+Course Management
+
+Categories
+
+----------------------------------
+
+Content Service
+
+Sections
+
+Lessons
+
+Videos
+
+PDFs
+
+Assignments
+
+Quizzes
+
+----------------------------------
+
+Enrollment Service
+
+Enrollment
+
+Course Progress
+
+Completion
+
+Certificates
+
+----------------------------------
+
+Frontend Service
+
+Thymeleaf UI
+
+Student Dashboard
+
+Tutor Dashboard
+
+Admin Dashboard
+
+===========================================================
+AI SERVICE
+===========================================================
+
+Do NOT create AI Service now.
+
+It will be added at the end of the project.
+
+===========================================================
+PROJECT QUALITY
+===========================================================
+
+Follow
+
+SOLID Principles
+
+Clean Architecture
+
+Layered Architecture
+
+Constructor Injection
+
+DRY
+
+KISS
+
+Enterprise Coding Standards
+
+Meaningful Naming
+
+No duplicate code
+
+===========================================================
+OUTPUT
+===========================================================
+
+Generate
+
+1. Parent Maven Project
+
+2. All Maven Modules
+
+3. Root pom.xml
+
+4. Module pom.xml files
+
+5. Folder Structure
+
+6. application.properties for every module
+
+7. Basic Spring Boot Application classes
+
+8. Maven dependency management
+
+9. Spring Cloud dependency management
+
+10. Proper module relationships
+
+Do NOT generate any business logic.
+
+Do NOT generate documentation.
+
+Do NOT ask implementation questions.
+
+Stop after the project foundation is complete.
+
+Wait for Prompt 2.
