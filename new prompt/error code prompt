@@ -1,0 +1,379 @@
+You are a Principal Software Architect, Spring Security Expert, JWT Expert, API Gateway Expert, and Enterprise Spring Boot Engineer.
+
+Analyze ONLY the following services:
+
+• API Gateway
+• Auth Service
+
+Do NOT modify any other microservice unless absolutely required.
+
+==========================================================
+CURRENT PROBLEM
+==========================================================
+
+1. Calling the registration APIs through the API Gateway returns
+
+403 Access Denied
+
+or
+
+401 Unauthorized
+
+even though registration should be public.
+
+2. The registration API currently generates a JWT token immediately after successful registration.
+
+This is NOT the desired authentication flow.
+
+==========================================================
+OBJECTIVE
+==========================================================
+
+Implement an enterprise authentication flow.
+
+==========================================================
+EXPECTED AUTHENTICATION FLOW
+==========================================================
+
+Student/Tutor Registration
+
+↓
+
+Account Created Successfully
+
+↓
+
+NO JWT TOKEN SHOULD BE GENERATED
+
+↓
+
+User must login
+
+↓
+
+Credentials are verified
+
+↓
+
+JWT Token is generated
+
+↓
+
+Client stores JWT
+
+↓
+
+Gateway validates JWT on every protected request
+
+↓
+
+Gateway forwards trusted user headers
+
+==========================================================
+REGISTRATION
+==========================================================
+
+Public Endpoint
+
+POST
+
+/api/v1/auth/register/student
+
+POST
+
+/api/v1/auth/register/tutor
+
+These endpoints must
+
+NOT require JWT
+
+NOT require Authorization Header
+
+Be accessible anonymously
+
+Return
+
+HTTP 201 Created
+
+Example Response
+
+{
+  "success": true,
+  "message": "Registration completed successfully. Please login to continue.",
+  "data": {
+      "userId": "...",
+      "email": "...",
+      "role": "STUDENT"
+  }
+}
+
+DO NOT include
+
+accessToken
+
+refreshToken
+
+jwt
+
+token
+
+==========================================================
+LOGIN
+==========================================================
+
+Public Endpoint
+
+POST
+
+/api/v1/auth/login
+
+This endpoint
+
+accepts
+
+email
+
+password
+
+If credentials are valid
+
+Generate JWT
+
+Return
+
+{
+   "success": true,
+   "message":"Login successful.",
+   "data":{
+      "accessToken":"...",
+      "tokenType":"Bearer",
+      "expiresIn":3600,
+      "role":"STUDENT",
+      "userId":"..."
+   }
+}
+
+JWT must ONLY be generated after successful login.
+
+==========================================================
+API GATEWAY
+==========================================================
+
+Analyze the Spring Security configuration.
+
+Permit ALL requests for
+
+/api/v1/auth/register/**
+
+/api/v1/auth/login
+
+/api/v1/auth/forgot-password
+
+/api/v1/auth/reset-password
+
+/api/v1/auth/verify-email
+
+Swagger endpoints
+
+Actuator health endpoint
+
+Do NOT require JWT for these endpoints.
+
+==========================================================
+JWT FILTER
+==========================================================
+
+The JWT Authentication Filter must completely bypass
+
+/api/v1/auth/register/**
+
+/api/v1/auth/login
+
+Swagger
+
+Actuator
+
+Health endpoints
+
+The filter should never try to validate a token for public endpoints.
+
+==========================================================
+PROTECTED ENDPOINTS
+==========================================================
+
+Every other endpoint
+
+must require a valid JWT.
+
+If JWT is missing
+
+Return
+
+401 Unauthorized
+
+If role is invalid
+
+Return
+
+403 Forbidden
+
+==========================================================
+JWT CLAIMS
+==========================================================
+
+Generate JWT ONLY after login.
+
+Include
+
+userId
+
+email
+
+role
+
+accountStatus
+
+issuedAt
+
+expiration
+
+Do not include password or sensitive information.
+
+==========================================================
+ROLE AUTHORIZATION
+==========================================================
+
+Gateway should validate JWT.
+
+Then forward trusted headers
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-Account-Status
+
+Downstream services must trust only these forwarded headers.
+
+==========================================================
+SUCCESS MESSAGES
+==========================================================
+
+Registration completed successfully.
+Please login to continue.
+
+Login successful.
+
+Logout successful.
+
+==========================================================
+ERROR MESSAGES
+==========================================================
+
+Invalid email or password.
+
+Account not found.
+
+Account is disabled.
+
+Account is pending approval.
+
+JWT token is missing.
+
+JWT token is invalid.
+
+JWT token has expired.
+
+Access denied.
+
+==========================================================
+SECURITY
+==========================================================
+
+Use Stateless Authentication.
+
+Do NOT create HTTP sessions.
+
+Do NOT generate JWT during registration.
+
+Generate JWT ONLY after login.
+
+==========================================================
+BUILD VERIFICATION
+==========================================================
+
+Before finishing
+
+1. Analyze API Gateway security configuration.
+
+2. Analyze JWT Filter.
+
+3. Analyze Auth Service.
+
+4. Fix every Access Denied issue.
+
+5. Ensure registration endpoints are public.
+
+6. Ensure login endpoint is public.
+
+7. Ensure registration does NOT return JWT.
+
+8. Ensure login DOES return JWT.
+
+9. Verify JWT validation works for protected APIs.
+
+10. Verify STUDENT registration.
+
+11. Verify TUTOR registration.
+
+12. Verify STUDENT login.
+
+13. Verify TUTOR login.
+
+14. Verify protected APIs reject requests without JWT.
+
+15. Verify protected APIs accept valid JWT.
+
+16. Resolve every compilation error.
+
+17. Resolve every dependency issue.
+
+18. Resolve every startup warning.
+
+19. Build the project.
+
+20. Verify API Gateway starts successfully.
+
+21. Verify Auth Service starts successfully.
+
+22. Verify all tests pass.
+
+Do not stop until the authentication flow follows enterprise best practices and both services start successfully with ZERO compilation errors and ZERO startup errors.
+
+==========================================================
+OUTPUT
+==========================================================
+
+Provide
+
+1. Root Cause
+
+2. Files Modified
+
+3. Security Changes
+
+4. JWT Flow Changes
+
+5. Gateway Changes
+
+6. Auth Service Changes
+
+7. Endpoints Updated
+
+8. Verification Checklist
+
+9. Git Commit Message
+
+Stop only after the complete authentication flow is working correctly.
