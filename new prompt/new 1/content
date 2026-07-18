@@ -1,0 +1,266 @@
+Analyze the existing LMS project before making any changes.
+
+Do not regenerate existing code.
+
+Do not rewrite working code.
+
+Do not create duplicate classes.
+
+Do not generate explanations.
+
+Only write production-ready code.
+
+Implement the database layer for the Content Service.
+
+Create all required entities, enums, repositories, JPA mappings, validations and Flyway migration.
+
+The Content Service must support:
+
+- Section
+- Lesson
+- LearningResource
+
+Relationships
+
+Course
+    ↓
+Many Sections
+
+Section
+    ↓
+Many Lessons
+
+Lesson
+    ↓
+Many Learning Resources
+
+Lesson Types
+
+- VIDEO
+- PDF
+- ARTICLE
+- DOCUMENT
+- QUIZ
+- ASSIGNMENT
+- LINK
+- DOWNLOAD
+
+Store only metadata and URLs.
+
+Do not store actual files.
+
+Use UUIDs.
+
+Support soft delete.
+
+Reuse existing project structure.
+
+Resolve all compilation and startup errors.
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------
+Analyze the existing project.
+
+Implement the complete Section module.
+
+Do not regenerate existing code.
+
+Only extend the existing Content Service.
+
+Implement
+
+- DTOs
+- Service
+- Controller
+- Business Logic
+- Validation
+- Exception Handling
+
+Support
+
+- Create Section
+- Update Section
+- Delete Section
+- Get Section
+- Get Sections By Course
+- Reorder Sections
+- Enable Section
+- Disable Section
+
+Only ACTIVE Tutors can manage their own course sections.
+
+Verify Course ownership using OpenFeign.
+
+Use existing ApiResponse and Exception handling.
+
+Resolve all compilation and startup errors.
+
+
+
+------------------------------
+
+
+Analyze the existing project.
+
+Implement the complete Lesson module.
+
+Do not regenerate existing code.
+
+Implement
+
+- DTOs
+- Service
+- Controller
+- Repository logic
+- Validation
+
+Support
+
+- Create Lesson
+- Update Lesson
+- Delete Lesson
+- Get Lesson
+- Get Lessons By Section
+- Reorder Lessons
+- Publish Lesson
+- Lock Lesson
+- Unlock Lesson
+- Free Preview
+- Lesson Duration
+
+Supported Lesson Types
+
+- VIDEO
+- PDF
+- ARTICLE
+- DOCUMENT
+- QUIZ
+- ASSIGNMENT
+- LINK
+- DOWNLOAD
+
+Only ACTIVE Tutors can manage lessons.
+
+Students can only view published lessons of enrolled courses.
+
+Reuse existing project classes.
+
+Resolve all compilation and startup errors.
+
+---------------------------------------------------
+Analyze the existing project.
+
+Implement the Learning Resource module.
+
+Do not regenerate existing code.
+
+Implement
+
+- DTOs
+- Services
+- Controllers
+- Repository
+- Validation
+
+Support
+
+- Add Resource
+- Update Resource
+- Delete Resource
+- List Resources By Lesson
+
+Supported Resources
+
+- Video URL
+- PDF
+- Image
+- ZIP
+- External Link
+- Notes
+- Documents
+- Download Files
+
+Store only URLs and metadata.
+
+Do not upload physical files.
+
+Only ACTIVE Tutors can manage resources.
+
+Reuse existing project classes.
+
+Resolve all compilation and startup errors.
+
+------------------------------------------------
+
+
+Analyze the existing project.
+
+Implement OpenFeign integration for Content Service.
+
+Do not regenerate existing code.
+
+Use existing Gateway authentication.
+
+Verify
+
+- Course exists
+- Tutor owns the course
+- Tutor account is ACTIVE
+
+Reuse existing Feign configuration if present.
+
+Avoid duplicate clients.
+
+Handle all Feign exceptions properly.
+
+Resolve all compilation and startup errors.
+
+
+
+---------------------------------------------
+
+
+Analyze the entire Content Service.
+
+Do not regenerate existing code.
+
+Connect all implemented modules.
+
+Verify
+
+- Entity relationships
+- DTO mappings
+- Controllers
+- Services
+- Repositories
+- OpenFeign integration
+- Exception handling
+- Validation
+- Flyway
+- Security
+- API Gateway compatibility
+
+Remove duplicate code.
+
+Resolve bean conflicts.
+
+Resolve circular dependencies.
+
+Resolve Hibernate issues.
+
+Resolve Flyway issues.
+
+Resolve compilation errors.
+
+Resolve startup errors.
+
+Keep implementing until the Content Service runs successfully with zero compilation errors and zero runtime errors.
+
+
+---------------------
