@@ -1,0 +1,140 @@
+Analyze the existing LMS project and extend the current Enrollment Service.
+
+Do not regenerate existing code.
+Do not rewrite working modules.
+Do not create duplicate classes.
+Reuse existing DTOs, ApiResponse, exceptions, security configuration and project structure.
+
+Implement the Enrollment module.
+
+Implement all required entities (if missing), DTOs, repositories, services, controllers, validations and business logic.
+
+Features
+
+- Enroll Student
+- Cancel Enrollment
+- Get Enrollment
+- Get My Enrollments
+- Get Course Enrollments
+- Check Enrollment Status
+
+Rules
+
+- Students can enroll only once per course.
+- Enrollment is allowed only for published courses.
+- Only enrolled students can access course content.
+- Admin has full access.
+
+Use UUIDs and existing project architecture.
+
+Resolve all compilation and startup errors. 
+
+
+
+---------------------------------------------------------------------
+
+
+
+Analyze the existing Enrollment Service.
+
+Extend the existing implementation.
+
+Do not regenerate existing code.
+
+Implement the Course Progress module.
+
+Features
+
+- Mark Lesson Completed
+- Mark Lesson Incomplete
+- Track Completed Lessons
+- Track Progress Percentage
+- Get Course Progress
+- Continue Learning
+
+Rules
+
+- Only enrolled students can update progress.
+- Progress must be calculated automatically.
+- Progress must update when lessons are completed or reverted.
+
+Reuse existing entities and project structure.
+
+Resolve all compilation and startup errors.
+
+
+
+----------------------------------------------------------------------
+
+
+
+Analyze the existing Enrollment Service.
+
+Do not regenerate existing code.
+
+Complete OpenFeign integration.
+
+Reuse existing Feign configuration.
+
+Verify
+
+- Student exists
+- Course exists
+- Course is Published
+- Student Enrollment
+- Lesson Count
+
+Implement Certificate generation logic.
+
+Rules
+
+- Certificate becomes available only after 100% course completion.
+- Prevent duplicate certificates.
+- Store certificate metadata only.
+
+Handle all Feign exceptions properly.
+
+Avoid duplicate Feign clients.
+
+Resolve all compilation and startup errors.
+
+
+----------------------------------------------------------------
+
+
+
+Analyze the existing LMS project and extend the current Enrollment Service.
+
+Do not regenerate existing code.
+Do not rewrite working modules.
+Do not create duplicate classes.
+
+Connect all Enrollment modules.
+
+Verify
+
+- Enrollment
+- Progress Tracking
+- Certificate
+- OpenFeign Integration
+
+Ensure
+
+- Entity relationships are correct.
+- DTO mappings work correctly.
+- Controllers, Services and Repositories are fully wired.
+- Validation and exception handling are complete.
+- Flyway migrations execute successfully.
+- Hibernate mappings are valid.
+- Security rules are enforced.
+- API Gateway integration works correctly.
+
+Remove duplicate code and fix dependency issues, bean conflicts, circular dependencies, mapping errors, Flyway issues, Hibernate issues, compilation errors and startup errors.
+
+Perform a final verification.
+
+Fix every issue preventing successful compilation, application startup or API execution.
+
+Ensure every endpoint returns the expected response and integrates correctly with Auth Service, User Service, Course Service, Content Service and API Gateway.
+
+Do not stop until the Enrollment Service is production-ready with zero compilation errors, zero startup errors and fully functional APIs.
