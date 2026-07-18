@@ -1,0 +1,688 @@
+You are a Principal Software Architect, Enterprise Java Architect, Spring Boot Expert, Spring Security Expert, Microservices Expert, and LMS Domain Expert.
+
+Analyze the ENTIRE existing LMS project before making any changes.
+
+The project already contains:
+
+• API Gateway
+• Eureka Discovery Server
+• Auth Service
+• User Service
+• Course Service
+• Content Service
+• Enrollment Service
+
+Technology Stack
+
+• Java 21
+• Spring Boot 3.x
+• Spring Security
+• JWT Authentication
+• Spring Cloud Gateway
+• OpenFeign
+• PostgreSQL
+• Flyway
+• Spring Data JPA
+• Hibernate
+• Swagger
+• Maven
+
+Do NOT regenerate existing modules.
+
+Do NOT break existing APIs.
+
+Extend the existing Course Service using enterprise best practices.
+
+==========================================================
+OBJECTIVE
+==========================================================
+
+Build a complete Enterprise Course Management Module.
+
+The module should allow approved tutors to create, manage, publish, archive and delete courses.
+
+All requests must go through API Gateway.
+
+==========================================================
+SECURITY
+==========================================================
+
+JWT is validated ONLY in API Gateway.
+
+Course Service must NEVER parse JWT.
+
+Course Service trusts forwarded headers.
+
+Gateway forwards
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-Account-Status
+
+==========================================================
+AUTHORIZATION
+==========================================================
+
+ROLE_ADMIN
+
+Full Access
+
+ROLE_TUTOR
+
+Must have
+
+AccountStatus = ACTIVE
+
+Only ACTIVE Tutors can
+
+Create Course
+
+Update Course
+
+Delete Own Course
+
+Publish Course
+
+Archive Course
+
+Manage Course Content
+
+ROLE_STUDENT
+
+Read Only
+
+Students can
+
+Browse Courses
+
+View Published Courses
+
+Search Courses
+
+Cannot create or edit courses.
+
+==========================================================
+COURSE ENTITY
+==========================================================
+
+Design a production-ready Course entity.
+
+Fields
+
+UUID id
+
+String title
+
+String subtitle
+
+String shortDescription
+
+String description
+
+String thumbnailUrl
+
+String bannerUrl
+
+String language
+
+CourseLevel level
+
+CourseStatus status
+
+UUID categoryId
+
+BigDecimal price
+
+BigDecimal discountPrice
+
+String currency
+
+Integer estimatedDurationMinutes
+
+UUID instructorId
+
+String instructorName
+
+Double averageRating
+
+Long totalRatings
+
+Long totalEnrollments
+
+Boolean featured
+
+Boolean certificateEnabled
+
+Boolean published
+
+LocalDateTime publishedAt
+
+LocalDateTime createdAt
+
+LocalDateTime updatedAt
+
+UUID createdBy
+
+UUID updatedBy
+
+Soft Delete Support
+
+==========================================================
+CATEGORY
+==========================================================
+
+Do NOT store category as String.
+
+Create Category entity.
+
+Fields
+
+UUID id
+
+Category Name
+
+Description
+
+Icon
+
+Display Order
+
+Active
+
+Slug
+
+Created At
+
+Updated At
+
+One Category
+
+↓
+
+Many Courses
+
+==========================================================
+COURSE STATUS
+==========================================================
+
+Support
+
+DRAFT
+
+UNDER_REVIEW
+
+PUBLISHED
+
+ARCHIVED
+
+REJECTED
+
+==========================================================
+COURSE CREATION
+==========================================================
+
+ACTIVE Tutor
+
+↓
+
+POST
+
+/api/v1/courses
+
+Tutor creates
+
+Title
+
+Subtitle
+
+Description
+
+Category
+
+Level
+
+Language
+
+Price
+
+Discount
+
+Thumbnail
+
+Banner
+
+Estimated Duration
+
+Certificate Enabled
+
+Course initially
+
+DRAFT
+
+==========================================================
+UPDATE COURSE
+==========================================================
+
+Tutor can edit
+
+Title
+
+Description
+
+Thumbnail
+
+Banner
+
+Pricing
+
+Category
+
+Language
+
+Duration
+
+Only owner tutor or Admin.
+
+==========================================================
+DELETE COURSE
+==========================================================
+
+Use Soft Delete.
+
+Never permanently delete.
+
+==========================================================
+PUBLISH COURSE
+==========================================================
+
+Tutor requests
+
+Publish
+
+Course status
+
+UNDER_REVIEW
+
+(Optional if Admin approval required)
+
+OR
+
+Direct
+
+PUBLISHED
+
+depending on configuration.
+
+Published course becomes visible to students.
+
+==========================================================
+ARCHIVE COURSE
+==========================================================
+
+Tutor
+
+↓
+
+Archive
+
+Course becomes invisible.
+
+Enrollment history remains.
+
+==========================================================
+FEATURE COURSE
+==========================================================
+
+Only Admin
+
+Feature Course
+
+Featured Courses appear on Homepage.
+
+==========================================================
+SEARCH
+==========================================================
+
+Support
+
+Keyword
+
+Category
+
+Tutor
+
+Language
+
+Level
+
+Price Range
+
+Rating
+
+Newest
+
+Popularity
+
+Featured
+
+==========================================================
+SORTING
+==========================================================
+
+Newest
+
+Oldest
+
+Highest Rated
+
+Lowest Price
+
+Highest Price
+
+Popularity
+
+Alphabetical
+
+==========================================================
+PAGINATION
+==========================================================
+
+Enterprise Pagination
+
+page
+
+size
+
+sort
+
+direction
+
+==========================================================
+STUDENT APIs
+==========================================================
+
+Students can
+
+Browse Published Courses
+
+View Course Details
+
+Search Courses
+
+Filter Courses
+
+Cannot view Draft Courses.
+
+==========================================================
+TUTOR APIs
+==========================================================
+
+My Courses
+
+Create Course
+
+Edit Course
+
+Delete Course
+
+Publish Course
+
+Archive Course
+
+Statistics
+
+==========================================================
+ADMIN APIs
+==========================================================
+
+View All Courses
+
+Approve Course
+
+Reject Course
+
+Feature Course
+
+Archive Course
+
+Delete Course
+
+Restore Course
+
+==========================================================
+STATISTICS
+==========================================================
+
+Course Details
+
+Enrollments
+
+Revenue
+
+Average Rating
+
+Completion Percentage
+
+Students Enrolled
+
+Lessons Count
+
+Sections Count
+
+==========================================================
+OPENFEIGN
+==========================================================
+
+Use OpenFeign where necessary.
+
+For example
+
+User Service
+
+↓
+
+Fetch Tutor Profile
+
+Enrollment Service
+
+↓
+
+Enrollment Count
+
+Content Service
+
+↓
+
+Lesson Count
+
+Do not duplicate data unnecessarily.
+
+==========================================================
+VALIDATION
+==========================================================
+
+Validate
+
+Title
+
+Description
+
+Price
+
+Discount
+
+Category
+
+Language
+
+Duration
+
+Thumbnail URL
+
+Banner URL
+
+==========================================================
+SWAGGER
+==========================================================
+
+Document every endpoint.
+
+Hide internal APIs.
+
+==========================================================
+API RESPONSE
+==========================================================
+
+Return
+
+ApiResponse<T>
+
+for every endpoint.
+
+Friendly success messages.
+
+Friendly error messages.
+
+==========================================================
+ERRORS
+==========================================================
+
+Course not found.
+
+Category not found.
+
+Unauthorized.
+
+Forbidden.
+
+Invalid Course.
+
+Duplicate Course.
+
+Tutor not Active.
+
+==========================================================
+EXCEPTION HANDLING
+==========================================================
+
+Use GlobalExceptionHandler.
+
+Never expose stack traces.
+
+==========================================================
+DATABASE
+==========================================================
+
+Use Flyway Migration.
+
+Proper Indexes
+
+Foreign Keys
+
+Constraints
+
+Soft Delete
+
+Audit Columns
+
+==========================================================
+TESTING
+==========================================================
+
+Generate
+
+Controller Tests
+
+Service Tests
+
+Repository Tests (only custom repository methods)
+
+Validation Tests
+
+Security Tests
+
+Exception Tests
+
+Mockito Tests
+
+JUnit 5
+
+MockMvc
+
+Testcontainers
+
+==========================================================
+BUILD VERIFICATION
+==========================================================
+
+Before completion
+
+1. Analyze existing code.
+
+2. Preserve existing APIs.
+
+3. Verify Flyway.
+
+4. Verify Hibernate.
+
+5. Verify Swagger.
+
+6. Verify OpenFeign.
+
+7. Verify Security.
+
+8. Verify Role Authorization.
+
+9. Verify only ACTIVE Tutor can manage courses.
+
+10. Verify Students cannot create courses.
+
+11. Verify Admin APIs.
+
+12. Verify Pagination.
+
+13. Verify Search.
+
+14. Verify Sorting.
+
+15. Verify Build.
+
+16. Verify Zero Compilation Errors.
+
+17. Verify Zero Startup Errors.
+
+==========================================================
+OUTPUT
+==========================================================
+
+Provide
+
+1. Updated Architecture
+
+2. Database Design
+
+3. Entity Relationships
+
+4. DTOs
+
+5. APIs Created
+
+6. Validation Rules
+
+7. Security Rules
+
+8. OpenFeign Integrations
+
+9. Testing Strategy
+
+10. Files Modified
+
+11. Verification Checklist
+
+12. Git Commit Message
+
+Do not stop until the Course Service is fully production-ready, follows enterprise architecture, integrates correctly with all existing services, and works successfully through the API Gateway.
