@@ -1,0 +1,667 @@
+You are a Principal Software Architect, Enterprise Spring Boot Architect, Spring Security Expert, JWT Expert, API Gateway Expert, and Microservices Architect.
+
+Analyze the ENTIRE existing LMS project before making any changes.
+
+The project already contains:
+
+• API Gateway
+• Eureka Discovery Server
+• Auth Service
+• User Service
+• Course Service
+• Content Service
+• Enrollment Service
+
+The project already uses
+
+• Spring Security
+• JWT Authentication
+• API Gateway
+• OpenFeign
+• PostgreSQL
+• Flyway
+• Swagger
+• ApiResponse<T>
+
+Do NOT regenerate existing code.
+
+Do NOT rewrite working modules.
+
+Only extend the current architecture following enterprise best practices.
+
+==========================================================
+OBJECTIVE
+==========================================================
+
+Implement a complete Enterprise Tutor Registration, Authentication, Application Approval and Authorization workflow.
+
+The entire flow must work ONLY through the API Gateway.
+
+The frontend and Postman must NEVER call individual services directly.
+
+Every request must go through
+
+localhost:8080
+
+==========================================================
+ARCHITECTURE
+==========================================================
+
+Client
+
+↓
+
+API Gateway
+
+↓
+
+JWT Validation
+
+↓
+
+Forward Trusted Headers
+
+↓
+
+Microservices
+
+==========================================================
+PUBLIC ENDPOINTS
+==========================================================
+
+These endpoints must NEVER require JWT.
+
+POST
+
+/api/v1/auth/register/student
+
+POST
+
+/api/v1/auth/register/tutor
+
+POST
+
+/api/v1/auth/login
+
+POST
+
+/api/v1/auth/forgot-password
+
+POST
+
+/api/v1/auth/reset-password
+
+Swagger
+
+Actuator
+
+Health
+
+Gateway must bypass JWT validation completely for these endpoints.
+
+==========================================================
+TUTOR REGISTRATION
+==========================================================
+
+Tutor registers using
+
+POST
+
+/api/v1/auth/register/tutor
+
+Gateway forwards request to Auth Service.
+
+Auth Service creates
+
+UserCredential
+
+Fields
+
+email
+
+password
+
+role = ROLE_TUTOR
+
+accountStatus = PENDING
+
+enabled = true
+
+createdAt
+
+updatedAt
+
+Password must be BCrypt encrypted.
+
+Registration MUST NOT generate JWT.
+
+Return
+
+201 Created
+
+Example
+
+{
+    "success": true,
+    "message": "Registration completed successfully. Please login to continue.",
+    "data": {
+
+        "userId":"...",
+
+        "email":"...",
+
+        "role":"ROLE_TUTOR",
+
+        "accountStatus":"PENDING"
+
+    }
+}
+
+==========================================================
+LOGIN
+==========================================================
+
+Tutor logs in
+
+POST
+
+/api/v1/auth/login
+
+Gateway forwards request.
+
+Auth Service verifies credentials.
+
+If successful
+
+Generate JWT.
+
+JWT must include
+
+userId
+
+email
+
+role
+
+accountStatus
+
+issuedAt
+
+expiration
+
+Return
+
+{
+    "success": true,
+    "message":"Login successful.",
+    "data":{
+
+        "accessToken":"...",
+
+        "tokenType":"Bearer",
+
+        "expiresIn":3600,
+
+        "userId":"...",
+
+        "role":"ROLE_TUTOR",
+
+        "accountStatus":"PENDING"
+
+    }
+
+}
+
+JWT must ONLY be generated after successful login.
+
+==========================================================
+PROFILE COMPLETION
+==========================================================
+
+After login
+
+Tutor can update profile
+
+POST
+
+/api/v1/users/profile
+
+PUT
+
+/api/v1/users/me
+
+Tutor Profile contains
+
+First Name
+
+Last Name
+
+Phone
+
+Bio
+
+Experience
+
+Education
+
+LinkedIn
+
+GitHub
+
+Website
+
+Profile Image
+
+Country
+
+State
+
+City
+
+==========================================================
+TUTOR APPLICATION
+==========================================================
+
+Registration DOES NOT automatically approve a tutor.
+
+A tutor must submit an application.
+
+Create Tutor Application functionality.
+
+Example endpoint
+
+POST
+
+/api/v1/users/tutor/application
+
+Application contains
+
+Education
+
+Years of Experience
+
+Teaching Experience
+
+Skills
+
+Primary Subjects
+
+Resume URL
+
+LinkedIn
+
+GitHub
+
+Certificates
+
+Identity Proof
+
+Languages
+
+Motivation
+
+Application Status
+
+PENDING
+
+Application Date
+
+Review Notes
+
+==========================================================
+APPLICATION STATUS
+==========================================================
+
+Possible Status
+
+PENDING
+
+APPROVED
+
+REJECTED
+
+UNDER_REVIEW
+
+==========================================================
+WHILE APPLICATION IS PENDING
+==========================================================
+
+Tutor can
+
+Login
+
+Update Profile
+
+View Dashboard
+
+View Application Status
+
+Tutor CANNOT
+
+Create Course
+
+Publish Course
+
+Archive Course
+
+Upload Lessons
+
+Upload Resources
+
+Manage Students
+
+Gateway must reject these operations.
+
+Return
+
+403 Forbidden
+
+Message
+
+"Your tutor application is under review."
+
+==========================================================
+ADMIN DASHBOARD
+==========================================================
+
+Admin logs in through Gateway.
+
+Admin accesses
+
+/api/v1/admin/tutors
+
+Admin sees
+
+Profile
+
+Education
+
+Experience
+
+Resume
+
+Certificates
+
+Identity Proof
+
+Skills
+
+Application Status
+
+Submission Date
+
+==========================================================
+ADMIN ACTIONS
+==========================================================
+
+Approve Tutor
+
+Reject Tutor
+
+Request More Information
+
+Suspend Tutor
+
+Reactivate Tutor
+
+==========================================================
+APPROVE TUTOR
+==========================================================
+
+Admin approves application.
+
+Update
+
+AccountStatus
+
+PENDING
+
+↓
+
+ACTIVE
+
+Application Status
+
+APPROVED
+
+Return
+
+"Tutor approved successfully."
+
+==========================================================
+REJECT TUTOR
+==========================================================
+
+Update
+
+Application Status
+
+REJECTED
+
+Store rejection reason.
+
+Tutor can view rejection reason.
+
+==========================================================
+ACTIVE TUTOR
+==========================================================
+
+After approval
+
+Tutor logs in again.
+
+JWT now contains
+
+ROLE_TUTOR
+
+AccountStatus = ACTIVE
+
+Gateway validates JWT.
+
+Tutor can now
+
+Create Course
+
+Edit Course
+
+Publish Course
+
+Upload Sections
+
+Upload Lessons
+
+Upload Resources
+
+View Enrolled Students
+
+View Analytics
+
+==========================================================
+JWT VALIDATION
+==========================================================
+
+Gateway validates JWT ONLY.
+
+Downstream services NEVER parse JWT.
+
+Gateway forwards
+
+X-User-Id
+
+X-User-Email
+
+X-User-Role
+
+X-Account-Status
+
+Services trust only these forwarded headers.
+
+==========================================================
+ROLE AUTHORIZATION
+==========================================================
+
+ROLE_STUDENT
+
+Can browse courses
+
+Enroll
+
+Learn
+
+==========================================================
+
+ROLE_TUTOR
+
+Must have
+
+AccountStatus = ACTIVE
+
+to access tutor operations.
+
+==========================================================
+
+ROLE_ADMIN
+
+Can access every Admin API.
+
+==========================================================
+SECURITY
+==========================================================
+
+Stateless Authentication.
+
+No HTTP Session.
+
+JWT only after Login.
+
+No JWT during Registration.
+
+No duplicated authentication logic.
+
+==========================================================
+SUCCESS RESPONSES
+==========================================================
+
+Registration completed successfully.
+
+Login successful.
+
+Profile updated successfully.
+
+Tutor application submitted successfully.
+
+Tutor approved successfully.
+
+Tutor rejected successfully.
+
+Course created successfully.
+
+==========================================================
+ERROR RESPONSES
+==========================================================
+
+Invalid email or password.
+
+Email already exists.
+
+Account is disabled.
+
+Account is pending approval.
+
+Tutor application is under review.
+
+Tutor application has been rejected.
+
+JWT token is missing.
+
+JWT token is invalid.
+
+JWT token has expired.
+
+Access denied.
+
+==========================================================
+SWAGGER
+==========================================================
+
+Document all public APIs.
+
+Document tutor APIs.
+
+Document admin APIs.
+
+Hide internal APIs.
+
+==========================================================
+BUILD VERIFICATION
+==========================================================
+
+Before finishing
+
+1. Analyze every existing service.
+
+2. Do not break existing APIs.
+
+3. Verify API Gateway routing.
+
+4. Verify JWT validation.
+
+5. Verify Registration through Gateway.
+
+6. Verify Login through Gateway.
+
+7. Verify Tutor Application flow.
+
+8. Verify Admin Approval flow.
+
+9. Verify Tutor cannot create courses while PENDING.
+
+10. Verify Tutor can create courses after ACTIVE.
+
+11. Verify Student restrictions.
+
+12. Verify Admin authorization.
+
+13. Verify Swagger.
+
+14. Verify Flyway.
+
+15. Verify Hibernate.
+
+16. Resolve every compilation error.
+
+17. Resolve every dependency issue.
+
+18. Resolve every startup warning.
+
+19. Verify every service starts successfully.
+
+20. Verify the complete flow works ONLY through API Gateway on port 8080.
+
+==========================================================
+OUTPUT
+==========================================================
+
+Provide
+
+1. Flow Diagram
+
+2. Files Modified
+
+3. Database Changes
+
+4. APIs Added
+
+5. Security Changes
+
+6. Gateway Changes
+
+7. JWT Changes
+
+8. Validation Rules
+
+9. Verification Checklist
+
+10. Git Commit Message
+
+Do not stop until the complete Tutor Registration → Login → Profile Completion → Tutor Application → Admin Review → Approval/Reject → Course Creation workflow is fully implemented, production-ready, and working correctly through the API Gateway.
